@@ -3,6 +3,7 @@ import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import PageTemplate from "./components/Common/PageTemplate";
 import Router from "./components/Router";
+import { GlobalStyle } from "./styles/GlobalStyle";
 
 function App() {
   const queryClient = new QueryClient();
@@ -11,6 +12,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <BrowserRouter>
+          <GlobalStyle />
           <PageTemplate>
             <Router />
           </PageTemplate>
