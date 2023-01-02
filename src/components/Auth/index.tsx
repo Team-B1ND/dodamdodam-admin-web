@@ -34,7 +34,11 @@ const Auth = () => {
           </AuthPanelTextWrap>
         </AuthPanelWrap>
         <AuthWrap>
-          {isLogin ? <AuthLogin setIsLogin={setIsLogin} /> : <AuthSignup />}
+          {isLogin ? (
+            <AuthLogin setIsLogin={setIsLogin} />
+          ) : (
+            <AuthSignup setIsLogin={setIsLogin} />
+          )}
         </AuthWrap>
       </AuthContainer>
     </AuthBackground>
