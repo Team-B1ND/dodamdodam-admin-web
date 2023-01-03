@@ -14,6 +14,7 @@ function App() {
         <BrowserRouter>
           <GlobalStyle />
           <PageTemplate>
+            <GlobalStyle />
             <Router />
           </PageTemplate>
         </BrowserRouter>
