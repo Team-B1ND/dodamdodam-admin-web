@@ -1,6 +1,11 @@
 import { ReactNode } from "react";
 import Header from "../Header";
-import { PageTemplateContainer, PageTemplateWrap } from "./style";
+import SideBar from "../SideBar";
+import {
+  PageTemplateContainer,
+  PageTemplateContentWrap,
+  PageTemplateWrap,
+} from "./style";
 
 interface Props {
   children: ReactNode;
@@ -10,7 +15,10 @@ const PageTemplate = ({ children }: Props) => {
   return (
     <PageTemplateContainer>
       <Header />
-      <PageTemplateWrap>{children}</PageTemplateWrap>
+      <PageTemplateWrap>
+        <SideBar />
+        <PageTemplateContentWrap>{children}</PageTemplateContentWrap>
+      </PageTemplateWrap>
     </PageTemplateContainer>
   );
 };
