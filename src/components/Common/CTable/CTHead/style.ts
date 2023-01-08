@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const THeadContainer = styled.thead`
+export const CTHeadContainer = styled.thead`
   width: 100%;
   height: 38px;
   border-top: 1px solid #dee2e6;

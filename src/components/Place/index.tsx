@@ -1,14 +1,20 @@
 import { useState } from "react";
 import Button from "../Common/Button";
 import Modal from "../Common/Modal";
+import ModalHeader from "../Common/ModalHeader";
 import SearchBar from "../Common/SearchBar";
 import SectionHeader from "../Common/SectionHeader";
 import Select from "../Common/Select";
-import Table from "../Common/Table";
-import TH from "../Common/Table/TH";
-import THead from "../Common/Table/THead";
-import TR from "../Common/Table/TR";
-import { PlaceContainer, PlaceInputWrap } from "./style";
+import CTable from "../Common/CTable";
+import CTH from "../Common/CTable/CTH";
+import CTHead from "../Common/CTable/CTHead";
+import CTR from "../Common/CTable/CTR";
+import {
+  PlaceContainer,
+  PlaceInputWrap,
+  PlaceModalButtonWrap,
+  PlaceModalWrap,
+} from "./style";
 
 const Place = () => {
   const [grade, setGrade] = useState("전체보기");
@@ -39,22 +45,48 @@ const Place = () => {
         <SearchBar onSubmit={onSubmit} onChange={setValue} value={value} />
       </PlaceInputWrap>
 
-      <Table customStyle={{ width: 664 }}>
-        <THead>
-          <TR>
-            <TH>장소분류</TH>
-            <TH>장소이름</TH>
-            <TH customStyle={{ textAlign: "right" }}>수정 / 삭제</TH>
-          </TR>
-        </THead>
-      </Table>
+      <CTable customStyle={{ width: 664 }}>
+        <CTHead>
+          <CTR>
+            <CTH>장소분류</CTH>
+            <CTH>장소이름</CTH>
+            <CTH customStyle={{ textAlign: "right" }}>수정 / 삭제</CTH>
+          </CTR>
+        </CTHead>
+      </CTable>
       <Modal
         zIndex={2}
         isOpen={open}
         setIsOpen={setOpen}
         customStyle={{ width: 410, height: 490 }}
       >
-        asdasd
+        <ModalHeader title="장소 추가하기" />
+        <PlaceModalWrap>
+          <PlaceModalButtonWrap>
+            <Button
+              type="Primary"
+              title="확인"
+              customStyle={{
+                width: 66,
+                height: 32,
+                borderRadius: 5,
+                fontSize: 12,
+              }}
+              onClick={() => {}}
+            />
+            <Button
+              type="Cancel"
+              title="취소"
+              customStyle={{
+                width: 66,
+                height: 32,
+                borderRadius: 5,
+                fontSize: 12,
+              }}
+              onClick={() => {}}
+            />
+          </PlaceModalButtonWrap>
+        </PlaceModalWrap>
       </Modal>
     </PlaceContainer>
   );

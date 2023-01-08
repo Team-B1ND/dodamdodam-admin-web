@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const THContainer = styled.th`
+export const CTHContainer = styled.th`
   padding: 12px;
   text-align: start;
 `;

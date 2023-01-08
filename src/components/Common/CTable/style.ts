@@ -1,5 +1,5 @@
 import styled from "styled-components";
 
-export const TableContainer = styled.table`
+export const CTableContainer = styled.table`
   font-size: 12px;
 `;
