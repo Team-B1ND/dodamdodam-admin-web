@@ -1,17 +1,11 @@
-import { ReactNode } from "react";
+import { SectionHeaderProps } from "./SectionHeader.type";
 import {
   SectionHeaderContainer,
   SectionHeaderSubTitle,
   SectionHeaderTitle,
 } from "./style";
 
-interface Props {
-  title: string;
-  subTitle: string;
-  children: ReactNode;
-}
-
-const SectionHeader = ({ title, subTitle, children }: Props) => {
+const SectionHeader = ({ title, subTitle, children }: SectionHeaderProps) => {
   return (
     <SectionHeaderContainer>
       <SectionHeaderTitle>{title}</SectionHeaderTitle>

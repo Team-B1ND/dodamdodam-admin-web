@@ -8,5 +8,9 @@ export const GlobalStyle = createGlobalStyle`
 
     * {
         box-sizing: border-box;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-use-select: none;
+        user-select: none;
     }
 `;

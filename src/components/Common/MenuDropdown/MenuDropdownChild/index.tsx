@@ -1,12 +1,8 @@
 import { useNavigate } from "react-router-dom";
+import { MenuDropdownChildProps } from "./MenuDropdownChild.type";
 import { MenuDropdownChildContainer } from "./style";
 
-interface Props {
-  title: string;
-  redirectUrl: string;
-}
-
-const MenuDropdownChild = ({ title, redirectUrl }: Props) => {
+const MenuDropdownChild = ({ title, redirectUrl }: MenuDropdownChildProps) => {
   const navigate = useNavigate();
 
   return (
