@@ -13,8 +13,14 @@ import {
   PlaceContainer,
   PlaceInputWrap,
   PlaceModalButtonWrap,
+  PlaceModalTableTitle,
   PlaceModalWrap,
 } from "./style";
+import RTable from "../Common/RTable";
+import RTR from "../Common/RTable/RTR";
+import RTH from "../Common/RTable/RTH";
+import RTD from "../Common/RTable/RTD";
+import TextInput from "../Common/TextInput";
 
 const Place = () => {
   const [grade, setGrade] = useState("전체보기");
@@ -62,6 +68,30 @@ const Place = () => {
       >
         <ModalHeader title="장소 추가하기" />
         <PlaceModalWrap>
+          <PlaceModalTableTitle>장소 기본정보</PlaceModalTableTitle>
+          <RTable customStyle={{ width: 340, margin: "0px auto" }}>
+            <RTR>
+              <RTH>장소 이름</RTH>
+              <RTD>
+                <TextInput
+                  value={value}
+                  onChange={(e) => setValue(e.target.value)}
+                  customStyle={{ width: "100%" }}
+                  placeholder="장소를 입력하세요"
+                />
+              </RTD>
+            </RTR>
+            <RTR>
+              <RTH>장소 분류 </RTH>
+              <RTD>
+                <Select
+                  items={["전체보기", "1학년", "2학년", "3학년"]}
+                  value={grade}
+                  onChange={setGrade}
+                />
+              </RTD>
+            </RTR>
+          </RTable>
           <PlaceModalButtonWrap>
             <Button
               type="Primary"
@@ -74,6 +104,7 @@ const Place = () => {
               }}
               onClick={() => {}}
             />
+
             <Button
               type="Cancel"
               title="취소"
@@ -83,7 +114,7 @@ const Place = () => {
                 borderRadius: 5,
                 fontSize: 12,
               }}
-              onClick={() => {}}
+              onClick={() => setOpen(false)}
             />
           </PlaceModalButtonWrap>
         </PlaceModalWrap>

@@ -1,7 +1,10 @@
 import { RTableProps } from "./RTable.type";
+import { RTableContainer } from "./style";
 
 const RTable = ({ children, customStyle }: RTableProps) => {
-  return <table style={{ ...customStyle }}>{children}</table>;
+  return (
+    <RTableContainer style={{ ...customStyle }}>{children}</RTableContainer>
+  );
 };
 
 export default RTable;

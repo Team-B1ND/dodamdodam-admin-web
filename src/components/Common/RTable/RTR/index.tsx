@@ -1,7 +1,8 @@
 import { RTRProps } from "./RTR.Type";
+import { RTRContainer } from "./style";
 
 const RTR = ({ children, customStyle }: RTRProps) => {
-  return <tr style={{ ...customStyle }}>{children}</tr>;
+  return <RTRContainer style={{ ...customStyle }}>{children}</RTRContainer>;
 };
 
 export default RTR;

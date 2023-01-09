@@ -22,6 +22,14 @@ export const PlaceModalWrap = styled.div`
   flex-direction: column;
 `;
 
+export const PlaceModalTableTitle = styled.h1`
+  margin-top: 28px;
+  margin-bottom: 8px;
+  padding: 0px 12px;
+  font-size: 14px;
+  font-weight: bold;
+`;
+
 export const PlaceModalButtonWrap = styled.div`
   width: 100%;
   display: flex;

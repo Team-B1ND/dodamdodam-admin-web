@@ -1,7 +1,8 @@
 import { RTDProps } from "./RTD.type";
+import { RTDContainer } from "./style";
 
 const RTD = ({ children, customStyle }: RTDProps) => {
-  return <td style={{ ...customStyle }}>{children}</td>;
+  return <RTDContainer style={{ ...customStyle }}>{children}</RTDContainer>;
 };
 
 export default RTD;

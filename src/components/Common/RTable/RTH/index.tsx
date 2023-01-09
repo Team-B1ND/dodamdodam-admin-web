@@ -1,7 +1,8 @@
 import { RTHProps } from "./RTH.type";
+import { RTHContainer } from "./style";
 
 const RTH = ({ children, customStyle }: RTHProps) => {
-  return <th style={{ ...customStyle }}>{children}</th>;
+  return <RTHContainer style={{ ...customStyle }}>{children}</RTHContainer>;
 };
 
 export default RTH;
