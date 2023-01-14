@@ -1,7 +1,8 @@
 import { CTRProps } from "./CTR.type";
+import { CTRContainer } from "./style";
 
 const CTR = ({ children, customStyle }: CTRProps) => {
-  return <tr style={{ ...customStyle }}>{children}</tr>;
+  return <CTRContainer style={{ ...customStyle }}>{children}</CTRContainer>;
 };
 
 export default CTR;
