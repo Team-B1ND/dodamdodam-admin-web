@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, Suspense } from "react";
+import { Dispatch, memo, SetStateAction, Suspense } from "react";
 import usePostPlace from "../../../hooks/place/usePostPlace";
 import Button from "../../Common/Button";
 import ErrorBoundary from "../../Common/ErrorBoundary";
@@ -95,4 +95,4 @@ const PlaceCreateModal = ({ open, setOpen }: Props) => {
   );
 };
 
-export default PlaceCreateModal;
+export default memo(PlaceCreateModal);

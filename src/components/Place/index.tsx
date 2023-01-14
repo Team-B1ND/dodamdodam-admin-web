@@ -15,13 +15,11 @@ import ErrorBoundary from "../Common/ErrorBoundary";
 import PlaceModifyModal from "./PlaceModifyModal";
 
 const Place = () => {
-  const [keyword, setKeyword] = useState("전체보기");
-  const onSubmit = () => {
-    console.log(value);
-  };
+  const [classification, setClassification] = useState("전체보기");
+
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
   const [selectModifyPlaceId, setSelectModifyPlaceId] = useState(-1);
-  const [value, setValue] = useState("");
+  const [keyword, setKeyword] = useState("");
 
   return (
     <PlaceContainer>
@@ -38,11 +36,11 @@ const Place = () => {
       <PlaceInputWrap>
         <Select
           items={["전체보기"]}
-          value={keyword}
-          onChange={setKeyword}
+          value={classification}
+          onChange={setClassification}
           zIndex={2}
         />
-        <SearchBar onSubmit={onSubmit} onChange={setValue} value={value} />
+        <SearchBar onChange={setKeyword} value={keyword} />
       </PlaceInputWrap>
 
       <CTable customStyle={{ width: 664 }}>
@@ -59,7 +57,7 @@ const Place = () => {
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
           <PlaceList
-            selectModifyPlaceId={selectModifyPlaceId}
+            keyword={keyword}
             setSelectModifyPlaceId={setSelectModifyPlaceId}
           />
         </Suspense>

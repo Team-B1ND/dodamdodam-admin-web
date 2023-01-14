@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, memo, SetStateAction } from "react";
 import { useGetPlaceTypesQuery } from "../../../quries/place/place.query";
 import Select from "../../Common/Select";
 
@@ -21,4 +21,4 @@ const PlaceModalTypeSelect = ({ placeTypeName, setPlaceTypeName }: Props) => {
   );
 };
 
-export default PlaceModalTypeSelect;
+export default memo(PlaceModalTypeSelect);

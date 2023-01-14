@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { memo, Suspense } from "react";
 import useModifyPost from "../../../hooks/place/useModifyPost";
 import Button from "../../Common/Button";
 import ErrorBoundary from "../../Common/ErrorBoundary";
@@ -97,4 +97,4 @@ const PlaceModifyModal = ({ selectModifyPlaceId, onClose }: Props) => {
   );
 };
 
-export default PlaceModifyModal;
+export default memo(PlaceModifyModal);

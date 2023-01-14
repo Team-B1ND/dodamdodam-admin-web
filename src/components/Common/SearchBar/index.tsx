@@ -2,7 +2,11 @@ import { SearchBarContainer, SearchBarIcon, SearchBarInput } from "./style";
 import { AiOutlineSearch } from "@react-icons/all-files/ai/AiOutlineSearch";
 import { SearchBarProps } from "./SearchBar.type";
 
-const SearchBar = ({ value, onChange, onSubmit }: SearchBarProps) => {
+const SearchBar = ({
+  value,
+  onChange = () => {},
+  onSubmit = () => {},
+}: SearchBarProps) => {
   return (
     <SearchBarContainer
       onSubmit={(e) => {
