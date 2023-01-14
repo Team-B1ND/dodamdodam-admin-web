@@ -1,5 +1,7 @@
+import PlaceType from "../../components/PlaceType";
+
 const PlaceTypePage = () => {
-  return <div>placetype</div>;
+  return <PlaceType />;
 };
 
 export default PlaceTypePage;

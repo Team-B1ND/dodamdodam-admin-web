@@ -62,8 +62,13 @@ const useModifyPost = ({ id }: Props) => {
   }, [id, resetPlace]);
 
   const onModifyPlace = () => {
+    if (patchPlaceMutation.isLoading) {
+      return;
+    }
+
     if (placeName === "") {
-      window.alert("장소 이름을 입력해주세요");
+      window.alert("장소 이름을 입력해주세요!");
+      return;
     }
 
     if (
@@ -74,7 +79,7 @@ const useModifyPost = ({ id }: Props) => {
         prevPlaceTypeName,
       }).toString()
     ) {
-      window.alert("수정된 사항이 없습니다");
+      window.alert("수정된 사항이 없습니다!");
       return;
     }
 

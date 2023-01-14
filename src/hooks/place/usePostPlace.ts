@@ -46,6 +46,10 @@ const usePostPlace = () => {
   }, [placeTypeName, serverPlaceTypesData]);
 
   const onSubmitPlace = () => {
+    if (postPlaceMutation.isLoading) {
+      return;
+    }
+
     if (placeName === "") {
       window.alert("장소 이름을 적어주세요!");
       return;

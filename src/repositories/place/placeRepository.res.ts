@@ -12,3 +12,7 @@ export interface getPlaceResponse extends Response {
 export interface getPlaceTypesResponse extends Response {
   data: PlaceType[];
 }
+
+export interface getPlaceTypeResponse extends Response {
+  data: PlaceType;
+}
