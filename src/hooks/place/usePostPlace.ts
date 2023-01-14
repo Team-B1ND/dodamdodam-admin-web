@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import {
-    useGetPlaceTypesQuery,
+  useGetPlaceTypesQuery,
   usePostPlaceMutation,
 } from "../../quries/place/place.query";
 
@@ -70,6 +70,9 @@ const usePostPlace = () => {
     serverPlaceTypesData,
     serverPlaceTypesDataIsLoading,
     placeName,
+    setPlaceName,
+    placeTypeId,
+    setPlaceTypeId,
     placeTypeName,
     setPlaceTypeName,
     onChangePlaceName,

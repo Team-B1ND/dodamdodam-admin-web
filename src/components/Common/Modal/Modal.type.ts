@@ -1,9 +1,9 @@
-import { CSSProperties, Dispatch, ReactNode, SetStateAction } from "react";
+import { CSSProperties, ReactNode } from "react";
 
 export interface ModalProps {
   customStyle?: CSSProperties;
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  onClose: () => void;
   children: ReactNode;
   zIndex: number;
 }

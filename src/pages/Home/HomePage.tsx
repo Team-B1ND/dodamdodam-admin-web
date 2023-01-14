@@ -13,6 +13,8 @@ import TimeTablePage from "./TimeTablePage";
 const HomePage = () => {
   const router = useLocation();
 
+  console.log(router.pathname.slice(1));
+
   return (
     <PageTemplate>
       <SwitchCase

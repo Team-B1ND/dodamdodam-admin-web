@@ -5,6 +5,10 @@ export interface getPlacesResponse extends Response {
   data: Place[];
 }
 
+export interface getPlaceResponse extends Response {
+  data: Place;
+}
+
 export interface getPlaceTypesResponse extends Response {
   data: PlaceType[];
 }

@@ -12,19 +12,16 @@ const Modal = ({
   children,
   customStyle,
   isOpen,
-  setIsOpen,
+  onClose,
 }: ModalProps) => {
   return (
     <>
       {isOpen && (
         <>
-          <ModalBackground
-            style={{ zIndex: zIndex - 1 }}
-            onClick={() => setIsOpen(false)}
-          />
+          <ModalBackground style={{ zIndex: zIndex - 1 }} onClick={onClose} />
           <ModalContainer style={{ ...customStyle, zIndex }}>
             <ModalWrap>
-              <ModalCloseIcon onClick={() => setIsOpen(false)}>
+              <ModalCloseIcon onClick={onClose}>
                 <IoClose />
               </ModalCloseIcon>
               {children}

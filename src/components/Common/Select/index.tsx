@@ -9,7 +9,13 @@ import {
 import { IoIosArrowDown } from "@react-icons/all-files/io/IoIosArrowDown";
 import { SelectProps } from "./Select.type";
 
-const Select = ({ items, value, onChange, customStyle }: SelectProps) => {
+const Select = ({
+  items,
+  value,
+  zIndex,
+  onChange,
+  customStyle,
+}: SelectProps) => {
   const [close, setClose] = useState<boolean>(true);
 
   return (
@@ -23,7 +29,7 @@ const Select = ({ items, value, onChange, customStyle }: SelectProps) => {
         <IoIosArrowDown />
       </SelectIcon>
       {!close && (
-        <SelectItemWrap>
+        <SelectItemWrap style={{ zIndex }}>
           {items.map((item, idx) => (
             <SelectItem key={idx} onClick={() => onChange(item)}>
               {item}

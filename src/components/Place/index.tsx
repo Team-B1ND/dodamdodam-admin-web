@@ -12,13 +12,15 @@ import { PlaceContainer, PlaceInputWrap } from "./style";
 import PlaceCreateModal from "./PlaceCreateModal";
 import PlaceList from "./PlaceList";
 import ErrorBoundary from "../Common/ErrorBoundary";
+import PlaceModifyModal from "./PlaceModifyModal";
 
 const Place = () => {
-  const [grade, setGrade] = useState("전체보기");
+  const [keyword, setKeyword] = useState("전체보기");
   const onSubmit = () => {
     console.log(value);
   };
-  const [open, setOpen] = useState(false);
+  const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
+  const [selectModifyPlaceId, setSelectModifyPlaceId] = useState(-1);
   const [value, setValue] = useState("");
 
   return (
@@ -28,16 +30,17 @@ const Place = () => {
         subTitle="장소를 추가/수정/삭제할 수 있습니다"
       >
         <Button
-          onClick={() => setOpen(true)}
+          onClick={() => setCreateModalIsOpen(true)}
           title="추가하기"
           type={"Primary"}
         />
       </SectionHeader>
       <PlaceInputWrap>
         <Select
-          items={["전체보기", "1학년", "2학년", "3학년"]}
-          value={grade}
-          onChange={setGrade}
+          items={["전체보기"]}
+          value={keyword}
+          onChange={setKeyword}
+          zIndex={2}
         />
         <SearchBar onSubmit={onSubmit} onChange={setValue} value={value} />
       </PlaceInputWrap>
@@ -55,10 +58,20 @@ const Place = () => {
       </CTable>
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
-          <PlaceList />
+          <PlaceList
+            selectModifyPlaceId={selectModifyPlaceId}
+            setSelectModifyPlaceId={setSelectModifyPlaceId}
+          />
         </Suspense>
       </ErrorBoundary>
-      <PlaceCreateModal open={open} setOpen={setOpen} />
+      <PlaceCreateModal
+        open={createModalIsOpen}
+        setOpen={setCreateModalIsOpen}
+      />
+      <PlaceModifyModal
+        selectModifyPlaceId={selectModifyPlaceId}
+        onClose={() => setSelectModifyPlaceId(-1)}
+      />
     </PlaceContainer>
   );
 };

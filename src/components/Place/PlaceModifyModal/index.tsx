@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, Suspense } from "react";
-import usePostPlace from "../../../hooks/place/usePostPlace";
+import { Suspense } from "react";
+import useModifyPost from "../../../hooks/place/useModifyPost";
 import Button from "../../Common/Button";
 import ErrorBoundary from "../../Common/ErrorBoundary";
 import Modal from "../../Common/Modal";
@@ -11,35 +11,37 @@ import RTR from "../../Common/RTable/RTR";
 import TextInput from "../../Common/TextInput";
 import PlaceModalTypeSelect from "../PlaceModalTypeSelect";
 import {
-  PlaceCreateModalButtonWrap,
-  PlaceCreateModalTitle,
-  PlaceCreateModalWrap,
+  PlaceModifyModalButtonWrap,
+  PlaceModifyModalTitle,
+  PlaceModifyModalWrap,
 } from "./style";
 
 interface Props {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
+  selectModifyPlaceId: number;
+  onClose: () => void;
 }
 
-const PlaceCreateModal = ({ open, setOpen }: Props) => {
+const PlaceModifyModal = ({ selectModifyPlaceId, onClose }: Props) => {
   const {
     placeName,
+    onChangePlaceName,
     placeTypeName,
     setPlaceTypeName,
-    onChangePlaceName,
-    onSubmitPlace,
-  } = usePostPlace();
+    onModifyPlace,
+  } = useModifyPost({
+    id: selectModifyPlaceId,
+  });
 
   return (
     <Modal
       zIndex={2}
-      isOpen={open}
-      onClose={() => setOpen(false)}
+      isOpen={selectModifyPlaceId !== -1}
+      onClose={onClose}
       customStyle={{ width: 410, height: 490 }}
     >
-      <ModalHeader title="장소 추가하기" />
-      <PlaceCreateModalWrap>
-        <PlaceCreateModalTitle>장소 기본정보</PlaceCreateModalTitle>
+      <ModalHeader title="장소 수정하기" />
+      <PlaceModifyModalWrap>
+        <PlaceModifyModalTitle>장소 기본정보</PlaceModifyModalTitle>
         <RTable customStyle={{ width: 340, margin: "0px auto" }}>
           <RTR>
             <RTH>장소 이름</RTH>
@@ -53,7 +55,7 @@ const PlaceCreateModal = ({ open, setOpen }: Props) => {
             </RTD>
           </RTR>
           <RTR>
-            <RTH>장소 분류 </RTH>
+            <RTH>장소 분류</RTH>
             <RTD>
               <ErrorBoundary fallback={<>에러 발생</>}>
                 <Suspense fallback={<>로딩중...</>}>
@@ -66,7 +68,7 @@ const PlaceCreateModal = ({ open, setOpen }: Props) => {
             </RTD>
           </RTR>
         </RTable>
-        <PlaceCreateModalButtonWrap>
+        <PlaceModifyModalButtonWrap>
           <Button
             type="Primary"
             title="확인"
@@ -76,7 +78,7 @@ const PlaceCreateModal = ({ open, setOpen }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={onSubmitPlace}
+            onClick={onModifyPlace}
           />
           <Button
             type="Cancel"
@@ -87,12 +89,12 @@ const PlaceCreateModal = ({ open, setOpen }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => setOpen(false)}
+            onClick={onClose}
           />
-        </PlaceCreateModalButtonWrap>
-      </PlaceCreateModalWrap>
+        </PlaceModifyModalButtonWrap>
+      </PlaceModifyModalWrap>
     </Modal>
   );
 };
 
-export default PlaceCreateModal;
+export default PlaceModifyModal;

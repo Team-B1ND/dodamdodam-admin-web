@@ -1,16 +1,13 @@
 import { Dispatch, SetStateAction } from "react";
-import { useGetPlaceTypesQuery } from "../../../../quries/place/place.query";
-import Select from "../../../Common/Select";
+import { useGetPlaceTypesQuery } from "../../../quries/place/place.query";
+import Select from "../../Common/Select";
 
 interface Props {
   placeTypeName: string;
   setPlaceTypeName: Dispatch<SetStateAction<string>>;
 }
 
-const PlaceCreateModalTypeSelect = ({
-  placeTypeName,
-  setPlaceTypeName,
-}: Props) => {
+const PlaceModalTypeSelect = ({ placeTypeName, setPlaceTypeName }: Props) => {
   const { data: serverPlaceTypesData } = useGetPlaceTypesQuery({
     suspense: true,
   });
@@ -24,4 +21,4 @@ const PlaceCreateModalTypeSelect = ({
   );
 };
 
-export default PlaceCreateModalTypeSelect;
+export default PlaceModalTypeSelect;
