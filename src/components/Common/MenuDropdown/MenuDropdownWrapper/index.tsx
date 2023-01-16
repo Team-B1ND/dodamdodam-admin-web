@@ -1,4 +1,4 @@
-import { Children, ReactNode, useState } from "react";
+import { Children, useState } from "react";
 import {
   MenuDropdownWrapperChildWrap,
   MenuDropdownWrapperContainer,
@@ -6,13 +6,9 @@ import {
   MenuDropdownWrapperTitleWrap,
 } from "./style";
 import { GoTriangleDown } from "@react-icons/all-files/go/GoTriangleDown";
+import { MenuDropdownWrapperProps } from "./MenuDropdownWrapper.type";
 
-interface Props {
-  title: string;
-  children?: ReactNode;
-}
-
-const MenuDropdownChild = ({ title, children }: Props) => {
+const MenuDropdownWrapper = ({ title, children }: MenuDropdownWrapperProps) => {
   const [close, setClose] = useState(true);
 
   return (
@@ -40,4 +36,4 @@ const MenuDropdownChild = ({ title, children }: Props) => {
   );
 };
 
-export default MenuDropdownChild;
+export default MenuDropdownWrapper;

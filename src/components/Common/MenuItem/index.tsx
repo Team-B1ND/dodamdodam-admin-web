@@ -1,12 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import { MenuItemProps } from "./MenuItem.type";
 import { MenuItemContainer } from "./style";
 
-interface Props {
-  title: string;
-  redirectUrl: string;
-}
-
-const MenuItem = ({ title, redirectUrl }: Props) => {
+const MenuItem = ({ title, redirectUrl }: MenuItemProps) => {
   const navigate = useNavigate();
 
   const { pathname } = useLocation();

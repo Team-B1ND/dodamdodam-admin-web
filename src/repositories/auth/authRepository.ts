@@ -1,10 +1,13 @@
 import axios from "axios";
 import config from "../../config/config.json";
-import { LoginResponse } from "../../types/auth/auth.type";
 import { postLoginParam } from "./aurhRepository.param";
+import { postLoginResponse } from "./authRepository.res";
 
 class AuthRepository {
-  public async postLogin({ id, pw }: postLoginParam): Promise<LoginResponse> {
+  public async postLogin({
+    id,
+    pw,
+  }: postLoginParam): Promise<postLoginResponse> {
     const { data } = await axios.post(`${config.SERVER}/auth/login`, {
       id,
       pw,
