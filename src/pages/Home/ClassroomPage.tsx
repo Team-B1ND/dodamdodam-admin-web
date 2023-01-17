@@ -1,5 +1,7 @@
+import ClassRoom from "../../components/ClassRoom";
+
 const ClassroomPage = () => {
-  return <div>classroom</div>;
+  return <ClassRoom />;
 };
 
 export default ClassroomPage;
