@@ -12,7 +12,7 @@ import {
 
 class ClassRoomRepository {
   public async getClassRooms(): Promise<getClassRoomsResponse> {
-    const { data } = await customAxios.get("/classroom");
+    const { data } = await customAxios.get("/classroom/");
     return data;
   }
 

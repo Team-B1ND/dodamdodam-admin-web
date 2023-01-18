@@ -17,11 +17,11 @@ export const useGetClassRoomsQuery = (
     getClassRoomsResponse,
     AxiosError,
     getClassRoomsResponse,
-    "classRoom/useGetClassRooms"
+    "classRoom/getClassRooms"
   >
 ) =>
   useQuery(
-    "classRoom/useGetClassRooms",
+    "classRoom/getClassRooms",
     () => ClassRoomRepository.getClassRooms(),
     { ...options, staleTime: 1000 * 60 * 5, cacheTime: 1000 * 60 * 60 }
   );
@@ -32,11 +32,11 @@ export const useGetClassRoomQuery = (
     getClassRoomResponse,
     AxiosError,
     getClassRoomResponse,
-    ["classRoom/useGetClassRoom", number]
+    ["classRoom/getClassRoom", number]
   >
 ) =>
   useQuery(
-    ["classRoom/useGetClassRoom", id],
+    ["classRoom/getClassRoom", id],
     () => ClassRoomRepository.getClassRoom({ id }),
     {
       ...options,
