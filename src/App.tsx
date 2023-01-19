@@ -1,7 +1,6 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import PageTemplate from "./components/Common/PageTemplate";
 import Router from "./components/Router";
 import { GlobalStyle } from "./styles/GlobalStyle";
 
@@ -13,10 +12,7 @@ function App() {
       <RecoilRoot>
         <BrowserRouter>
           <GlobalStyle />
-          <PageTemplate>
-            <GlobalStyle />
-            <Router />
-          </PageTemplate>
+          <Router />
         </BrowserRouter>
       </RecoilRoot>
     </QueryClientProvider>
