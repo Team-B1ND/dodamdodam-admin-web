@@ -6,6 +6,7 @@ import {
   ModalWrap,
 } from "./style";
 import { IoClose } from "@react-icons/all-files/io5/IoClose";
+import { memo } from "react";
 
 const Modal = ({
   zIndex,
@@ -33,4 +34,4 @@ const Modal = ({
   );
 };
 
-export default Modal;
+export default memo(Modal);

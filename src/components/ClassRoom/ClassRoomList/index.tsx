@@ -1,5 +1,7 @@
+import { Dispatch, memo, SetStateAction } from "react";
 import useDeleteClassRoom from "../../../hooks/classRoom/useDeleteClassRoom";
 import { useGetClassRoomsQuery } from "../../../quries/classRoom/classRoom.query";
+import { ClassRoom } from "../../../types/classRoom/classRoom.type";
 import Button from "../../Common/Button";
 import CTable, { CTableScrollWrapper } from "../../Common/CTable";
 import CTBody from "../../Common/CTable/CTBody";
@@ -7,7 +9,15 @@ import CTD from "../../Common/CTable/CTD";
 import CTR from "../../Common/CTable/CTR";
 import { ClassRoomListButtonWrap } from "./style";
 
-const ClassRoomList = () => {
+interface Props {
+  classification: string;
+  setSelectModifyClassRoomId: Dispatch<SetStateAction<number>>;
+}
+
+const ClassRoomList = ({
+  classification,
+  setSelectModifyClassRoomId,
+}: Props) => {
   const { data: serverClassRoomsData } = useGetClassRoomsQuery({
     suspense: true,
   });
@@ -18,8 +28,15 @@ const ClassRoomList = () => {
     <CTableScrollWrapper customStyle={{ width: 664, height: 568 }}>
       <CTable customStyle={{ width: 664 }}>
         <CTBody>
-          {serverClassRoomsData?.data.map((classRoom) => (
-            <CTR>
+          {(() => {
+            return classification === "전체보기"
+              ? serverClassRoomsData?.data.map((classRoom) => classRoom)
+              : serverClassRoomsData?.data.filter(
+                  (classRoom) =>
+                    classRoom.grade === Number(classification.slice(0, 1))
+                );
+          })()?.map((classRoom) => (
+            <CTR key={classRoom.id}>
               <CTD
                 customStyle={{ width: "50%" }}
               >{`${classRoom.grade}학년 ${classRoom.room}반`}</CTD>
@@ -29,7 +46,7 @@ const ClassRoomList = () => {
                     type="Primary"
                     title="수정"
                     customStyle={{ width: 66, height: 32, borderRadius: 5 }}
-                    onClick={() => {}}
+                    onClick={() => setSelectModifyClassRoomId(classRoom.id)}
                   />
                   <Button
                     type="Cancel"
@@ -47,4 +64,4 @@ const ClassRoomList = () => {
   );
 };
 
-export default ClassRoomList;
+export default memo(ClassRoomList);

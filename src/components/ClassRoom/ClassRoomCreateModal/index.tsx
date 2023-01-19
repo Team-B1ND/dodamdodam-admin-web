@@ -1,4 +1,8 @@
 import { Dispatch, SetStateAction, Suspense } from "react";
+import {
+  CLASSROOM_GRADE_MAX,
+  CLASSROOM_ROOM_MAX,
+} from "../../../constants/classRoom/classRoom.constant";
 import usePostClassRoom from "../../../hooks/classRoom/usePostClassRoom";
 import Button from "../../Common/Button";
 import ErrorBoundary from "../../Common/ErrorBoundary";
@@ -45,7 +49,7 @@ const ClassRoomCreateModal = ({ open, setOpen }: Props) => {
             <RTH>학년 입력</RTH>
             <RTD>
               <ClassRoomCreateModalInfoSelectWrap>
-                {Array.from({ length: 3 }).map((_, i) => {
+                {Array.from({ length: CLASSROOM_GRADE_MAX }).map((_, i) => {
                   const buttonGrade = i + 1;
 
                   return (
@@ -67,7 +71,7 @@ const ClassRoomCreateModal = ({ open, setOpen }: Props) => {
             <RTH>학반 입력</RTH>
             <RTD>
               <ClassRoomCreateModalInfoSelectWrap>
-                {Array.from({ length: 10 }).map((_, i) => {
+                {Array.from({ length: CLASSROOM_ROOM_MAX }).map((_, i) => {
                   const buttonRoom = i + 1;
 
                   return (

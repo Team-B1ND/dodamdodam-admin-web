@@ -10,8 +10,8 @@ export interface postClassRoomParam {
 
 export interface putClassRoomParam {
   id: number;
-  classRoomId: number;
-  studentId: number;
+  grade: number;
+  room: number;
 }
 
 export interface deleteClassRoomParam {
