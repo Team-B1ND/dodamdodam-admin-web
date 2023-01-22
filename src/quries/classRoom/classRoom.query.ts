@@ -54,8 +54,9 @@ export const usePostClassRoomMutation = () => {
 };
 
 export const usePutClassRoomMutation = () => {
-  const mutation = useMutation(({ id, grade, room }: putClassRoomParam) =>
-    ClassRoomRepository.putClassRoom({ id, grade, room })
+  const mutation = useMutation(
+    ({ id, grade, room, placeId }: putClassRoomParam) =>
+      ClassRoomRepository.putClassRoom({ id, grade, room, placeId })
   );
 
   return mutation;

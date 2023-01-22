@@ -19,7 +19,7 @@ const ClassRoomPlaceSelect = ({ onChange, custumDefaultValue }: Props) => {
       }
     >
       {serverPlacesData?.data.map((place) => (
-        <BrowserSelectOption value={place.name}>
+        <BrowserSelectOption value={place.name} key={place.id}>
           {place.name}
         </BrowserSelectOption>
       ))}

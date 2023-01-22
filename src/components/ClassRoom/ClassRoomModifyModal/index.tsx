@@ -3,6 +3,7 @@ import {
   CLASSROOM_GRADE_MAX,
   CLASSROOM_ROOM_MAX,
 } from "../../../constants/classRoom/classRoom.constant";
+import useModifyClassRoom from "../../../hooks/classRoom/useModifyClassRoom";
 import Button from "../../Common/Button";
 import ErrorBoundary from "../../Common/ErrorBoundary";
 import Modal from "../../Common/Modal";
@@ -13,6 +14,7 @@ import RTH from "../../Common/RTable/RTH";
 import RTR from "../../Common/RTable/RTR";
 import ClassRoomPlaceSelect from "../ClassRoomPlaceSelect";
 import {
+  ClassRoomModifyModalButtonWrap,
   ClassRoomModifyModalInfoSelectWrap,
   ClassRoomModifyModalTitle,
   ClassRoomModifyModalWrap,
@@ -24,6 +26,17 @@ interface Props {
 }
 
 const ClassRoomModifyModal = ({ selectModifyClassRoomId, onClose }: Props) => {
+  const {
+    classRoomData,
+    classRoomPlaceName,
+    onChangeGrade,
+    onChangeRoom,
+    onChangePlace,
+    onModifyClassRoom,
+  } = useModifyClassRoom({
+    classRoomId: selectModifyClassRoomId,
+  });
+
   return (
     <Modal
       zIndex={2}
@@ -45,8 +58,13 @@ const ClassRoomModifyModal = ({ selectModifyClassRoomId, onClose }: Props) => {
                   return (
                     <Button
                       title={`${buttonGrade}학년`}
-                      type={"Cancel"}
-                      onClick={() => {}}
+                      type={
+                        classRoomData.grade === buttonGrade
+                          ? "Primary"
+                          : "Cancel"
+                      }
+                      onClick={() => onChangeGrade(buttonGrade)}
+                      key={buttonGrade}
                     />
                   );
                 })}
@@ -63,8 +81,11 @@ const ClassRoomModifyModal = ({ selectModifyClassRoomId, onClose }: Props) => {
                   return (
                     <Button
                       title={`${buttonRoom}반`}
-                      type={"Cancel"}
-                      onClick={() => {}}
+                      type={
+                        classRoomData.room === buttonRoom ? "Primary" : "Cancel"
+                      }
+                      onClick={() => onChangeRoom(buttonRoom)}
+                      key={buttonRoom}
                     />
                   );
                 })}
@@ -77,14 +98,38 @@ const ClassRoomModifyModal = ({ selectModifyClassRoomId, onClose }: Props) => {
               <ErrorBoundary fallback={<>에러 발생</>}>
                 <Suspense fallback={<>로딩중...</>}>
                   <ClassRoomPlaceSelect
-                    onChange={() => {}}
-                    custumDefaultValue={"프로그래밍1"}
+                    onChange={onChangePlace}
+                    custumDefaultValue={classRoomPlaceName}
                   />
                 </Suspense>
               </ErrorBoundary>
             </RTD>
           </RTR>
         </RTable>
+        <ClassRoomModifyModalButtonWrap>
+          <Button
+            type="Primary"
+            title="확인"
+            customStyle={{
+              width: 66,
+              height: 32,
+              borderRadius: 5,
+              fontSize: 12,
+            }}
+            onClick={onModifyClassRoom}
+          />
+          <Button
+            type="Cancel"
+            title="취소"
+            customStyle={{
+              width: 66,
+              height: 32,
+              borderRadius: 5,
+              fontSize: 12,
+            }}
+            onClick={() => onClose()}
+          />
+        </ClassRoomModifyModalButtonWrap>
       </ClassRoomModifyModalWrap>
     </Modal>
   );

@@ -1,21 +1,26 @@
-import { useEffect, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
-import { useGetClassRoomQuery } from "../../quries/classRoom/classRoom.query";
+import {
+  useGetClassRoomQuery,
+  usePutClassRoomMutation,
+} from "../../quries/classRoom/classRoom.query";
 import { useGetPlacesQuery } from "../../quries/place/place.query";
 
 interface Props {
-  id: number;
+  classRoomId: number;
 }
 
-const useModifyClassRoom = ({ id }: Props) => {
+const useModifyClassRoom = ({ classRoomId }: Props) => {
   const queryClient = useQueryClient();
 
   const { data: serverPlacesData } = useGetPlacesQuery();
 
   const { data: serverClassRoomData } = useGetClassRoomQuery(
-    { id },
-    { enabled: id !== -1 }
+    { id: classRoomId },
+    { enabled: classRoomId !== -1 }
   );
+
+  const pustClassRoomMutation = usePutClassRoomMutation();
 
   const [prevClassRoomData, setPrevClassRoomData] = useState({
     grade: -1,
@@ -29,13 +34,97 @@ const useModifyClassRoom = ({ id }: Props) => {
     placeId: -1,
   });
 
+  const [classRoomPlaceName, setClassRoomPlaceName] = useState("");
+
   useEffect(() => {
     if (serverClassRoomData) {
-      const { grade } = serverClassRoomData.data;
+      const {
+        grade,
+        room,
+        place: { id: placeId, name: placeName },
+      } = serverClassRoomData.data;
+
+      setPrevClassRoomData({ grade, room, placeId });
+      setClassRoomData({ grade, room, placeId });
+      setClassRoomPlaceName(placeName);
     }
   }, [serverClassRoomData]);
 
-  return {};
+  const onChangeRoom = (room: number) => {
+    setClassRoomData((prev) => ({ ...prev, room }));
+  };
+
+  const onChangeGrade = (grade: number) => {
+    setClassRoomData((prev) => ({ ...prev, grade }));
+  };
+
+  const onChangePlace = useCallback(
+    (e: ChangeEvent<HTMLSelectElement>) => {
+      const { value } = e.target;
+
+      if (serverPlacesData) {
+        const selectedPlace = serverPlacesData.data.find(
+          (place) => place.name === value
+        );
+
+        setClassRoomData((prev) => ({
+          ...prev,
+          placeId: selectedPlace ? selectedPlace.id : -1,
+        }));
+      }
+    },
+    [serverPlacesData]
+  );
+
+  const onModifyClassRoom = () => {
+    if (pustClassRoomMutation.isLoading) {
+      return;
+    }
+
+    if (classRoomData.placeId === -1) {
+      window.alert("장소를 입력해주세요!");
+    }
+
+    if (
+      Object.entries({ ...classRoomData }).toString() ===
+      Object.entries({ ...prevClassRoomData }).toString()
+    ) {
+      window.alert("수정된 사항이 없습니다!");
+      return;
+    }
+
+    if (!window.confirm("정말 수정하시겠습니까?")) {
+      return;
+    }
+
+    console.log(classRoomId)
+
+    pustClassRoomMutation.mutate(
+      { id: classRoomId, ...classRoomData },
+      {
+        onSuccess: () => {
+          window.alert("교실 수정 성공");
+          queryClient.invalidateQueries([
+            "classRoom/getClassRoom",
+            classRoomId,
+          ]);
+          queryClient.invalidateQueries("classRoom/getClassRooms");
+        },
+        onError: () => {
+          window.alert("장소 수정 실패");
+        },
+      }
+    );
+  };
+
+  return {
+    classRoomData,
+    classRoomPlaceName,
+    onChangeGrade,
+    onChangeRoom,
+    onChangePlace,
+    onModifyClassRoom,
+  };
 };
 
 export default useModifyClassRoom;

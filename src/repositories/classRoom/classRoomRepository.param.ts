@@ -12,6 +12,7 @@ export interface putClassRoomParam {
   id: number;
   grade: number;
   room: number;
+  placeId: number;
 }
 
 export interface deleteClassRoomParam {

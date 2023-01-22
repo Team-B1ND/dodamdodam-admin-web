@@ -61,6 +61,7 @@ const ClassRoomCreateModal = ({ open, setOpen }: Props) => {
                           : "Cancel"
                       }
                       onClick={() => onChangeGrade(buttonGrade)}
+                      key={buttonGrade}
                     />
                   );
                 })}
@@ -81,6 +82,7 @@ const ClassRoomCreateModal = ({ open, setOpen }: Props) => {
                         classRoomData.room === buttonRoom ? "Primary" : "Cancel"
                       }
                       onClick={() => onChangeRoom(buttonRoom)}
+                      key={buttonRoom}
                     />
                   );
                 })}

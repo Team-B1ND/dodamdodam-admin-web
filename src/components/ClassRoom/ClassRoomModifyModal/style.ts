@@ -22,3 +22,12 @@ export const ClassRoomModifyModalInfoSelectWrap = styled.div`
   row-gap: 5px;
   column-gap: 5px;
 `;
+
+export const ClassRoomModifyModalButtonWrap = styled.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 6px;
+  margin-top: 50px;
+`;

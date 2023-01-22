@@ -6,15 +6,15 @@ import {
 } from "../../quries/place/place.query";
 
 interface Props {
-  id: number;
+  placeTypeId: number;
 }
 
-const useModifyPlaceType = ({ id }: Props) => {
+const useModifyPlaceType = ({ placeTypeId }: Props) => {
   const queryClient = useQueryClient();
 
   const { data: serverPlaceTypeData } = useGetPlaceTypeQuery(
-    { id },
-    { enabled: id !== -1 }
+    { id: placeTypeId },
+    { enabled: placeTypeId !== -1 }
   );
 
   const patchPlaceTypeMutation = usePatchPlaceTypeMutation();
@@ -55,12 +55,12 @@ const useModifyPlaceType = ({ id }: Props) => {
     }
 
     patchPlaceTypeMutation.mutate(
-      { id, name: placeTypeName },
+      { id: placeTypeId, name: placeTypeName },
       {
         onSuccess: () => {
           window.alert("장소 분류 수정 성공");
-          queryClient.invalidateQueries(["place/getPlaceType", id]);
-          queryClient.invalidateQueries(["place/getPlaceTypes"]);
+          queryClient.invalidateQueries(["place/getPlaceType", placeTypeId]);
+          queryClient.invalidateQueries("place/getPlaceTypes");
         },
         onError: () => {
           window.alert("장소 분류 수정 실패");

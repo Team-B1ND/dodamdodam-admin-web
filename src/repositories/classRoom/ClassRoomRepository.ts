@@ -35,8 +35,9 @@ class ClassRoomRepository {
     id,
     grade,
     room,
+    placeId,
   }: putClassRoomParam): Promise<void> {
-    await customAxios.put(`/classroom/${id}`, { grade, room });
+    await customAxios.put(`/classroom/${id}`, { grade, room, placeId });
   }
 
   public async deleteClassRoom({ id }: deleteClassRoomParam): Promise<void> {

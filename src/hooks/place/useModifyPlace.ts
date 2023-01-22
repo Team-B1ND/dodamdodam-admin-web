@@ -7,15 +7,15 @@ import {
 } from "../../quries/place/place.query";
 
 interface Props {
-  id: number;
+  placeId: number;
 }
 
-const useModifyPost = ({ id }: Props) => {
+const useModifyPlace = ({ placeId }: Props) => {
   const queryClient = useQueryClient();
 
   const { data: serverPlaceData } = useGetPlaceQuery(
-    { id },
-    { enabled: id !== -1 }
+    { id: placeId },
+    { enabled: placeId !== -1 }
   );
   const { data: serverPlaceTypesData } = useGetPlaceTypesQuery();
 
@@ -59,7 +59,7 @@ const useModifyPost = ({ id }: Props) => {
 
   useEffect(() => {
     resetPlace();
-  }, [id, resetPlace]);
+  }, [placeId, resetPlace]);
 
   const onModifyPlace = () => {
     if (patchPlaceMutation.isLoading) {
@@ -88,12 +88,12 @@ const useModifyPost = ({ id }: Props) => {
     }
 
     patchPlaceMutation.mutate(
-      { id, name: placeName, typeId: placeTypeId },
+      { id: placeId, name: placeName, typeId: placeTypeId },
       {
         onSuccess: () => {
           window.alert("장소 수정 성공");
-          queryClient.invalidateQueries(["place/getPlace", id]);
-          queryClient.invalidateQueries(["place/getPlaces"]);
+          queryClient.invalidateQueries(["place/getPlace", placeId]);
+          queryClient.invalidateQueries("place/getPlaces");
         },
         onError: () => {
           window.alert("장소 수정 실패");
@@ -114,4 +114,4 @@ const useModifyPost = ({ id }: Props) => {
   };
 };
 
-export default useModifyPost;
+export default useModifyPlace;
