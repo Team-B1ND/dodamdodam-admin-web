@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { sha512 } from "js-sha512";
 import { FormEvent, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -30,12 +31,12 @@ const useLogin = () => {
     e.preventDefault();
 
     if (loginData.id === "") {
-      window.alert("아이디를 입력해주세요");
+      B1ndToast.showInfo("아이디를 입력해주세요");
       return;
     }
 
     if (loginData.pw === "") {
-      window.alert("비밀번호를 입력해주세요");
+      B1ndToast.showInfo("비밀번호를 입력해주세요");
       return;
     }
 
@@ -52,11 +53,11 @@ const useLogin = () => {
         onSuccess: ({ data }) => {
           token.setToken(ACCESS_TOKEN_KEY, data.token);
           token.setToken(REFRESH_TOKEN_KEY, data.refreshToken);
-          window.alert("로그인 성공");
+          B1ndToast.showSuccess("로그인 성공");
           navigate("/");
         },
         onError: () => {
-          window.alert("로그인 실패");
+          B1ndToast.showSuccess("로그인 실패");
         },
       }
     );

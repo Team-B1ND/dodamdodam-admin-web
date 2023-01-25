@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import {
@@ -41,12 +42,12 @@ const useModifyPlaceType = ({ placeTypeId }: Props) => {
     }
 
     if (placeTypeName === "") {
-      window.alert("장소 분류 이름을 입력해주세요!");
+      B1ndToast.showInfo("장소 분류 이름을 입력해주세요!");
       return;
     }
 
     if (placeTypeName === prevPlaceTypeName) {
-      window.alert("수정된 사항이 없습니다!");
+      B1ndToast.showInfo("수정된 사항이 없습니다!");
       return;
     }
 
@@ -58,12 +59,12 @@ const useModifyPlaceType = ({ placeTypeId }: Props) => {
       { id: placeTypeId, name: placeTypeName },
       {
         onSuccess: () => {
-          window.alert("장소 분류 수정 성공");
+          B1ndToast.showSuccess("장소 분류 수정 성공");
           queryClient.invalidateQueries(["place/getPlaceType", placeTypeId]);
           queryClient.invalidateQueries("place/getPlaceTypes");
         },
         onError: () => {
-          window.alert("장소 분류 수정 실패");
+          B1ndToast.showError("장소 분류 수정 실패");
         },
       }
     );

@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useCallback, useState } from "react";
 import { useQueryClient } from "react-query";
 import { usePostClassRoomMutation } from "../../quries/classRoom/classRoom.query";
@@ -50,17 +51,17 @@ const usePostClassRoom = () => {
     }
 
     if (grade === -1) {
-      window.alert("학년을 입력해주세요!");
+      B1ndToast.showInfo("학년을 입력해주세요!");
       return;
     }
 
     if (room === -1) {
-      window.alert("학반을 입력해주세요!");
+      B1ndToast.showInfo("학반을 입력해주세요!");
       return;
     }
 
     if (placeId === -1) {
-      window.alert("장소를 입력해주세요!");
+      B1ndToast.showInfo("장소를 입력해주세요!");
       return;
     }
 
@@ -72,11 +73,11 @@ const usePostClassRoom = () => {
       },
       {
         onSuccess: () => {
-          window.alert("교실 추가 성공");
+          B1ndToast.showSuccess("교실 추가 성공");
           queryClient.invalidateQueries("classRoom/getClassRooms");
         },
         onError: () => {
-          window.alert("교실 추가 실패");
+          B1ndToast.showError("교실 추가 실패");
         },
       }
     );

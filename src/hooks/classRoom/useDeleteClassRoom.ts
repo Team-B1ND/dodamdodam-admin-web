@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useQueryClient } from "react-query";
 import { useDeleteClassRoomMutation } from "../../quries/classRoom/classRoom.query";
 
@@ -19,11 +20,11 @@ const useDeleteClassRoom = () => {
       { id },
       {
         onSuccess: () => {
-          window.alert("교실 삭제 성공");
+          B1ndToast.showSuccess("교실 삭제 성공");
           queryClient.invalidateQueries("classRoom/getClassRooms");
         },
         onError: () => {
-          window.alert("교실 삭제 실패");
+          B1ndToast.showError("교실 삭제 실패");
         },
       }
     );

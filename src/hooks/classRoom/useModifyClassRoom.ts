@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import {
@@ -82,14 +83,14 @@ const useModifyClassRoom = ({ classRoomId }: Props) => {
     }
 
     if (classRoomData.placeId === -1) {
-      window.alert("장소를 입력해주세요!");
+      B1ndToast.showInfo("장소를 입력해주세요!");
     }
 
     if (
       Object.entries({ ...classRoomData }).toString() ===
       Object.entries({ ...prevClassRoomData }).toString()
     ) {
-      window.alert("수정된 사항이 없습니다!");
+      B1ndToast.showInfo("수정된 사항이 없습니다!");
       return;
     }
 
@@ -97,13 +98,13 @@ const useModifyClassRoom = ({ classRoomId }: Props) => {
       return;
     }
 
-    console.log(classRoomId)
+    console.log(classRoomId);
 
     pustClassRoomMutation.mutate(
       { id: classRoomId, ...classRoomData },
       {
         onSuccess: () => {
-          window.alert("교실 수정 성공");
+          B1ndToast.showSuccess("교실 수정 성공");
           queryClient.invalidateQueries([
             "classRoom/getClassRoom",
             classRoomId,
@@ -111,7 +112,7 @@ const useModifyClassRoom = ({ classRoomId }: Props) => {
           queryClient.invalidateQueries("classRoom/getClassRooms");
         },
         onError: () => {
-          window.alert("장소 수정 실패");
+          B1ndToast.showError("교실 수정 실패");
         },
       }
     );

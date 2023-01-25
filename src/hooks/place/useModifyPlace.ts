@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import {
@@ -67,7 +68,7 @@ const useModifyPlace = ({ placeId }: Props) => {
     }
 
     if (placeName === "") {
-      window.alert("장소 이름을 입력해주세요!");
+      B1ndToast.showInfo("장소 이름을 입력해주세요!");
       return;
     }
 
@@ -79,7 +80,7 @@ const useModifyPlace = ({ placeId }: Props) => {
         prevPlaceTypeName,
       }).toString()
     ) {
-      window.alert("수정된 사항이 없습니다!");
+      B1ndToast.showInfo("수정된 사항이 없습니다!");
       return;
     }
 
@@ -91,12 +92,12 @@ const useModifyPlace = ({ placeId }: Props) => {
       { id: placeId, name: placeName, typeId: placeTypeId },
       {
         onSuccess: () => {
-          window.alert("장소 수정 성공");
+          B1ndToast.showSuccess("장소 수정 성공");
           queryClient.invalidateQueries(["place/getPlace", placeId]);
           queryClient.invalidateQueries("place/getPlaces");
         },
         onError: () => {
-          window.alert("장소 수정 실패");
+          B1ndToast.showError("장소 수정 실패");
         },
       }
     );

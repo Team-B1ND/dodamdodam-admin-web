@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useQueryClient } from "react-query";
 import { useDeletePlaceTypeMutation } from "../../quries/place/place.query";
 
@@ -19,11 +20,11 @@ const useDeletePlaceType = () => {
       { id },
       {
         onSuccess: () => {
-          window.alert("장소 분류 삭제 성공");
+          B1ndToast.showSuccess("장소 분류 삭제 성공");
           queryClient.invalidateQueries("place/getPlaceTypes");
         },
         onError: () => {
-          window.alert("장소 분류 삭제 실패");
+          B1ndToast.showError("장소 분류 삭제 실패");
         },
       }
     );
