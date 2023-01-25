@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import {
@@ -6,15 +7,15 @@ import {
 } from "../../quries/place/place.query";
 
 interface Props {
-  id: number;
+  placeTypeId: number;
 }
 
-const useModifyPlaceType = ({ id }: Props) => {
+const useModifyPlaceType = ({ placeTypeId }: Props) => {
   const queryClient = useQueryClient();
 
   const { data: serverPlaceTypeData } = useGetPlaceTypeQuery(
-    { id },
-    { enabled: id !== -1 }
+    { id: placeTypeId },
+    { enabled: placeTypeId !== -1 }
   );
 
   const patchPlaceTypeMutation = usePatchPlaceTypeMutation();
@@ -41,12 +42,12 @@ const useModifyPlaceType = ({ id }: Props) => {
     }
 
     if (placeTypeName === "") {
-      window.alert("장소 분류 이름을 입력해주세요!");
+      B1ndToast.showInfo("장소 분류 이름을 입력해주세요!");
       return;
     }
 
     if (placeTypeName === prevPlaceTypeName) {
-      window.alert("수정된 사항이 없습니다!");
+      B1ndToast.showInfo("수정된 사항이 없습니다!");
       return;
     }
 
@@ -55,15 +56,15 @@ const useModifyPlaceType = ({ id }: Props) => {
     }
 
     patchPlaceTypeMutation.mutate(
-      { id, name: placeTypeName },
+      { id: placeTypeId, name: placeTypeName },
       {
         onSuccess: () => {
-          window.alert("장소 분류 수정 성공");
-          queryClient.invalidateQueries(["place/getPlaceType", id]);
-          queryClient.invalidateQueries(["place/getPlaceTypes"]);
+          B1ndToast.showSuccess("장소 분류 수정 성공");
+          queryClient.invalidateQueries(["place/getPlaceType", placeTypeId]);
+          queryClient.invalidateQueries("place/getPlaceTypes");
         },
         onError: () => {
-          window.alert("장소 분류 수정 실패");
+          B1ndToast.showError("장소 분류 수정 실패");
         },
       }
     );

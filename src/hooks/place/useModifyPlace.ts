@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useCallback, useEffect, useState } from "react";
 import { useQueryClient } from "react-query";
 import {
@@ -7,15 +8,15 @@ import {
 } from "../../quries/place/place.query";
 
 interface Props {
-  id: number;
+  placeId: number;
 }
 
-const useModifyPost = ({ id }: Props) => {
+const useModifyPlace = ({ placeId }: Props) => {
   const queryClient = useQueryClient();
 
   const { data: serverPlaceData } = useGetPlaceQuery(
-    { id },
-    { enabled: id !== -1 }
+    { id: placeId },
+    { enabled: placeId !== -1 }
   );
   const { data: serverPlaceTypesData } = useGetPlaceTypesQuery();
 
@@ -59,7 +60,7 @@ const useModifyPost = ({ id }: Props) => {
 
   useEffect(() => {
     resetPlace();
-  }, [id, resetPlace]);
+  }, [placeId, resetPlace]);
 
   const onModifyPlace = () => {
     if (patchPlaceMutation.isLoading) {
@@ -67,7 +68,7 @@ const useModifyPost = ({ id }: Props) => {
     }
 
     if (placeName === "") {
-      window.alert("장소 이름을 입력해주세요!");
+      B1ndToast.showInfo("장소 이름을 입력해주세요!");
       return;
     }
 
@@ -79,7 +80,7 @@ const useModifyPost = ({ id }: Props) => {
         prevPlaceTypeName,
       }).toString()
     ) {
-      window.alert("수정된 사항이 없습니다!");
+      B1ndToast.showInfo("수정된 사항이 없습니다!");
       return;
     }
 
@@ -88,15 +89,15 @@ const useModifyPost = ({ id }: Props) => {
     }
 
     patchPlaceMutation.mutate(
-      { id, name: placeName, typeId: placeTypeId },
+      { id: placeId, name: placeName, typeId: placeTypeId },
       {
         onSuccess: () => {
-          window.alert("장소 수정 성공");
-          queryClient.invalidateQueries(["place/getPlace", id]);
-          queryClient.invalidateQueries(["place/getPlaces"]);
+          B1ndToast.showSuccess("장소 수정 성공");
+          queryClient.invalidateQueries(["place/getPlace", placeId]);
+          queryClient.invalidateQueries("place/getPlaces");
         },
         onError: () => {
-          window.alert("장소 수정 실패");
+          B1ndToast.showError("장소 수정 실패");
         },
       }
     );
@@ -114,4 +115,4 @@ const useModifyPost = ({ id }: Props) => {
   };
 };
 
-export default useModifyPost;
+export default useModifyPlace;
