@@ -1,5 +1,7 @@
+import Member from "../../components/Member";
+
 const MemberPage = () => {
-  return <div>member</div>;
+  return <Member />;
 };
 
 export default MemberPage;
