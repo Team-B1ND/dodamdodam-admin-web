@@ -1,6 +1,6 @@
 import axios from "axios";
 import config from "../../config/config.json";
-import { postLoginParam } from "./aurhRepository.param";
+import { postLoginParam } from "./authRepository.param";
 import { postLoginResponse } from "./authRepository.res";
 
 class AuthRepository {

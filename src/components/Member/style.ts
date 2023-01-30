@@ -14,3 +14,8 @@ export const MemberInputWrap = styled.div`
   gap: 5px;
   margin-bottom: 10px;
 `;
+
+export const MemberProfileImg = styled.img`
+  width: 38px;
+  height: 38px;
+`;
