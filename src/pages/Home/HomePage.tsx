@@ -7,7 +7,7 @@ import MemberPage from "./MemberPage";
 import NumberSettingPage from "./NumberSettingPage";
 import PlacePage from "./PlacePage";
 import PlaceTypePage from "./PlaceTypePage";
-import RegisterApprovalPage from "./RegisterApprovalPage";
+import JoinApprovalPage from "./JoinApprovalPage";
 import TimeTablePage from "./TimeTablePage";
 
 const HomePage = () => {
@@ -18,7 +18,7 @@ const HomePage = () => {
       <SwitchCase
         value={router.pathname.slice(1)}
         caseBy={{
-          registerApproval: <RegisterApprovalPage />,
+          joinApproval: <JoinApprovalPage />,
           timetable: <TimeTablePage />,
           classroom: <ClassroomPage />,
           place: <PlacePage />,
