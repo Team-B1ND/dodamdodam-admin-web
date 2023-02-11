@@ -25,3 +25,7 @@ export interface NotAllowMember {
     phone: string;
   };
 }
+
+export interface PostJoinMemberId {
+  id: string;
+}
