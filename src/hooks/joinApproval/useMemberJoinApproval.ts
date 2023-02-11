@@ -7,7 +7,6 @@ const useMemberJoinApproval = () => {
   const memberJoinApproval = usePostMemberJoinApproval();
 
   const postMemberJoinApproval = (joinAllowMemberId: string) => {
-    console.log(joinAllowMemberId);
     memberJoinApproval.mutate(
       { id: joinAllowMemberId },
       {
