@@ -1,4 +1,4 @@
-import axios from "axios";
+import { customAxios } from "../../lib/axios/customAxios";
 import {
   CreateTimeTableData,
   TimeTablesDataResponse,
@@ -6,12 +6,12 @@ import {
 
 class TimeTableRepository {
   public async getTimeTables(): Promise<TimeTablesDataResponse> {
-    const { data } = await axios.get("time/tables");
+    const { data } = await customAxios.get("time/tables");
     return data;
   }
 
   public async postCreateTimeTable(createTimeTableData: CreateTimeTableData) {
-    const { data } = await axios.post("time/tables", createTimeTableData);
+    const { data } = await customAxios.post("time/tables", createTimeTableData);
     return data;
   }
 }
