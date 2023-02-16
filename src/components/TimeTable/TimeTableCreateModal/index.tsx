@@ -18,9 +18,6 @@ interface Props {
 
 const TimeTableCreateModal = ({ open, setOpen }: Props) => {
   const { timeTableTypeName, setTimeTableTypeName } = useCreateTimeTable();
-  const a = () => {
-
-  }
 
   return (
     <Modal
