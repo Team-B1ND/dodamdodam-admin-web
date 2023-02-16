@@ -1,16 +1,21 @@
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Button from "../Common/Button";
 import CTable from "../Common/CTable";
 import CTH from "../Common/CTable/CTH";
 import CTHead from "../Common/CTable/CTHead";
 import CTR from "../Common/CTable/CTR";
+import ErrorBoundary from "../Common/ErrorBoundary";
 import SectionHeader from "../Common/SectionHeader";
-import { TimeTableContainer } from "./style";
+import Select from "../Common/Select";
+import { TimeTableContainer, TimeTableSelectWrap } from "./style";
 import TimeTableCreateModal from "./TimeTableCreateModal";
+import TimeTableList from "./TimeTableList";
+import TimeTableModifyModal from "./TimeTableModifyModal";
 
 const TimeTable = () => {
-
+  const [timeTableTypeName, setTimeTableTypeName] = useState("전체보기");
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
+  const [modifyModalIsOpen, setModifyModalIsOpen] = useState(false);
 
   return (
     <TimeTableContainer>
@@ -24,19 +29,39 @@ const TimeTable = () => {
           type={"Primary"}
         />
       </SectionHeader>
-      <CTable customStyle={{ width: 600 }}>
+      <TimeTableSelectWrap>
+
+        <Select
+          customStyle={{ width: "100px" }}
+          items={["전체보기", "평일", "주말"]}
+          value={timeTableTypeName}
+          onChange={setTimeTableTypeName}
+        />
+      </TimeTableSelectWrap>
+      <CTable customStyle={{ width: 800 }}>
         <CTHead>
           <CTR>
             <CTH customStyle={{ minWidth: 200 }}>시간표</CTH>
+            <CTH customStyle={{ minWidth: 200 }}>시작시간</CTH>
+            <CTH customStyle={{ minWidth: 200 }}>끝나는시간</CTH>
             <CTH customStyle={{ width: "100%", textAlign: "right" }}>
               수정 / 삭제
             </CTH>
           </CTR>
         </CTHead>
       </CTable>
+      <ErrorBoundary fallback={<>에러 발생</>}>
+        <Suspense fallback={<>로딩중...</>}>
+          <TimeTableList />
+        </Suspense>
+      </ErrorBoundary>
       <TimeTableCreateModal
         open={createModalIsOpen}
         setOpen={setCreateModalIsOpen}
+      />
+      <TimeTableModifyModal
+        open={modifyModalIsOpen}
+        setOpen={setModifyModalIsOpen}
       />
     </TimeTableContainer>
   );
