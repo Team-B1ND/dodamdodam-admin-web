@@ -20,7 +20,7 @@ interface Props {
 
 const PlaceTypeModifyModal = ({ selectModifyPlaceTypeId, onClose }: Props) => {
   const { placeTypeName, onChangePlaceTypeName, onModifyPlaceType } =
-    useModifyPlaceType({ id: selectModifyPlaceTypeId });
+    useModifyPlaceType({ placeTypeId: selectModifyPlaceTypeId });
 
   return (
     <Modal

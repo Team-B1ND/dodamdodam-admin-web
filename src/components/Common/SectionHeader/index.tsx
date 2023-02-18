@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { SectionHeaderProps } from "./SectionHeader.type";
 import {
   SectionHeaderContainer,
@@ -15,4 +16,4 @@ const SectionHeader = ({ title, subTitle, children }: SectionHeaderProps) => {
   );
 };
 
-export default SectionHeader;
+export default memo(SectionHeader);

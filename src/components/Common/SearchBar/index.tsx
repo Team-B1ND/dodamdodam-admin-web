@@ -1,6 +1,7 @@
 import { SearchBarContainer, SearchBarIcon, SearchBarInput } from "./style";
 import { AiOutlineSearch } from "@react-icons/all-files/ai/AiOutlineSearch";
 import { SearchBarProps } from "./SearchBar.type";
+import { memo } from "react";
 
 const SearchBar = ({
   value,
@@ -26,4 +27,4 @@ const SearchBar = ({
   );
 };
 
-export default SearchBar;
+export default memo(SearchBar);
