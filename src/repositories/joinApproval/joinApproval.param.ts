@@ -34,6 +34,6 @@ export interface idAndName {
   name: string;
 }
 
-export interface postJoinMemberId {
+export interface postJoinMemberIdParam {
   id: string;
 }

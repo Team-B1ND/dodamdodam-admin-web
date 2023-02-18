@@ -2,7 +2,7 @@ import { JoinApprovalContainer } from "./style";
 import SectionHeader from "../Common/SectionHeader";
 import ErrorBoundary from "components/Common/ErrorBoundary";
 import { Suspense } from "react";
-import CTable, { CTableScrollWrapper } from "components/Common/CTable";
+import CTable from "components/Common/CTable";
 import CTHead from "components/Common/CTable/CTHead";
 import CTR from "components/Common/CTable/CTR";
 import CTH from "components/Common/CTable/CTH";

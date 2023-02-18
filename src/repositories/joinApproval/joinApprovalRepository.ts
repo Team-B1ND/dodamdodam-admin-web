@@ -1,15 +1,17 @@
 import { customAxios } from "lib/axios/customAxios";
-import { postJoinMemberId } from "./joinApproval.param";
+import { postJoinMemberIdParam } from "./joinApproval.param";
 import { getNotAllowMemberResponse } from "./joinApproval.res";
 
 class JoinApprovalRepository {
-  public async PostMemberJoinApproval({ id }: postJoinMemberId): Promise<void> {
+  public async PostMemberJoinApproval({
+    id,
+  }: postJoinMemberIdParam): Promise<void> {
     await customAxios.post("auth/allow", { id }); //회원가입 승인
   }
 
   public async PostMemberJoinApprovalDeny({
     id,
-  }: postJoinMemberId): Promise<void> {
+  }: postJoinMemberIdParam): Promise<void> {
     await customAxios.post("auth/deny", { id }); //회원가입 거절
   }
 
