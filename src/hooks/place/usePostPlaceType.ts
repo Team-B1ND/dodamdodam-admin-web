@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
 import { usePostPlaceTypeMutation } from "../../quries/place/place.query";
@@ -19,7 +20,7 @@ const usePostPlaceType = () => {
     }
 
     if (placeTypeName === "") {
-      window.alert("장소 분류를 적어주세요!");
+      B1ndToast.showInfo("장소 분류를 적어주세요!");
       return;
     }
 
@@ -27,12 +28,12 @@ const usePostPlaceType = () => {
       { name: placeTypeName },
       {
         onSuccess: () => {
-          window.alert("장소 분류 추가 성공");
+          B1ndToast.showSuccess("장소 분류 추가 성공");
           setPlaceTypeName("");
           queryClient.invalidateQueries("place/getPlaceTypes");
         },
         onError: () => {
-          window.alert("장소 분류 추가 실패");
+          B1ndToast.showError("장소 분류 추가 실패");
         },
       }
     );

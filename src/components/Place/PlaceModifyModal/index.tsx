@@ -1,5 +1,5 @@
 import { memo, Suspense } from "react";
-import useModifyPost from "../../../hooks/place/useModifyPost";
+import useModifyPlace from "../../../hooks/place/useModifyPlace";
 import Button from "../../Common/Button";
 import ErrorBoundary from "../../Common/ErrorBoundary";
 import Modal from "../../Common/Modal";
@@ -28,8 +28,8 @@ const PlaceModifyModal = ({ selectModifyPlaceId, onClose }: Props) => {
     placeTypeName,
     setPlaceTypeName,
     onModifyPlace,
-  } = useModifyPost({
-    id: selectModifyPlaceId,
+  } = useModifyPlace({
+    placeId: selectModifyPlaceId,
   });
 
   return (
