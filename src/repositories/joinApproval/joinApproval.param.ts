@@ -1,37 +1,22 @@
-export interface notAllowMemberParam {
-  email: string;
-  id: string;
-  joinDate: string;
-  name: string;
-  profileImage: string;
-  role: "ADMIN";
-  status: "ACTIVE";
-  student: student;
+import { Member } from "types/member/member.type";
+import { Place } from "types/place/place.type";
+
+export interface notAllowMemberParam extends Member {
+  student: Student;
 }
 
-export interface student {
-  classroom: studentClassroom;
+export interface Student {
+  classroom: ClassRoom;
   id: number;
   number: number;
   phone: string;
 }
 
-export interface studentClassroom {
+export interface ClassRoom {
   grade: number;
   id: number;
-  place: place;
+  place: Place;
   room: number;
-}
-
-export interface place {
-  id: number;
-  name: string;
-  type: idAndName;
-}
-
-export interface idAndName {
-  id: number;
-  name: string;
 }
 
 export interface postJoinMemberIdParam {
