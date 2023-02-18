@@ -1,6 +1,6 @@
 import { Response } from "../../types/util/util.type";
-import { NotAllowMember } from "./joinApproval.param";
+import { notAllowMemberParam } from "./joinApproval.param";
 
-export interface getNotAllowMember extends Response {
-  data: NotAllowMember[];
+export interface getNotAllowMemberResponse extends Response {
+  data: notAllowMemberParam[];
 }

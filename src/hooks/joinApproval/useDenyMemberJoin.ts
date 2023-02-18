@@ -1,12 +1,12 @@
 import { usePostMemberJoinApprovalDeny } from "quries/joinApproval/joinApproval.query";
 import { useQueryClient } from "react-query";
 
-const useMemberJoinApprovalDeny = () => {
+const useDenyMemberJoin = () => {
   const queryClient = useQueryClient();
 
   const memberJoinApprovalDeny = usePostMemberJoinApprovalDeny();
 
-  const postMemberJoinApprovalDeny = (joinDenyMemberId: string) => {
+  const deny = (joinDenyMemberId: string) => {
     memberJoinApprovalDeny.mutate(
       { id: joinDenyMemberId },
       {
@@ -21,7 +21,7 @@ const useMemberJoinApprovalDeny = () => {
     );
   };
 
-  return { postMemberJoinApprovalDeny };
+  return { deny };
 };
 
-export default useMemberJoinApprovalDeny;
+export default useDenyMemberJoin;

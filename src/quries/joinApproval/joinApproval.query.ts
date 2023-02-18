@@ -1,16 +1,16 @@
 import { useMutation, useQuery } from "react-query";
-import { PostJoinMemberId } from "repositories/joinApproval/joinApproval.param";
+import { postJoinMemberId } from "repositories/joinApproval/joinApproval.param";
 import JoinApprovalRepository from "repositories/joinApproval/joinApprovalRepository";
 
 export const usePostMemberJoinApproval = () => {
-  const mutation = useMutation(({ id }: PostJoinMemberId) =>
+  const mutation = useMutation(({ id }: postJoinMemberId) =>
     JoinApprovalRepository.PostMemberJoinApproval({ id })
   );
   return mutation;
 };
 
-export const usePostMemberJoinApprovalDeny = () => {
-  const mutation = useMutation(({ id }: PostJoinMemberId) =>
+export const usePostMemberJoinDeny = () => {
+  const mutation = useMutation(({ id }: postJoinMemberId) =>
     JoinApprovalRepository.PostMemberJoinApprovalDeny({ id })
   );
   return mutation;

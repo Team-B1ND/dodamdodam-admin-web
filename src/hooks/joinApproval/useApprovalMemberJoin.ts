@@ -1,12 +1,12 @@
 import { usePostMemberJoinApproval } from "quries/joinApproval/joinApproval.query";
 import { useQueryClient } from "react-query";
 
-const useMemberJoinApproval = () => {
+const useApprovalMemberJoin = () => {
   const queryClient = useQueryClient();
 
   const memberJoinApproval = usePostMemberJoinApproval();
 
-  const postMemberJoinApproval = (joinAllowMemberId: string) => {
+  const approval = (joinAllowMemberId: string) => {
     memberJoinApproval.mutate(
       { id: joinAllowMemberId },
       {
@@ -21,7 +21,7 @@ const useMemberJoinApproval = () => {
     );
   };
 
-  return { postMemberJoinApproval };
+  return { approval };
 };
 
-export default useMemberJoinApproval;
+export default useApprovalMemberJoin;
