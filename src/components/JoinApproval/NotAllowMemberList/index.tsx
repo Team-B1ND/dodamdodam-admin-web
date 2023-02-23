@@ -13,7 +13,7 @@ const NotAllowMemberList = () => {
     const { approval } = useMemberJoinApproval();
     const { deny } = useMemberJoinApprovalDeny();
     return (
-        <CTableScrollWrapper customStyle={{ width: 800, height: 568 }}>
+        <CTableScrollWrapper customStyle={{ width: 950, height: 568 }}>
             <CTable>
                 <CTBody>
                     {data?.data.map((item, idx) => {
@@ -22,6 +22,7 @@ const NotAllowMemberList = () => {
                                 <CTD customStyle={{ minWidth: 200 }}>{item.id}</CTD>
                                 <CTD customStyle={{ minWidth: 200 }}>{item.name}</CTD>
                                 <CTD customStyle={{ minWidth: 200 }}>{item.joinDate}</CTD>
+                                <CTD customStyle={{ minWidth: 170, display: "flex", justifyContent: "center" }}>{item.role}</CTD>
                                 <CTD customStyle={{ width: "100%", textAlign: "right" }}>
                                     <NotAllowButtonWrap>
                                         <Button
