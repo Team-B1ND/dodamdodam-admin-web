@@ -18,12 +18,13 @@ const JoinApproval = () => {
         subTitle="가입 신청자가 표시됩니다. 가입신청자는 승인 완료 후 서비스를 이용할 수 있습니다"
       >
       </SectionHeader>
-      <CTable customStyle={{ width: 800 }}>
+      <CTable customStyle={{ width: 950 }}>
         <CTHead>
           <CTR>
-            <CTH customStyle={{ minWidth: 165 }}>회원ID</CTH>
-            <CTH customStyle={{ minWidth: 200 }}>이름</CTH>
-            <CTH customStyle={{ minWidth: 200 }}>날짜</CTH>
+            <CTH customStyle={{ minWidth: 175 }}>회원ID</CTH>
+            <CTH customStyle={{ minWidth: 210 }}>이름</CTH>
+            <CTH customStyle={{ minWidth: 180 }}>날짜</CTH>
+            <CTH customStyle={{ minWidth: 160 }}>직급</CTH>
             <CTH customStyle={{ minWidth: "100%", textAlign: "right" }}>
               승인 / 거절
             </CTH>
