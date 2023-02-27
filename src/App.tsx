@@ -1,4 +1,5 @@
 import { B1ndToastContainer } from "@b1nd/b1nd-toastify";
+import Layout from "components/Common/Layout";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
@@ -14,7 +15,9 @@ function App() {
         <B1ndToastContainer autoClose={5000} limit={6} />
         <BrowserRouter>
           <GlobalStyle />
-          <Router />
+          <Layout>
+            <Router />
+          </Layout>
         </BrowserRouter>
       </RecoilRoot>
     </QueryClientProvider>

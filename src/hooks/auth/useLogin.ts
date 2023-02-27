@@ -51,13 +51,17 @@ const useLogin = () => {
       { ...processLoginData },
       {
         onSuccess: ({ data }) => {
-          token.setToken(ACCESS_TOKEN_KEY, data.token);
-          token.setToken(REFRESH_TOKEN_KEY, data.refreshToken);
-          B1ndToast.showSuccess("로그인 성공");
-          navigate("/");
+          if (data.member.role === "ADMIN") {
+            token.setToken(ACCESS_TOKEN_KEY, data.token);
+            token.setToken(REFRESH_TOKEN_KEY, data.refreshToken);
+            B1ndToast.showSuccess("로그인 성공");
+            navigate("/member");
+          } else {
+            B1ndToast.showError("접근할 수 없는 사용자입니다.");
+          }
         },
         onError: () => {
-          B1ndToast.showSuccess("로그인 실패");
+          B1ndToast.showError("로그인 실패");
         },
       }
     );

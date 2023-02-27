@@ -1,4 +1,5 @@
 import { memo, Suspense } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import useModifyPlace from "../../../hooks/place/useModifyPlace";
 import Button from "../../Common/Button";
 import ErrorBoundary from "../../Common/ErrorBoundary";
@@ -16,12 +17,15 @@ import {
   PlaceModifyModalWrap,
 } from "./style";
 
-interface Props {
-  selectModifyPlaceId: number;
-  onClose: () => void;
-}
+const PlaceModifyModal = () => {
+  const { id } = useParams();
 
-const PlaceModifyModal = ({ selectModifyPlaceId, onClose }: Props) => {
+  const navigate = useNavigate();
+
+  const onCloseModal = () => {
+    navigate("/place");
+  };
+
   const {
     placeName,
     onChangePlaceName,
@@ -29,14 +33,14 @@ const PlaceModifyModal = ({ selectModifyPlaceId, onClose }: Props) => {
     setPlaceTypeName,
     onModifyPlace,
   } = useModifyPlace({
-    placeId: selectModifyPlaceId,
+    placeId: Number(id),
   });
 
   return (
     <Modal
       zIndex={2}
-      isOpen={selectModifyPlaceId !== -1}
-      onClose={onClose}
+      isOpen={!!id}
+      onClose={onCloseModal}
       customStyle={{ width: 410, height: 490 }}
     >
       <ModalHeader title="장소 수정하기" />
@@ -89,7 +93,7 @@ const PlaceModifyModal = ({ selectModifyPlaceId, onClose }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={onClose}
+            onClick={onCloseModal}
           />
         </PlaceModifyModalButtonWrap>
       </PlaceModifyModalWrap>

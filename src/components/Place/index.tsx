@@ -18,7 +18,6 @@ const Place = () => {
   const [classification, setClassification] = useState("전체보기");
 
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
-  const [selectModifyPlaceId, setSelectModifyPlaceId] = useState(-1);
   const [keyword, setKeyword] = useState("");
 
   return (
@@ -56,20 +55,14 @@ const Place = () => {
       </CTable>
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
-          <PlaceList
-            keyword={keyword}
-            setSelectModifyPlaceId={setSelectModifyPlaceId}
-          />
+          <PlaceList keyword={keyword} />
         </Suspense>
       </ErrorBoundary>
       <PlaceCreateModal
         open={createModalIsOpen}
         setOpen={setCreateModalIsOpen}
       />
-      <PlaceModifyModal
-        selectModifyPlaceId={selectModifyPlaceId}
-        onClose={() => setSelectModifyPlaceId(-1)}
-      />
+      <PlaceModifyModal />
     </PlaceContainer>
   );
 };

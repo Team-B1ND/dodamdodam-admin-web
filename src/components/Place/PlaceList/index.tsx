@@ -1,4 +1,5 @@
-import { Dispatch, memo, SetStateAction } from "react";
+import { memo } from "react";
+import { useNavigate } from "react-router-dom";
 import useDeletePlace from "../../../hooks/place/useDeletePlace";
 import { useGetPlacesQuery } from "../../../quries/place/place.query";
 import Button from "../../Common/Button";
@@ -10,10 +11,11 @@ import { PlaceListButtonWrap } from "./style";
 
 interface Props {
   keyword: string;
-  setSelectModifyPlaceId: Dispatch<SetStateAction<number>>;
 }
 
-const PlaceList = ({ keyword, setSelectModifyPlaceId }: Props) => {
+const PlaceList = ({ keyword }: Props) => {
+  const navigate = useNavigate();
+
   const { data: serverPlacesData } = useGetPlacesQuery({ suspense: true });
   const { onDeletePlace } = useDeletePlace();
 
@@ -33,7 +35,7 @@ const PlaceList = ({ keyword, setSelectModifyPlaceId }: Props) => {
                         type="Primary"
                         title="수정"
                         customStyle={{ width: 66, height: 32, borderRadius: 5 }}
-                        onClick={() => setSelectModifyPlaceId(place.id)}
+                        onClick={() => navigate(`/place/${place.id}`)}
                       />
                       <Button
                         type="Cancel"

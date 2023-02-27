@@ -4,6 +4,8 @@ export interface Member {
   readonly joinDate: string;
   name: string;
   profileImage: null | string;
-  readonly role: string;
+  readonly role: MemberRole;
   readonly status: "ACTIVE" | "DEACTIVATED";
 }
+
+export type MemberRole = "STUDENT" | "TEACHER" | "ADMIN";

@@ -16,7 +16,6 @@ const ClassRoom = () => {
   const [classification, setClassification] = useState("전체보기");
 
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
-  const [selectModifyClassRoomId, setSelectModifyClassRoomId] = useState(-1);
 
   return (
     <ClassRoomContainer>
@@ -48,20 +47,14 @@ const ClassRoom = () => {
       </CTable>
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
-          <ClassRoomList
-            setSelectModifyClassRoomId={setSelectModifyClassRoomId}
-            classification={classification}
-          />
+          <ClassRoomList classification={classification} />
         </Suspense>
       </ErrorBoundary>
       <ClassRoomCreateModal
         open={createModalIsOpen}
         setOpen={setCreateModalIsOpen}
       />
-      <ClassRoomModifyModal
-        selectModifyClassRoomId={selectModifyClassRoomId}
-        onClose={() => setSelectModifyClassRoomId(-1)}
-      />
+      <ClassRoomModifyModal />
     </ClassRoomContainer>
   );
 };
