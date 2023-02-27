@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
 import useDeletePlaceType from "../../../hooks/place/useDeletePlaceType";
 import { useGetPlaceTypesQuery } from "../../../quries/place/place.query";
 import Button from "../../Common/Button";
@@ -8,11 +8,9 @@ import CTD from "../../Common/CTable/CTD";
 import CTR from "../../Common/CTable/CTR";
 import { PlaceTypeListButtonWrap } from "./style";
 
-interface Props {
-  setSelectModifyPlaceTypeId: Dispatch<SetStateAction<number>>;
-}
+const PlaceTypeList = () => {
+  const navigate = useNavigate();
 
-const PlaceTypeList = ({ setSelectModifyPlaceTypeId }: Props) => {
   const { data: serverPlaceTypesData } = useGetPlaceTypesQuery({
     suspense: true,
   });
@@ -32,7 +30,7 @@ const PlaceTypeList = ({ setSelectModifyPlaceTypeId }: Props) => {
                     type="Primary"
                     title="수정"
                     customStyle={{ width: 66, height: 32, borderRadius: 5 }}
-                    onClick={() => setSelectModifyPlaceTypeId(placeType.id)}
+                    onClick={() => navigate(`/placetype/${placeType.id}`)}
                   />
                   <Button
                     type="Cancel"
