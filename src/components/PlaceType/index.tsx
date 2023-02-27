@@ -13,7 +13,6 @@ import { PlaceTypeContainer } from "./style";
 
 const PlaceType = () => {
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
-  const [selectModifyPlaceTypeId, setSelectModifyPlaceTypeId] = useState(-1);
 
   return (
     <PlaceTypeContainer>
@@ -37,19 +36,14 @@ const PlaceType = () => {
       </CTable>
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
-          <PlaceTypeList
-            setSelectModifyPlaceTypeId={setSelectModifyPlaceTypeId}
-          />
+          <PlaceTypeList />
         </Suspense>
       </ErrorBoundary>
       <PlaceTypeCreateModal
         open={createModalIsOpen}
         setOpen={setCreateModalIsOpen}
       />
-      <PlaceTypeModifyModal
-        selectModifyPlaceTypeId={selectModifyPlaceTypeId}
-        onClose={() => setSelectModifyPlaceTypeId(-1)}
-      />
+      <PlaceTypeModifyModal />
     </PlaceTypeContainer>
   );
 };

@@ -1,3 +1,4 @@
+import { useNavigate, useParams } from "react-router-dom";
 import useModifyPlaceType from "../../../hooks/place/useModifyPlaceType";
 import Button from "../../Common/Button";
 import Modal from "../../Common/Modal";
@@ -13,20 +14,19 @@ import {
   PlaceTypeModifyModalWrap,
 } from "./style";
 
-interface Props {
-  selectModifyPlaceTypeId: number;
-  onClose: () => void;
-}
+const PlaceTypeModifyModal = () => {
+  const { id } = useParams();
 
-const PlaceTypeModifyModal = ({ selectModifyPlaceTypeId, onClose }: Props) => {
+  const navigate = useNavigate();
+
   const { placeTypeName, onChangePlaceTypeName, onModifyPlaceType } =
-    useModifyPlaceType({ placeTypeId: selectModifyPlaceTypeId });
+    useModifyPlaceType({ placeTypeId: Number(id) });
 
   return (
     <Modal
       zIndex={2}
-      isOpen={selectModifyPlaceTypeId !== -1}
-      onClose={onClose}
+      isOpen={!!id}
+      onClose={() => navigate("/placetype")}
       customStyle={{ width: 410, height: 490 }}
     >
       <ModalHeader title="장소분류 수정하기" />
@@ -66,7 +66,7 @@ const PlaceTypeModifyModal = ({ selectModifyPlaceTypeId, onClose }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={onClose}
+            onClick={() => navigate("/placetype")}
           />
         </PlaceTypeModifyModalButtonWrap>
       </PlaceTypeModifyModalWrap>

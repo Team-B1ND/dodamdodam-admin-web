@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   CLASSROOM_GRADE_MAX,
   CLASSROOM_ROOM_MAX,
@@ -20,12 +21,10 @@ import {
   ClassRoomModifyModalWrap,
 } from "./style";
 
-interface Props {
-  selectModifyClassRoomId: number;
-  onClose: () => void;
-}
+const ClassRoomModifyModal = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
 
-const ClassRoomModifyModal = ({ selectModifyClassRoomId, onClose }: Props) => {
   const {
     classRoomData,
     classRoomPlaceName,
@@ -34,14 +33,14 @@ const ClassRoomModifyModal = ({ selectModifyClassRoomId, onClose }: Props) => {
     onChangePlace,
     onModifyClassRoom,
   } = useModifyClassRoom({
-    classRoomId: selectModifyClassRoomId,
+    classRoomId: Number(id),
   });
 
   return (
     <Modal
       zIndex={2}
-      isOpen={selectModifyClassRoomId !== -1}
-      onClose={onClose}
+      isOpen={!!id}
+      onClose={() => navigate("/classroom")}
       customStyle={{ width: 410, minHeight: 490 }}
     >
       <ModalHeader title="교실 수정하기" />
@@ -127,7 +126,7 @@ const ClassRoomModifyModal = ({ selectModifyClassRoomId, onClose }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => onClose()}
+            onClick={() => navigate("/classroom")}
           />
         </ClassRoomModifyModalButtonWrap>
       </ClassRoomModifyModalWrap>
