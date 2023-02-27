@@ -5,6 +5,8 @@ export const ClassRoomContainer = styled.div`
   height: 100%;
   display: flex;
   flex-direction: column;
+  padding: 16px 48px;
+  box-sizing: border-box;
 `;
 
 export const ClassRoomInputWrap = styled.div`

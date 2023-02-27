@@ -6,7 +6,7 @@ export interface Member {
   readonly joinDate: string;
   name: string;
   profileImage: null | string;
-  readonly role: string;
+  readonly role: MemberRole;
   readonly status: "ACTIVE" | "DEACTIVATED";
 }
 
@@ -37,3 +37,5 @@ export interface Teacher {
   position: string;
   tel: string;
 }
+
+export type MemberRole = "STUDENT" | "TEACHER" | "ADMIN";

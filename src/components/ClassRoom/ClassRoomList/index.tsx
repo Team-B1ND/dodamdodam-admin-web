@@ -1,7 +1,7 @@
-import { Dispatch, memo, SetStateAction } from "react";
+import { memo } from "react";
+import { useNavigate } from "react-router-dom";
 import useDeleteClassRoom from "../../../hooks/classRoom/useDeleteClassRoom";
 import { useGetClassRoomsQuery } from "../../../quries/classRoom/classRoom.query";
-import { ClassRoom } from "../../../types/classRoom/classRoom.type";
 import Button from "../../Common/Button";
 import CTable, { CTableScrollWrapper } from "../../Common/CTable";
 import CTBody from "../../Common/CTable/CTBody";
@@ -11,16 +11,14 @@ import { ClassRoomListButtonWrap } from "./style";
 
 interface Props {
   classification: string;
-  setSelectModifyClassRoomId: Dispatch<SetStateAction<number>>;
 }
 
-const ClassRoomList = ({
-  classification,
-  setSelectModifyClassRoomId,
-}: Props) => {
+const ClassRoomList = ({ classification }: Props) => {
   const { data: serverClassRoomsData } = useGetClassRoomsQuery({
     suspense: true,
   });
+
+  const navigate = useNavigate();
 
   const { onDeleteClassRoom } = useDeleteClassRoom();
 
@@ -46,7 +44,7 @@ const ClassRoomList = ({
                     type="Primary"
                     title="수정"
                     customStyle={{ width: 66, height: 32, borderRadius: 5 }}
-                    onClick={() => setSelectModifyClassRoomId(classRoom.id)}
+                    onClick={() => navigate(`/classroom/${classRoom.id}`)}
                   />
                   <Button
                     type="Cancel"
