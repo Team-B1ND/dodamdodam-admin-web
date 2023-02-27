@@ -1,20 +1,14 @@
-import { Response } from "../../types/util/util.type";
-
-export interface TimeTablesData {
-  endTime: string;
-  id: number;
+export interface createTimeTableDataParam {
   name: string;
   startTime: string;
+  endTime: string;
   type: string;
 }
 
-export interface TimeTablesDataResponse extends Response {
-  data: TimeTablesData[];
+export interface timeTableId {
+  id: number;
 }
 
-export interface CreateTimeTableData {
-  endTime: string;
-  name: string;
-  startTime: string;
+export interface timeTableType {
   type: string;
 }
