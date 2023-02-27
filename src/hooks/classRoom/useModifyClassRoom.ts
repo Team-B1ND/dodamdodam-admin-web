@@ -21,7 +21,7 @@ const useModifyClassRoom = ({ classRoomId }: Props) => {
     { enabled: classRoomId !== -1 }
   );
 
-  const pustClassRoomMutation = usePutClassRoomMutation();
+  const putClassRoomMutation = usePutClassRoomMutation();
 
   const [prevClassRoomData, setPrevClassRoomData] = useState({
     grade: -1,
@@ -78,7 +78,7 @@ const useModifyClassRoom = ({ classRoomId }: Props) => {
   );
 
   const onModifyClassRoom = () => {
-    if (pustClassRoomMutation.isLoading) {
+    if (putClassRoomMutation.isLoading) {
       return;
     }
 
@@ -98,9 +98,7 @@ const useModifyClassRoom = ({ classRoomId }: Props) => {
       return;
     }
 
-    console.log(classRoomId);
-
-    pustClassRoomMutation.mutate(
+    putClassRoomMutation.mutate(
       { id: classRoomId, ...classRoomData },
       {
         onSuccess: () => {

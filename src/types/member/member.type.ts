@@ -1,3 +1,5 @@
+import { ClassRoom } from "../classRoom/classRoom.type";
+
 export interface Member {
   email: string;
   id: string;
@@ -6,6 +8,34 @@ export interface Member {
   profileImage: null | string;
   readonly role: MemberRole;
   readonly status: "ACTIVE" | "DEACTIVATED";
+}
+
+export interface Parent {
+  id: number;
+  phone: string;
+  student: {
+    classroom: ClassRoom;
+    id: number;
+    member: Member;
+    number: number;
+    phone: string;
+  };
+}
+
+export interface Student {
+  classroom: ClassRoom;
+  id: number;
+  member: Member;
+  number: number;
+  phone: string;
+}
+
+export interface Teacher {
+  id: number;
+  member: Member;
+  phone: string;
+  position: string;
+  tel: string;
 }
 
 export type MemberRole = "STUDENT" | "TEACHER" | "ADMIN";

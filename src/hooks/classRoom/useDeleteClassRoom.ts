@@ -5,10 +5,10 @@ import { useDeleteClassRoomMutation } from "../../quries/classRoom/classRoom.que
 const useDeleteClassRoom = () => {
   const queryClient = useQueryClient();
 
-  const deletecClassRoomMutation = useDeleteClassRoomMutation();
+  const deleteClassRoomMutation = useDeleteClassRoomMutation();
 
   const onDeleteClassRoom = (id: number) => {
-    if (deletecClassRoomMutation.isLoading) {
+    if (deleteClassRoomMutation.isLoading) {
       return;
     }
 
@@ -16,7 +16,7 @@ const useDeleteClassRoom = () => {
       return;
     }
 
-    deletecClassRoomMutation.mutate(
+    deleteClassRoomMutation.mutate(
       { id },
       {
         onSuccess: () => {
