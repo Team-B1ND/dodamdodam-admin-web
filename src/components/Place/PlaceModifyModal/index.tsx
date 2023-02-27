@@ -22,6 +22,10 @@ const PlaceModifyModal = () => {
 
   const navigate = useNavigate();
 
+  const onCloseModal = () => {
+    navigate("/place");
+  };
+
   const {
     placeName,
     onChangePlaceName,
@@ -36,7 +40,7 @@ const PlaceModifyModal = () => {
     <Modal
       zIndex={2}
       isOpen={!!id}
-      onClose={() => navigate("/place")}
+      onClose={onCloseModal}
       customStyle={{ width: 410, height: 490 }}
     >
       <ModalHeader title="장소 수정하기" />
@@ -89,7 +93,7 @@ const PlaceModifyModal = () => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => navigate("/place")}
+            onClick={onCloseModal}
           />
         </PlaceModifyModalButtonWrap>
       </PlaceModifyModalWrap>

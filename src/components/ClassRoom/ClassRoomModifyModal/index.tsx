@@ -25,6 +25,10 @@ const ClassRoomModifyModal = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const onCloseModal = () => {
+    navigate("/classroom");
+  };
+
   const {
     classRoomData,
     classRoomPlaceName,
@@ -40,7 +44,7 @@ const ClassRoomModifyModal = () => {
     <Modal
       zIndex={2}
       isOpen={!!id}
-      onClose={() => navigate("/classroom")}
+      onClose={onCloseModal}
       customStyle={{ width: 410, minHeight: 490 }}
     >
       <ModalHeader title="교실 수정하기" />
@@ -126,7 +130,7 @@ const ClassRoomModifyModal = () => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => navigate("/classroom")}
+            onClick={onCloseModal}
           />
         </ClassRoomModifyModalButtonWrap>
       </ClassRoomModifyModalWrap>

@@ -17,6 +17,10 @@ import {
 const PlaceTypeModifyModal = () => {
   const { id } = useParams();
 
+  const onCloseModal = () => {
+    navigate("/placetype");
+  };
+
   const navigate = useNavigate();
 
   const { placeTypeName, onChangePlaceTypeName, onModifyPlaceType } =
@@ -26,7 +30,7 @@ const PlaceTypeModifyModal = () => {
     <Modal
       zIndex={2}
       isOpen={!!id}
-      onClose={() => navigate("/placetype")}
+      onClose={onCloseModal}
       customStyle={{ width: 410, height: 490 }}
     >
       <ModalHeader title="장소분류 수정하기" />
@@ -66,7 +70,7 @@ const PlaceTypeModifyModal = () => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => navigate("/placetype")}
+            onClick={onCloseModal}
           />
         </PlaceTypeModifyModalButtonWrap>
       </PlaceTypeModifyModalWrap>
