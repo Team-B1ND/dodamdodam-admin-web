@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import useCreateTimeTable from "../../../hooks/timeTable/useCreateTimeTable";
+import usePostCreateTimeTable from "../../../hooks/timeTable/usePostCreateTimeTable";
 import Button from "../../Common/Button";
 import Modal from "../../Common/Modal";
 import ModalHeader from "../../Common/ModalHeader";
@@ -17,7 +17,15 @@ interface Props {
 }
 
 const TimeTableCreateModal = ({ open, setOpen }: Props) => {
-  const { timeTableTypeName, setTimeTableTypeName } = useCreateTimeTable();
+  const {
+    timeTableTypeName,
+    setTimeTableTypeName,
+    onChangeTimeTableName,
+    timeTableName,
+    resetTimeTable,
+    create
+  } = usePostCreateTimeTable();
+
 
   return (
     <Modal
@@ -34,6 +42,8 @@ const TimeTableCreateModal = ({ open, setOpen }: Props) => {
             <RTH>시간표 이름</RTH>
             <RTD>
               <TextInput
+                value={timeTableName}
+                onChange={onChangeTimeTableName}
                 customStyle={{ width: "100%" }}
                 placeholder="시간표 이름을 입력하세요"
               />
@@ -78,7 +88,10 @@ const TimeTableCreateModal = ({ open, setOpen }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              create();
+              setOpen(false);
+            }}
           />
           <Button
             type="Cancel"
@@ -89,7 +102,10 @@ const TimeTableCreateModal = ({ open, setOpen }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              setOpen(false);
+              resetTimeTable();
+            }}
           />
         </TimeTableCreateModalButtonWrap>
       </TimeTableCreateModalWrap>

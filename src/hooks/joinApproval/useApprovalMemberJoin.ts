@@ -3,7 +3,6 @@ import { useQueryClient } from "react-query";
 
 const useApprovalMemberJoin = () => {
   const queryClient = useQueryClient();
-
   const memberJoinApproval = usePostMemberJoinApproval();
 
   const approval = (joinAllowMemberId: string) => {

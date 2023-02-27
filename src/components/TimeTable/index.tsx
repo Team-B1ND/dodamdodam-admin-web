@@ -41,9 +41,9 @@ const TimeTable = () => {
       <CTable customStyle={{ width: 800 }}>
         <CTHead>
           <CTR>
-            <CTH customStyle={{ minWidth: 200 }}>시간표</CTH>
+            <CTH customStyle={{ minWidth: 195 }}>시간표</CTH>
             <CTH customStyle={{ minWidth: 200 }}>시작시간</CTH>
-            <CTH customStyle={{ minWidth: 200 }}>끝나는시간</CTH>
+            <CTH customStyle={{ minWidth: 200 }}>종료시간</CTH>
             <CTH customStyle={{ width: "100%", textAlign: "right" }}>
               수정 / 삭제
             </CTH>
@@ -52,7 +52,8 @@ const TimeTable = () => {
       </CTable>
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
-          <TimeTableList />
+          <TimeTableList
+            setModifyModalIsOpen={setModifyModalIsOpen} />
         </Suspense>
       </ErrorBoundary>
       <TimeTableCreateModal
