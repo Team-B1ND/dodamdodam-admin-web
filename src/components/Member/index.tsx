@@ -1,20 +1,19 @@
-import { useState } from "react";
-import Button from "../Common/Button";
+import { Suspense, useState } from "react";
 import CTable from "../Common/CTable";
 import CTH from "../Common/CTable/CTH";
 import CTHead from "../Common/CTable/CTHead";
 import CTR from "../Common/CTable/CTR";
+import ErrorBoundary from "../Common/ErrorBoundary";
 import SearchBar from "../Common/SearchBar";
 import SectionHeader from "../Common/SectionHeader";
 import Select from "../Common/Select";
-import { MemberContainer, MemberInputWrap, MemberProfileImg } from "./style";
-import DEFAULT_PROFILE from "../../assets/defaultProfile/defaultProfile.svg";
-import DODAM_PROFILE from "../../assets/defaultProfile/dodamProfile.svg";
-import CTD from "../Common/CTable/CTD";
+import MemberList from "./MemberList";
+import { MemberContainer, MemberInputWrap } from "./style";
 
 const Member = () => {
   const [classification, setClassification] = useState("전체보기");
   const [keyword, setKeyword] = useState("");
+
   return (
     <MemberContainer>
       <SectionHeader
@@ -23,61 +22,32 @@ const Member = () => {
       ></SectionHeader>
       <MemberInputWrap>
         <Select
-          items={["전체보기", "1학년", "2학년", "3학년"]}
+          items={["전체보기", "1학년", "2학년", "3학년", "선생님"]}
           value={classification}
           onChange={setClassification}
           zIndex={2}
         />
         <SearchBar onChange={setKeyword} value={keyword} />
       </MemberInputWrap>
-      <CTable customStyle={{ width: "100%" }}>
+      <CTable customStyle={{ width: 864 }}>
         <CTHead>
-          <CTR customStyle={{ borderBottom: "2px" }}>
+          <CTR>
             <CTH customStyle={{ width: "120px", textAlign: "center" }}>
               사진
             </CTH>
-            <CTH customStyle={{ width: "19%" }}>이름</CTH>
-            <CTH customStyle={{ width: "15%" }}>반</CTH>
-            <CTH customStyle={{ width: "17%" }}>아이디</CTH>
+            <CTH customStyle={{ width: "16%" }}>이름</CTH>
+            <CTH customStyle={{ width: "12%" }}>반</CTH>
+            <CTH customStyle={{ width: "14%" }}>아이디</CTH>
             <CTH>이메일</CTH>
-            <CTH customStyle={{ width: "13%" }}>{""}</CTH>
+            <CTH>{""}</CTH>
           </CTR>
         </CTHead>
-        <CTR>
-          <CTD customStyle={{ width: "120px", textAlign: "center" }}>
-            <MemberProfileImg src={DEFAULT_PROFILE} />
-          </CTD>
-          <CTD customStyle={{ width: "19%" }}>김민재</CTD>
-          <CTD customStyle={{ width: "15%" }}>2학년 3반 18번</CTD>
-          <CTD customStyle={{ width: "17%" }}>snack655</CTD>
-          <CTD>minjae1230@gamil.com</CTD>
-          <CTD customStyle={{ width: "13%" }}>
-            <Button
-              type="Primary"
-              onClick={() => console.log("hi")}
-              title="삭제"
-              customStyle={{ borderRadius: "5px", width: "66px" }}
-            />
-          </CTD>
-        </CTR>
-        <CTR>
-          <CTD customStyle={{ width: "120px", textAlign: "center" }}>
-            <MemberProfileImg src={DODAM_PROFILE} />
-          </CTD>
-          <CTD customStyle={{ width: "19%" }}>임동현</CTD>
-          <CTD customStyle={{ width: "15%" }}>2학년 1반 17번</CTD>
-          <CTD customStyle={{ width: "17%" }}>ldh3907</CTD>
-          <CTD>ldh3907@gamil.com</CTD>
-          <CTD customStyle={{ width: "13%" }}>
-            <Button
-              type="Primary"
-              onClick={() => console.log("hi")}
-              title="삭제"
-              customStyle={{ borderRadius: "5px", width: "66px" }}
-            />
-          </CTD>
-        </CTR>
       </CTable>
+      <ErrorBoundary fallback={<>에러 발생</>}>
+        <Suspense fallback={<>로딩중...</>}>
+          <MemberList classification={classification} />
+        </Suspense>
+      </ErrorBoundary>
     </MemberContainer>
   );
 };
