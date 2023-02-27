@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import useCreateTimeTable from "../../../hooks/timeTable/useCreateTimeTable";
+import useCreateTimeTable from "../../../hooks/timeTable/usePostCreateTimeTable";
 import Button from "../../Common/Button";
 import Modal from "../../Common/Modal";
 import ModalHeader from "../../Common/ModalHeader";
@@ -26,7 +26,7 @@ const TimeTableModifyModal = ({ open, setOpen }: Props) => {
       onClose={() => setOpen(false)}
       customStyle={{ width: 470, height: 440 }}
     >
-      <ModalHeader title="시간표 추가하기" />
+      <ModalHeader title="시간표 수정하기" />
       <TimeTableCreateModalWrap>
         <TimeTableCreateModalTitle>시간표 기본정보</TimeTableCreateModalTitle>
         <RTable customStyle={{ width: 400, margin: "0px auto" }}>
@@ -35,8 +35,14 @@ const TimeTableModifyModal = ({ open, setOpen }: Props) => {
             <RTD>
               <TextInput
                 customStyle={{ width: "100%" }}
-                placeholder="시간표 이름을 입력하세요"
+                placeholder="수정 할 시간표 이름을 입력하세요"
               />
+              {/* <TextInput
+                value={placeName}
+                onChange={(e) => onChangePlaceName(e)}
+                customStyle={{ width: "100%" }}
+                placeholder="장소를 입력하세요"
+              /> */}
             </RTD>
           </RTR>
           <RTR>
