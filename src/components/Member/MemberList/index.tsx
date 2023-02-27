@@ -4,7 +4,7 @@ import CTR from "../../Common/CTable/CTR";
 import DEFAULT_PROFILE from "../../../assets/defaultProfile/defaultProfile.svg";
 import DODAM_PROFILE from "../../../assets/defaultProfile/dodamProfile.svg";
 import Button from "../../Common/Button";
-import { MemberProfileImg } from "./style";
+import { MemberProfileImg, MemberProfileImgWrap } from "./style";
 import CTable, { CTableScrollWrapper } from "../../Common/CTable";
 import CTBody from "../../Common/CTable/CTBody";
 import useDeleteMember from "../../../hooks/member/useDeleteMember";
@@ -57,7 +57,15 @@ const MemberList = ({ keyword, classification }: Props) => {
                 return (
                   <CTR>
                     <CTD customStyle={{ width: "120px", textAlign: "center" }}>
-                      <MemberProfileImg src={DODAM_PROFILE} />
+                      <MemberProfileImgWrap>
+                        <MemberProfileImg
+                          src={
+                            student.member.profileImage
+                              ? student.member.profileImage
+                              : DODAM_PROFILE
+                          }
+                        />
+                      </MemberProfileImgWrap>
                     </CTD>
                     <CTD customStyle={{ width: "19%", textAlign: "left" }}>
                       {student.member.name}
@@ -98,7 +106,15 @@ const MemberList = ({ keyword, classification }: Props) => {
                       <CTD
                         customStyle={{ width: "120px", textAlign: "center" }}
                       >
-                        <MemberProfileImg src={DODAM_PROFILE} />
+                        <MemberProfileImgWrap>
+                          <MemberProfileImg
+                            src={
+                              teacher.member.profileImage
+                                ? teacher.member.profileImage
+                                : DODAM_PROFILE
+                            }
+                          />
+                        </MemberProfileImgWrap>
                       </CTD>
                       <CTD customStyle={{ width: "19%", textAlign: "left" }}>
                         {teacher.member.name}
