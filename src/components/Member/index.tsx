@@ -12,7 +12,7 @@ import { MemberContainer, MemberInputWrap } from "./style";
 
 const Member = () => {
   const [classification, setClassification] = useState("전체보기");
-  const [keyword, setKeyword] = useState("");
+  const [keyword, setKeyword] = useState<string>("");
 
   return (
     <MemberContainer>
@@ -29,23 +29,23 @@ const Member = () => {
         />
         <SearchBar onChange={setKeyword} value={keyword} />
       </MemberInputWrap>
-      <CTable customStyle={{ width: 864 }}>
+      <CTable>
         <CTHead>
           <CTR>
             <CTH customStyle={{ width: "120px", textAlign: "center" }}>
               사진
             </CTH>
-            <CTH customStyle={{ width: "16%" }}>이름</CTH>
-            <CTH customStyle={{ width: "12%" }}>반</CTH>
-            <CTH customStyle={{ width: "14%" }}>아이디</CTH>
-            <CTH>이메일</CTH>
+            <CTH customStyle={{ width: "19%" }}>이름</CTH>
+            <CTH customStyle={{ width: "15.5%" }}>반</CTH>
+            <CTH customStyle={{ width: "17.5%" }}>아이디</CTH>
+            <CTH customStyle={{ width: "27.5%" }}>이메일</CTH>
             <CTH>{""}</CTH>
           </CTR>
         </CTHead>
       </CTable>
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
-          <MemberList classification={classification} />
+          <MemberList keyword={keyword} classification={classification} />
         </Suspense>
       </ErrorBoundary>
     </MemberContainer>

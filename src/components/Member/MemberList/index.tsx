@@ -10,10 +10,11 @@ import CTBody from "../../Common/CTable/CTBody";
 import useDeleteMember from "../../../hooks/member/useDeleteMember";
 
 interface Props {
+  keyword: string;
   classification: string;
 }
 
-const MemberList = ({ classification }: Props) => {
+const MemberList = ({ keyword, classification }: Props) => {
   const { data: serverMembersData } = useGetMembersQuery({ suspense: true });
 
   const { onDeleteMember } = useDeleteMember();
@@ -31,8 +32,8 @@ const MemberList = ({ classification }: Props) => {
   );
 
   return (
-    <CTableScrollWrapper customStyle={{ width: 864, height: 600 }}>
-      <CTable>
+    <CTableScrollWrapper customStyle={{ width: "100%", height: 600 }}>
+      <CTable customStyle={{ width: "100%" }}>
         <CTBody>
           <>
             {(() => {
@@ -44,52 +45,84 @@ const MemberList = ({ classification }: Props) => {
                         student.classroom.grade ===
                         Number(classification.slice(0, 1))
                     );
-            })()?.map((student) => {
-              return (
-                <CTR>
-                  <CTD customStyle={{ width: "120px", textAlign: "center" }}>
-                    <MemberProfileImg src={DODAM_PROFILE} />
-                  </CTD>
-                  <CTD>{student.member.name}</CTD>
-                  <CTD>
-                    {student.classroom.grade}학년 {student.classroom.room}반{" "}
-                    {student.number}번
-                  </CTD>
-                  <CTD>{student.member.id}</CTD>
-                  <CTD>{student.member.email}</CTD>
-                  <CTD>
-                    <Button
-                      type="Primary"
-                      onClick={() => onDeleteMember(student.member.id)}
-                      title="삭제"
-                      customStyle={{ borderRadius: "5px", width: "66px" }}
-                    />
-                  </CTD>
-                </CTR>
-              );
-            })}
-            {classification === "전체보기" || classification === "선생님" ? (
-              teachersData?.map((teacher) => {
+            })()
+              ?.filter((student) => {
+                return (
+                  student.member.email.indexOf(keyword) > -1 ||
+                  student.member.id.indexOf(keyword) > -1 ||
+                  student.member.name.indexOf(keyword) > -1
+                );
+              })
+              .map((student) => {
                 return (
                   <CTR>
                     <CTD customStyle={{ width: "120px", textAlign: "center" }}>
                       <MemberProfileImg src={DODAM_PROFILE} />
                     </CTD>
-                    <CTD>{teacher.member.name}</CTD>
-                    <CTD>선생님</CTD>
-                    <CTD>{teacher.member.id}</CTD>
-                    <CTD>{teacher.member.email}</CTD>
+                    <CTD customStyle={{ width: "19%", textAlign: "left" }}>
+                      {student.member.name}
+                    </CTD>
+                    <CTD customStyle={{ width: "15.5%", textAlign: "left" }}>
+                      {student.classroom.grade}학년 {student.classroom.room}반{" "}
+                      {student.number}번
+                    </CTD>
+                    <CTD customStyle={{ width: "17.5%", textAlign: "left" }}>
+                      {student.member.id}
+                    </CTD>
+                    <CTD customStyle={{ width: "27.5%", textAlign: "left" }}>
+                      {student.member.email}
+                    </CTD>
                     <CTD>
                       <Button
                         type="Primary"
-                        onClick={() => onDeleteMember(teacher.member.id)}
+                        onClick={() => onDeleteMember(student.member.id)}
                         title="삭제"
                         customStyle={{ borderRadius: "5px", width: "66px" }}
                       />
                     </CTD>
                   </CTR>
                 );
-              })
+              })}
+            {classification === "전체보기" || classification === "선생님" ? (
+              teachersData
+                ?.filter((student) => {
+                  return (
+                    student.member.email.indexOf(keyword) > -1 ||
+                    student.member.id.indexOf(keyword) > -1 ||
+                    student.member.name.indexOf(keyword) > -1
+                  );
+                })
+                .map((teacher) => {
+                  return (
+                    <CTR>
+                      <CTD
+                        customStyle={{ width: "120px", textAlign: "center" }}
+                      >
+                        <MemberProfileImg src={DODAM_PROFILE} />
+                      </CTD>
+                      <CTD customStyle={{ width: "19%", textAlign: "left" }}>
+                        {teacher.member.name}
+                      </CTD>
+                      <CTD customStyle={{ width: "15.5%", textAlign: "left" }}>
+                        선생님
+                      </CTD>
+                      <CTD customStyle={{ width: "17.5%", textAlign: "left" }}>
+                        {teacher.member.id}
+                      </CTD>
+                      <CTD customStyle={{ width: "27.5%", textAlign: "left" }}>
+                        {teacher.member.email}
+                      </CTD>
+                      <CTD>
+                        <Button
+                          type="Primary"
+                          onClick={() => onDeleteMember(teacher.member.id)}
+                          title="삭제"
+                          customStyle={{ borderRadius: "5px", width: "66px" }}
+                        />
+                      </CTD>
+                    </CTR>
+                  );
+                })
             ) : (
               <></>
             )}
