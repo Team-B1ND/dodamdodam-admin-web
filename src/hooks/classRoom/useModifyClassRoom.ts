@@ -98,8 +98,6 @@ const useModifyClassRoom = ({ classRoomId }: Props) => {
       return;
     }
 
-    console.log(classRoomId);
-
     putClassRoomMutation.mutate(
       { id: classRoomId, ...classRoomData },
       {

@@ -19,8 +19,6 @@ const MemberList = ({ keyword, classification }: Props) => {
 
   const { onDeleteMember } = useDeleteMember();
 
-  console.log(serverMembersData?.data);
-
   const studentsData = serverMembersData?.data.students.sort(
     (a, b) =>
       a.classroom.grade - b.classroom.grade ||
@@ -91,7 +89,7 @@ const MemberList = ({ keyword, classification }: Props) => {
                   </CTR>
                 );
               })}
-            {classification === "전체보기" || classification === "선생님" ? (
+            {(classification === "전체보기" || classification === "선생님") &&
               teachersData
                 ?.filter((student) => {
                   return (
@@ -138,10 +136,7 @@ const MemberList = ({ keyword, classification }: Props) => {
                       </CTD>
                     </CTR>
                   );
-                })
-            ) : (
-              <></>
-            )}
+                })}
           </>
         </CTBody>
       </CTable>

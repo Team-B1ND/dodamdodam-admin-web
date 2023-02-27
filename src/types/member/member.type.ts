@@ -1,3 +1,5 @@
+import { ClassRoom } from "../classRoom/classRoom.type";
+
 export interface Member {
   email: string;
   id: string;
@@ -12,73 +14,25 @@ export interface Parent {
   id: number;
   phone: string;
   student: {
-    classroom: {
-      grade: number;
-      id: number;
-      place: {
-        id: number;
-        name: string;
-        type: {
-          id: number;
-          name: string;
-        };
-      };
-      room: number;
-    };
+    classroom: ClassRoom;
     id: number;
-    member: {
-      email: string;
-      id: string;
-      joinDate: string;
-      name: string;
-      profileImage: null | string;
-      role: string;
-      status: "ACTIVE" | "DEACTIVATED";
-    };
+    member: Member;
     number: number;
     phone: string;
   };
 }
 
 export interface Student {
-  classroom: {
-    grade: number;
-    id: number;
-    place: {
-      id: number;
-      name: string;
-      type: {
-        id: number;
-        name: string;
-      };
-    };
-    room: number;
-  };
+  classroom: ClassRoom;
   id: number;
-  member: {
-    email: string;
-    id: string;
-    joinDate: string;
-    name: string;
-    profileImage: null | string;
-    role: string;
-    status: "ACTIVE" | "DEACTIVATED";
-  };
+  member: Member;
   number: number;
   phone: string;
 }
 
 export interface Teacher {
   id: number;
-  member: {
-    email: string;
-    id: string;
-    joinDate: string;
-    name: string;
-    profileImage: string;
-    role: string;
-    status: "ACTIVE" | "DEACTIVATED";
-  };
+  member: Member;
   phone: string;
   position: string;
   tel: string;
