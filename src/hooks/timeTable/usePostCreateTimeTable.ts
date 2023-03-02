@@ -14,8 +14,12 @@ const usePostCreateTimeTable = () => {
     setTimeTableName(e.target.value);
   };
 
-  const dateH = new Date().getHours().toString();
-  const dateM = new Date().getMinutes().toString();
+  const resetTimeTable = useCallback(() => {
+    if (timeTableTypeName !== "타입 선택" || timeTableName !== "") {
+      setTimeTableTypeName("타입 선택");
+      setTimeTableName("");
+    }
+  }, [timeTableTypeName, timeTableName]);
 
   const create = () => {
     if (timeTableName === "") {
@@ -24,18 +28,29 @@ const usePostCreateTimeTable = () => {
     } else if (timeTableTypeName === "타입 선택") {
       B1ndToast.showError("시간표 타입을 입력해 주세요");
       return;
+    } else if (timeTableStartTime === "") {
+      B1ndToast.showError("시작 시간을 입력해 주세요");
+      return;
+    } else if (timeTableEndTime === "") {
+      B1ndToast.showError("종료 시간을 입력해 주세요");
+      return;
+    } else if (timeTableStartTime >= timeTableEndTime) {
+      B1ndToast.showError(
+        "종료 시간 시작 시간 보다 빠릅니다. 다시 입력해 주세요"
+      );
+      return;
     }
-
     postCreateTimeTable.mutate(
       {
         type: timeTableTypeName,
         name: timeTableName,
-        startTime: dateH,
-        endTime: dateM,
+        startTime: timeTableStartTime,
+        endTime: timeTableEndTime,
       },
       {
         onSuccess: () => {
           B1ndToast.showSuccess("시간표 추가 성공");
+          resetTimeTable();
         },
         onError: () => {
           B1ndToast.showError("시간표 추가 실패");
@@ -44,13 +59,6 @@ const usePostCreateTimeTable = () => {
     );
   };
 
-  const resetTimeTable = useCallback(() => {
-    if (timeTableTypeName !== "타입 선택" || timeTableName !== "") {
-      setTimeTableTypeName("타입 선택");
-      setTimeTableName("");
-    }
-  }, [timeTableTypeName, timeTableName]);
-
   return {
     timeTableTypeName,
     setTimeTableTypeName,
@@ -58,6 +66,10 @@ const usePostCreateTimeTable = () => {
     timeTableName,
     resetTimeTable,
     create,
+    setTimeTableStartTime,
+    setTimeTableEndTime,
+    timeTableStartTime,
+    timeTableEndTime,
   };
 };
 

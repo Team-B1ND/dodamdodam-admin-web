@@ -16,6 +16,7 @@ const TimeTable = () => {
   const [timeTableTypeName, setTimeTableTypeName] = useState("전체보기");
   const [createModalIsOpen, setCreateModalIsOpen] = useState(false);
   const [modifyModalIsOpen, setModifyModalIsOpen] = useState(false);
+  const [timeTableId, setTimeTableId] = useState(-1);
 
   return (
     <TimeTableContainer>
@@ -53,6 +54,7 @@ const TimeTable = () => {
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
           <TimeTableList
+            setTimeTableId={setTimeTableId}
             setModifyModalIsOpen={setModifyModalIsOpen} />
         </Suspense>
       </ErrorBoundary>
@@ -61,6 +63,7 @@ const TimeTable = () => {
         setOpen={setCreateModalIsOpen}
       />
       <TimeTableModifyModal
+        id={timeTableId}
         open={modifyModalIsOpen}
         setOpen={setModifyModalIsOpen}
       />

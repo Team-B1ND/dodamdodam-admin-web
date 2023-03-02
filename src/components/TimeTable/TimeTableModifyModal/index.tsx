@@ -1,5 +1,5 @@
+import useModifyTimeTable from "hooks/timeTable/useModifyTimeTable";
 import { Dispatch, SetStateAction } from "react";
-import useCreateTimeTable from "../../../hooks/timeTable/usePostCreateTimeTable";
 import Button from "../../Common/Button";
 import Modal from "../../Common/Modal";
 import ModalHeader from "../../Common/ModalHeader";
@@ -9,15 +9,16 @@ import RTH from "../../Common/RTable/RTH";
 import RTR from "../../Common/RTable/RTR";
 import Select from "../../Common/Select";
 import TextInput from "../../Common/TextInput";
-import { TimeTableCreateModalButtonWrap, TimeTableCreateModalTitle, TimeTableCreateModalWrap } from "./style";
+import { TimeTableDateInput, TimeTableModifyModalButtonWrap, TimeTableModifyModalTitle, TimeTableModifyModalWrap } from "./style";
 
 interface Props {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
+  id: number;
 }
 
-const TimeTableModifyModal = ({ open, setOpen }: Props) => {
-  const { timeTableTypeName, setTimeTableTypeName } = useCreateTimeTable();
+const TimeTableModifyModal = ({ open, setOpen, id }: Props) => {
+  const { modify, onChangeTimeTableName, resetTimeTable, setTimeTableModifyStartTime, timeTableModifyTypeName, setTimeTableModifyEndTime, setTimeTableModifyTypeName } = useModifyTimeTable();
 
   return (
     <Modal
@@ -27,22 +28,17 @@ const TimeTableModifyModal = ({ open, setOpen }: Props) => {
       customStyle={{ width: 470, height: 440 }}
     >
       <ModalHeader title="시간표 수정하기" />
-      <TimeTableCreateModalWrap>
-        <TimeTableCreateModalTitle>시간표 기본정보</TimeTableCreateModalTitle>
+      <TimeTableModifyModalWrap>
+        <TimeTableModifyModalTitle>시간표 기본정보</TimeTableModifyModalTitle>
         <RTable customStyle={{ width: 400, margin: "0px auto" }}>
           <RTR>
             <RTH>시간표 이름</RTH>
             <RTD>
               <TextInput
+                onChange={onChangeTimeTableName}
                 customStyle={{ width: "100%" }}
                 placeholder="수정 할 시간표 이름을 입력하세요"
               />
-              {/* <TextInput
-                value={placeName}
-                onChange={(e) => onChangePlaceName(e)}
-                customStyle={{ width: "100%" }}
-                placeholder="장소를 입력하세요"
-              /> */}
             </RTD>
           </RTR>
           <RTR>
@@ -50,31 +46,29 @@ const TimeTableModifyModal = ({ open, setOpen }: Props) => {
             <RTD>
               <Select
                 items={["평일", "주말"]}
-                value={timeTableTypeName}
-                onChange={setTimeTableTypeName}
+                value={timeTableModifyTypeName}
+                onChange={setTimeTableModifyTypeName}
               />
             </RTD>
           </RTR>
           <RTR>
             <RTH>시작 시간</RTH>
             <RTD>
-              <TextInput
-                customStyle={{ width: "100%" }}
-                placeholder="시간표 이름을 입력하세요"
-              />
+              <TimeTableDateInput type="time"
+                onChange={(e) => setTimeTableModifyStartTime(e.target.value)}
+                min="09:00" max="21:00" required />
             </RTD>
           </RTR>
           <RTR>
             <RTH>종료 시간</RTH>
             <RTD>
-              <TextInput
-                customStyle={{ width: "100%" }}
-                placeholder="시간표 이름을 입력하세요"
-              />
+              <TimeTableDateInput type="time"
+                onChange={(e) => setTimeTableModifyEndTime(e.target.value)}
+                min="09:00" max="21:00" required />
             </RTD>
           </RTR>
         </RTable>
-        <TimeTableCreateModalButtonWrap>
+        <TimeTableModifyModalButtonWrap>
           <Button
             type="Primary"
             title="확인"
@@ -84,7 +78,10 @@ const TimeTableModifyModal = ({ open, setOpen }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => setOpen(false)}
+            onClick={() => {
+              modify({ id });
+              setOpen(false);
+            }}
           />
           <Button
             type="Cancel"
@@ -95,10 +92,10 @@ const TimeTableModifyModal = ({ open, setOpen }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => setOpen(false)}
+            onClick={() => { setOpen(false); resetTimeTable(); }}
           />
-        </TimeTableCreateModalButtonWrap>
-      </TimeTableCreateModalWrap>
+        </TimeTableModifyModalButtonWrap>
+      </TimeTableModifyModalWrap>
     </Modal>
   );
 };

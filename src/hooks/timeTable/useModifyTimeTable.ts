@@ -1,28 +1,76 @@
-import { ChangeEvent, useState, useCallback, useEffect } from "react";
-import { useGetTimeTableQuery } from "quries/timeTable/timeTable.query";
+import { ChangeEvent, useCallback, useState } from "react";
+import { usePatchTimeTableMutation } from "quries/timeTable/timeTable.query";
+import { B1ndToast } from "@b1nd/b1nd-toastify";
+import { timeTableId } from "repositories/timeTable/timeTableRepository.param";
 
 const useModifyTimeTable = () => {
-  const [timeTableTypeName, setTimeTableTypeName] = useState("타입 선택");
-  const [timeTableName, setTimeTableName] = useState("");
-  const [timeTableId, setTimeTableId] = useState(-1);
-  const [timeTableStartTime, setTimeTableStartTime] = useState("");
-  const [timeTableEndTime, setTimeTableEndTime] = useState("");
+  const [timeTableModifyTypeName, setTimeTableModifyTypeName] =
+    useState("타입 선택");
+  const [timeTableModifyName, setTimeTableModifyName] = useState("");
+  const [timeTableModifyStartTime, setTimeTableModifyStartTime] = useState("");
+  const [timeTableModifyEndTime, setTimeTableModifyEndTime] = useState("");
 
-  //   const { data: serverTimeTableTypesData } = useGetTimeTableQuery();
+  const patchTimeTable = usePatchTimeTableMutation();
+  const onChangeTimeTableName = (e: ChangeEvent<HTMLInputElement>) => {
+    setTimeTableModifyName(e.target.value);
+  };
 
-  //     const resetTimeTable = useCallback(() => {
-  //         const firstTimeTable = serverTimeTableTypesData?.data[0];
-  //           setTimeTableTypeName(firstTimeTable?.type);
-  //           setTimeTableName(firstTimeTable?.name);
-  //       }, []);
+  const resetTimeTable = useCallback(() => {
+    if (timeTableModifyTypeName !== "타입 선택" || timeTableModifyName !== "") {
+      setTimeTableModifyTypeName("타입 선택");
+      setTimeTableModifyName("");
+    }
+  }, [timeTableModifyTypeName, timeTableModifyName]);
 
-  //       useEffect(() => {
-  //         if (serverTimeTableTypesData) {
-  //           resetTimeTable();
-  //         }
-  //       }, [resetTimeTable, serverTimeTableTypesData]);
+  const modify = ({ id }: timeTableId) => {
+    if (timeTableModifyName === "") {
+      B1ndToast.showError("시간표 이름을 입력해 주세요");
+      return;
+    } else if (timeTableModifyTypeName === "타입 선택") {
+      B1ndToast.showError("시간표 타입을 입력해 주세요");
+      return;
+    } else if (timeTableModifyStartTime === "") {
+      B1ndToast.showError("시작 시간을 입력해 주세요");
+      return;
+    } else if (timeTableModifyEndTime === "") {
+      B1ndToast.showError("종료 시간을 입력해 주세요");
+      return;
+    } else if (timeTableModifyStartTime >= timeTableModifyEndTime) {
+      B1ndToast.showError(
+        "종료 시간 시작 시간 보다 빠릅니다. 다시 입력해 주세요"
+      );
+      return;
+    }
+    console.log(id, timeTableModifyName);
 
-  return {};
+    patchTimeTable.mutate(
+      {
+        id: id,
+        name: timeTableModifyName,
+        startTime: timeTableModifyStartTime,
+        endTime: timeTableModifyEndTime,
+        type: timeTableModifyTypeName,
+      },
+      {
+        onSuccess: () => {
+          B1ndToast.showSuccess("시간표 수정 성공");
+          resetTimeTable();
+        },
+        onError: () => {
+          B1ndToast.showError("시간표 수정 실패");
+        },
+      }
+    );
+  };
+  return {
+    resetTimeTable,
+    modify,
+    onChangeTimeTableName,
+    setTimeTableModifyTypeName,
+    timeTableModifyTypeName,
+    setTimeTableModifyStartTime,
+    setTimeTableModifyEndTime,
+  };
 };
 
 export default useModifyTimeTable;

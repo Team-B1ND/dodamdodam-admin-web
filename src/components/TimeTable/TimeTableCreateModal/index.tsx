@@ -9,7 +9,7 @@ import RTH from "../../Common/RTable/RTH";
 import RTR from "../../Common/RTable/RTR";
 import Select from "../../Common/Select";
 import TextInput from "../../Common/TextInput";
-import { TimeTableCreateModalButtonWrap, TimeTableCreateModalTitle, TimeTableCreateModalWrap } from "./style";
+import { TimeTableCreateModalButtonWrap, TimeTableCreateModalTitle, TimeTableCreateModalWrap, TimeTableDateInput } from "./style";
 
 interface Props {
   open: boolean;
@@ -23,9 +23,10 @@ const TimeTableCreateModal = ({ open, setOpen }: Props) => {
     onChangeTimeTableName,
     timeTableName,
     resetTimeTable,
-    create
+    create,
+    setTimeTableEndTime,
+    setTimeTableStartTime,
   } = usePostCreateTimeTable();
-
 
   return (
     <Modal
@@ -53,6 +54,7 @@ const TimeTableCreateModal = ({ open, setOpen }: Props) => {
             <RTH>타입 선택</RTH>
             <RTD>
               <Select
+                customStyle={{ zIndex: "1" }}
                 items={["평일", "주말"]}
                 value={timeTableTypeName}
                 onChange={setTimeTableTypeName}
@@ -62,19 +64,17 @@ const TimeTableCreateModal = ({ open, setOpen }: Props) => {
           <RTR>
             <RTH>시작 시간</RTH>
             <RTD>
-              <TextInput
-                customStyle={{ width: "100%" }}
-                placeholder="시간표 이름을 입력하세요"
-              />
+              <TimeTableDateInput type="time"
+                onChange={(e) => setTimeTableStartTime(e.target.value)}
+                min="09:00" max="21:00" required />
             </RTD>
           </RTR>
           <RTR>
             <RTH>종료 시간</RTH>
             <RTD>
-              <TextInput
-                customStyle={{ width: "100%" }}
-                placeholder="시간표 이름을 입력하세요"
-              />
+              <TimeTableDateInput type="time"
+                onChange={(e) => setTimeTableEndTime(e.target.value)}
+                min="09:00" max="21:00" required />
             </RTD>
           </RTR>
         </RTable>

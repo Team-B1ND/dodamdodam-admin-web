@@ -10,9 +10,10 @@ import { TimeTableListButtonWrap } from './style';
 
 interface Props {
     setModifyModalIsOpen: Dispatch<SetStateAction<boolean>>;
+    setTimeTableId: Dispatch<SetStateAction<number>>;
 }
 
-const TimeTableList = ({ setModifyModalIsOpen }: Props) => {
+const TimeTableList = ({ setModifyModalIsOpen, setTimeTableId }: Props) => {
     const { data: TimeTableData } = useGetTimeTableQuery();
     const { deleteTimeTable } = useDeleteTimeTable();
 
@@ -32,7 +33,10 @@ const TimeTableList = ({ setModifyModalIsOpen }: Props) => {
                                             type="Primary"
                                             title="수정"
                                             customStyle={{ width: 66, height: 32, borderRadius: 5 }}
-                                            onClick={() => setModifyModalIsOpen(true)}
+                                            onClick={() => {
+                                                setModifyModalIsOpen(true);
+                                                setTimeTableId(item.id)
+                                            }}
                                         />
                                         <Button
                                             type="Cancel"

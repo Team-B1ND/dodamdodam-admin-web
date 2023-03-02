@@ -23,3 +23,10 @@ export const TimeTableCreateModalButtonWrap = styled.div`
   column-gap: 6px;
   margin-top: auto;
 `;
+
+export const TimeTableDateInput = styled.input`
+  border: 1px solid #bdbdbd;
+  padding: 3px;
+  outline: none;
+  border-radius: 3px;
+`;

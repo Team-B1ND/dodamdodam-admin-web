@@ -5,6 +5,7 @@ import {
 } from "./timeTableRepository.res";
 import {
   createTimeTableDataParam,
+  modifyTimeTableDataParam,
   timeTableId,
   timeTableType,
 } from "./timeTableRepository.param";
@@ -25,8 +26,13 @@ class TimeTableRepository {
     await customAxios.delete(`time/tables/${id}`);
   }
 
-  public async patchTimeTable({ id }: timeTableId): Promise<void> {
-    await customAxios.patch(`time/tables/${id}`);
+  public async patchTimeTable(
+    modifyTimeTableData: modifyTimeTableDataParam
+  ): Promise<void> {
+    await customAxios.patch(
+      `time/tables/${modifyTimeTableData.id}`,
+      modifyTimeTableData
+    );
   }
 
   public async getTimeTableType({

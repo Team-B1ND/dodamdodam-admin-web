@@ -2,6 +2,7 @@ import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import {
   createTimeTableDataParam,
+  modifyTimeTableDataParam,
   timeTableId,
   timeTableType,
 } from "repositories/timeTable/timeTableRepository.param";
@@ -31,8 +32,8 @@ export const useGetTimeTableQuery = (
 
 export const usePostCreateTimeTableMutation = () => {
   const mutation = useMutation(
-    (createTimeTableDataParam: createTimeTableDataParam) =>
-      TimeTableRepository.postCreateTimeTable(createTimeTableDataParam)
+    (createTimeTableData: createTimeTableDataParam) =>
+      TimeTableRepository.postCreateTimeTable(createTimeTableData)
   );
   return mutation;
 };
@@ -45,8 +46,9 @@ export const useDeleteTimeTableMutation = () => {
 };
 
 export const usePatchTimeTableMutation = () => {
-  const mutation = useMutation(({ id }: timeTableId) =>
-    TimeTableRepository.patchTimeTable({ id })
+  const mutation = useMutation(
+    ({ id, name, startTime, endTime, type }: modifyTimeTableDataParam) =>
+      TimeTableRepository.patchTimeTable({ id, name, startTime, endTime, type })
   );
   return mutation;
 };
