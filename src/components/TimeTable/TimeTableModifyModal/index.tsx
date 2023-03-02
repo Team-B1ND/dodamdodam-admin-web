@@ -1,5 +1,6 @@
 import useModifyTimeTable from "hooks/timeTable/useModifyTimeTable";
 import { Dispatch, SetStateAction } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import Button from "../../Common/Button";
 import Modal from "../../Common/Modal";
 import ModalHeader from "../../Common/ModalHeader";
@@ -14,17 +15,17 @@ import { TimeTableDateInput, TimeTableModifyModalButtonWrap, TimeTableModifyModa
 interface Props {
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  id: number;
 }
 
-const TimeTableModifyModal = ({ open, setOpen, id }: Props) => {
+const TimeTableModifyModal = ({ open, setOpen }: Props) => {
   const { modify, onChangeTimeTableName, resetTimeTable, setTimeTableModifyStartTime, timeTableModifyTypeName, setTimeTableModifyEndTime, setTimeTableModifyTypeName } = useModifyTimeTable();
-
+  const { id } = useParams();
+  const navigate = useNavigate();
   return (
     <Modal
       zIndex={2}
       isOpen={open}
-      onClose={() => setOpen(false)}
+      onClose={() => { setOpen(false); navigate("/timetable") }}
       customStyle={{ width: 470, height: 440 }}
     >
       <ModalHeader title="시간표 수정하기" />
@@ -79,8 +80,9 @@ const TimeTableModifyModal = ({ open, setOpen, id }: Props) => {
               fontSize: 12,
             }}
             onClick={() => {
-              modify({ id });
+              modify({ id: Number(id) });
               setOpen(false);
+              navigate("/timetable");
             }}
           />
           <Button
@@ -92,7 +94,7 @@ const TimeTableModifyModal = ({ open, setOpen, id }: Props) => {
               borderRadius: 5,
               fontSize: 12,
             }}
-            onClick={() => { setOpen(false); resetTimeTable(); }}
+            onClick={() => { setOpen(false); navigate("/timetable"); resetTimeTable(); }}
           />
         </TimeTableModifyModalButtonWrap>
       </TimeTableModifyModalWrap>

@@ -15,6 +15,7 @@ const Router = () => {
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/joinapproval" element={<JoinApprovalPage />} />
       <Route path="/timetable" element={<TimeTablePage />} />
+      <Route path="/timetable/:id" element={<TimeTablePage />} />
       <Route path="/classroom" element={<ClassroomPage />} />
       <Route path="/classroom/:id" element={<ClassroomPage />} />
       <Route path="/place" element={<PlacePage />} />

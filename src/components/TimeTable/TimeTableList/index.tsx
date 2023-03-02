@@ -1,5 +1,6 @@
 import useDeleteTimeTable from "hooks/timeTable/useDeleteTimeTable";
 import { Dispatch, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
 import { useGetTimeTableQuery } from '../../../quries/timeTable/timeTable.query';
 import Button from '../../Common/Button';
 import CTable, { CTableScrollWrapper } from '../../Common/CTable';
@@ -10,18 +11,18 @@ import { TimeTableListButtonWrap } from './style';
 
 interface Props {
     setModifyModalIsOpen: Dispatch<SetStateAction<boolean>>;
-    setTimeTableId: Dispatch<SetStateAction<number>>;
 }
 
-const TimeTableList = ({ setModifyModalIsOpen, setTimeTableId }: Props) => {
-    const { data: TimeTableData } = useGetTimeTableQuery();
+const TimeTableList = ({ setModifyModalIsOpen }: Props) => {
+    const { data: timeTableData } = useGetTimeTableQuery();
     const { deleteTimeTable } = useDeleteTimeTable();
+    const navigate = useNavigate();
 
     return (
         <CTableScrollWrapper customStyle={{ width: 800, height: 568 }}>
             <CTable>
                 <CTBody>
-                    {TimeTableData?.data.map(
+                    {timeTableData?.data.map(
                         (item) =>
                             <CTR>
                                 <CTD customStyle={{ minWidth: 200 }}>{item.name}</CTD>
@@ -35,7 +36,7 @@ const TimeTableList = ({ setModifyModalIsOpen, setTimeTableId }: Props) => {
                                             customStyle={{ width: 66, height: 32, borderRadius: 5 }}
                                             onClick={() => {
                                                 setModifyModalIsOpen(true);
-                                                setTimeTableId(item.id)
+                                                navigate(`${item.id}`);
                                             }}
                                         />
                                         <Button

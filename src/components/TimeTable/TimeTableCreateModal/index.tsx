@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import usePostCreateTimeTable from "../../../hooks/timeTable/usePostCreateTimeTable";
+import useCreateTimeTable from "../../../hooks/timeTable/useCreateTimeTable";
 import Button from "../../Common/Button";
 import Modal from "../../Common/Modal";
 import ModalHeader from "../../Common/ModalHeader";
@@ -26,7 +26,7 @@ const TimeTableCreateModal = ({ open, setOpen }: Props) => {
     create,
     setTimeTableEndTime,
     setTimeTableStartTime,
-  } = usePostCreateTimeTable();
+  } = useCreateTimeTable();
 
   return (
     <Modal

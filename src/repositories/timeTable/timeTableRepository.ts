@@ -6,9 +6,9 @@ import {
 import {
   createTimeTableDataParam,
   modifyTimeTableDataParam,
-  timeTableId,
-  timeTableType,
+  deleteTimeTableParam,
 } from "./timeTableRepository.param";
+import { timeTableType } from "types/timeTable/timeTable";
 
 class TimeTableRepository {
   public async getTimeTables(): Promise<getTimeTablesDataResponse> {
@@ -22,7 +22,7 @@ class TimeTableRepository {
     await customAxios.post("time/tables", createTimeTableData);
   }
 
-  public async deleteTimeTable({ id }: timeTableId): Promise<void> {
+  public async deleteTimeTable({ id }: deleteTimeTableParam): Promise<void> {
     await customAxios.delete(`time/tables/${id}`);
   }
 

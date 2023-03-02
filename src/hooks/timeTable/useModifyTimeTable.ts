@@ -1,7 +1,7 @@
 import { ChangeEvent, useCallback, useState } from "react";
 import { usePatchTimeTableMutation } from "quries/timeTable/timeTable.query";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import { timeTableId } from "repositories/timeTable/timeTableRepository.param";
+import { deleteTimeTableParam } from "repositories/timeTable/timeTableRepository.param";
 
 const useModifyTimeTable = () => {
   const [timeTableModifyTypeName, setTimeTableModifyTypeName] =
@@ -22,27 +22,29 @@ const useModifyTimeTable = () => {
     }
   }, [timeTableModifyTypeName, timeTableModifyName]);
 
-  const modify = ({ id }: timeTableId) => {
+  const modify = ({ id }: deleteTimeTableParam) => {
     if (timeTableModifyName === "") {
       B1ndToast.showError("시간표 이름을 입력해 주세요");
       return;
-    } else if (timeTableModifyTypeName === "타입 선택") {
+    }
+    if (timeTableModifyTypeName === "타입 선택") {
       B1ndToast.showError("시간표 타입을 입력해 주세요");
       return;
-    } else if (timeTableModifyStartTime === "") {
+    }
+    if (timeTableModifyStartTime === "") {
       B1ndToast.showError("시작 시간을 입력해 주세요");
       return;
-    } else if (timeTableModifyEndTime === "") {
+    }
+    if (timeTableModifyEndTime === "") {
       B1ndToast.showError("종료 시간을 입력해 주세요");
       return;
-    } else if (timeTableModifyStartTime >= timeTableModifyEndTime) {
+    }
+    if (timeTableModifyStartTime >= timeTableModifyEndTime) {
       B1ndToast.showError(
         "종료 시간 시작 시간 보다 빠릅니다. 다시 입력해 주세요"
       );
       return;
     }
-    console.log(id, timeTableModifyName);
-
     patchTimeTable.mutate(
       {
         id: id,

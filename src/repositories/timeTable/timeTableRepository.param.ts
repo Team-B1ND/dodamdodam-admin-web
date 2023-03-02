@@ -13,10 +13,6 @@ export interface modifyTimeTableDataParam {
   type: string;
 }
 
-export interface timeTableId {
+export interface deleteTimeTableParam {
   id: number;
-}
-
-export interface timeTableType {
-  type: string;
 }
