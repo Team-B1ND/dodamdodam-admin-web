@@ -1,4 +1,9 @@
-import { Parent, Student, Teacher } from "../../types/member/member.type";
+import {
+  Admin,
+  Parent,
+  Student,
+  Teacher,
+} from "../../types/member/member.type";
 import { Response } from "../../types/util/util.type";
 
 export interface getMembersResponse extends Response {
@@ -7,4 +12,8 @@ export interface getMembersResponse extends Response {
     students: Student[];
     teachers: Teacher[];
   };
+}
+
+export interface getMyMemberResponse extends Response {
+  data: Admin;
 }

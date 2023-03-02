@@ -1,6 +1,8 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { sha512 } from "js-sha512";
+
 import { FormEvent, useState } from "react";
+import { useQueryClient } from "react-query";
 import { useNavigate } from "react-router-dom";
 import {
   ACCESS_TOKEN_KEY,
@@ -10,6 +12,8 @@ import token from "../../lib/token";
 import { usePostLoginMutation } from "../../quries/auth/auth.query";
 
 const useLogin = () => {
+  const queryClient = useQueryClient();
+
   const navigate = useNavigate();
 
   const postLoginMutation = usePostLoginMutation();
@@ -50,10 +54,11 @@ const useLogin = () => {
     postLoginMutation.mutateAsync(
       { ...processLoginData },
       {
-        onSuccess: ({ data }) => {
-          if (data.member.role === "ADMIN") {
-            token.setToken(ACCESS_TOKEN_KEY, data.token);
-            token.setToken(REFRESH_TOKEN_KEY, data.refreshToken);
+        onSuccess: ({ data: { token: accessToken, refreshToken, member } }) => {
+          if (member.role === "ADMIN") {
+            token.setToken(ACCESS_TOKEN_KEY, accessToken);
+            token.setToken(REFRESH_TOKEN_KEY, refreshToken);
+            queryClient.invalidateQueries("member/getMyMember");
             B1ndToast.showSuccess("로그인 성공");
             navigate("/member");
           } else {

@@ -6,7 +6,7 @@ const useLogout = () => {
 
   const onLogout = () => {
     token.clearToken();
-    navigate("/auth");
+    navigate("/sign");
   };
 
   return { onLogout };
