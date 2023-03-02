@@ -1,13 +1,14 @@
-import { useGetMembersQuery } from "../../../quries/member/member.query";
-import CTD from "../../Common/CTable/CTD";
-import CTR from "../../Common/CTable/CTR";
-import DODAM_PROFILE from "../../../assets/defaultProfile/dodamProfile.svg";
-import Button from "../../Common/Button";
-import { MemberProfileImg, MemberProfileImgWrap } from "./style";
-import CTable, { CTableScrollWrapper } from "../../Common/CTable";
-import CTBody from "../../Common/CTable/CTBody";
-import useDeleteMember from "../../../hooks/member/useDeleteMember";
+import CTable, { CTableScrollWrapper } from "components/Common/CTable";
+import CTBody from "components/Common/CTable/CTBody";
+import CTD from "components/Common/CTable/CTD";
 import { CTDImageWrap } from "components/Common/CTable/CTD/style";
+import CTR from "components/Common/CTable/CTR";
+import DODAM_PROFILE from "../../../assets/defaultProfile/dodamProfile.svg";
+import {
+  MemberProfileImg,
+  MemberProfileImgWrap,
+} from "components/Member/MemberList/style";
+import { useGetMembersQuery } from "quries/member/member.query";
 import { Student, Teacher } from "types/member/member.type";
 
 interface Props {
@@ -15,25 +16,22 @@ interface Props {
   classification: string;
 }
 
-const MemberList = ({ keyword, classification }: Props) => {
+const AuthorityMemberList = ({ keyword, classification }: Props) => {
   const { data: serverMembersData } = useGetMembersQuery({ suspense: true });
 
-  const { onDeleteMember } = useDeleteMember();
-
   const studentsData = serverMembersData?.data.students.sort(
-    (a: Student, b: Student) =>
+    (a:Student, b:Student) =>
       a.classroom.grade - b.classroom.grade ||
       a.classroom.room - b.classroom.room ||
       a.number - b.number
   );
-
   const teachersData = serverMembersData?.data.teachers.sort(
-    (a: Teacher, b: Teacher) => b.id - a.id
+    (a:Teacher, b:Teacher) => b.id - a.id
   );
 
   return (
-    <CTableScrollWrapper customStyle={{ width: "100%", height: 600 }}>
-      <CTable customStyle={{ width: "100%" }}>
+    <CTableScrollWrapper customStyle={{ width: 720, height: 600 }}>
+      <CTable>
         <CTBody>
           <>
             {(() => {
@@ -69,27 +67,14 @@ const MemberList = ({ keyword, classification }: Props) => {
                         </MemberProfileImgWrap>
                       </CTDImageWrap>
                     </CTD>
-                    <CTD customStyle={{ width: "19%", textAlign: "left" }}>
+                    <CTD customStyle={{ width: 200 }}>
                       {student.member.name}
                     </CTD>
-                    <CTD customStyle={{ width: "15.5%", textAlign: "left" }}>
+                    <CTD customStyle={{ width: 150 }}>
                       {student.classroom.grade}학년 {student.classroom.room}반{" "}
                       {student.number}번
                     </CTD>
-                    <CTD customStyle={{ width: "17.5%", textAlign: "left" }}>
-                      {student.member.id}
-                    </CTD>
-                    <CTD customStyle={{ width: "27.5%", textAlign: "left" }}>
-                      {student.member.email}
-                    </CTD>
-                    <CTD>
-                      <Button
-                        type="Primary"
-                        onClick={() => onDeleteMember(student.member.id)}
-                        title="삭제"
-                        customStyle={{ borderRadius: "5px", width: "66px" }}
-                      />
-                    </CTD>
+                    <CTD customStyle={{ width: 250 }}>{student.member.id}</CTD>
                   </CTR>
                 );
               })}
@@ -118,25 +103,12 @@ const MemberList = ({ keyword, classification }: Props) => {
                           </MemberProfileImgWrap>
                         </CTDImageWrap>
                       </CTD>
-                      <CTD customStyle={{ width: "19%", textAlign: "left" }}>
+                      <CTD customStyle={{ width: 200 }}>
                         {teacher.member.name}
                       </CTD>
-                      <CTD customStyle={{ width: "15.5%", textAlign: "left" }}>
-                        선생님
-                      </CTD>
-                      <CTD customStyle={{ width: "17.5%", textAlign: "left" }}>
+                      <CTD customStyle={{ width: 150 }}>선생님</CTD>
+                      <CTD customStyle={{ width: 250 }}>
                         {teacher.member.id}
-                      </CTD>
-                      <CTD customStyle={{ width: "27.5%", textAlign: "left" }}>
-                        {teacher.member.email}
-                      </CTD>
-                      <CTD>
-                        <Button
-                          type="Primary"
-                          onClick={() => onDeleteMember(teacher.member.id)}
-                          title="삭제"
-                          customStyle={{ borderRadius: "5px", width: "66px" }}
-                        />
                       </CTD>
                     </CTR>
                   );
@@ -148,4 +120,4 @@ const MemberList = ({ keyword, classification }: Props) => {
   );
 };
 
-export default MemberList;
+export default AuthorityMemberList;

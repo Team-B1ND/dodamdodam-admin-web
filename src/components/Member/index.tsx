@@ -11,7 +11,7 @@ import MemberList from "./MemberList";
 import { MemberContainer, MemberInputWrap } from "./style";
 
 const Member = () => {
-  const [classification, setClassification] = useState("전체보기");
+  const [classification, setClassification] = useState<string>("전체보기");
   const [keyword, setKeyword] = useState<string>("");
 
   return (

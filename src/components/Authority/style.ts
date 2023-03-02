@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MemberContainer = styled.div`
+export const AuthorityContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -8,7 +8,7 @@ export const MemberContainer = styled.div`
   flex-direction: column;
 `;
 
-export const MemberInputWrap = styled.div`
+export const AuthorityInputWrap = styled.div`
   width: 100%;
   display: flex;
   align-items: center;
