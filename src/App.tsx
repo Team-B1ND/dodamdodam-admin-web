@@ -7,13 +7,19 @@ import Router from "./components/Router";
 import { GlobalStyle } from "./styles/GlobalStyle";
 
 function App() {
-  const queryClient = new QueryClient();
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        retry: false,
+      },
+    },
+  });
 
   return (
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <B1ndToastContainer autoClose={5000} limit={6} />
-        <BrowserRouter>
+        <BrowserRouter basename="/admin">
           <GlobalStyle />
           <Layout>
             <Router />

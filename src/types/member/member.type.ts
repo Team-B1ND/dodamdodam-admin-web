@@ -11,28 +11,32 @@ export interface Member {
 }
 
 export interface Parent {
-  id: number;
+  readonly d: number;
   phone: string;
-  student: {
-    classroom: ClassRoom;
-    id: number;
-    member: Member;
-    number: number;
-    phone: string;
-  };
+  student: Student;
 }
 
 export interface Student {
   classroom: ClassRoom;
-  id: number;
+  readonly id: number;
   member: Member;
   number: number;
   phone: string;
 }
 
 export interface Teacher {
-  id: number;
+  readonly id: number;
   member: Member;
+  phone: string;
+  position: string;
+  tel: string;
+}
+
+export interface Admin {
+  classroom: ClassRoom;
+  readonly id: number;
+  member: Member;
+  number: number;
   phone: string;
   position: string;
   tel: string;

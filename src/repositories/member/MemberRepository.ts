@@ -1,12 +1,18 @@
-import axios from "axios";
-import config from "../../config/config.json";
 import { customAxios } from "../../lib/axios/customAxios";
 import { deleteMemberParam } from "./memberRepository.param";
-import { getMembersResponse } from "./memberRepository.res";
+import {
+  getMembersResponse,
+  getMyMemberResponse,
+} from "./memberRepository.res";
 
 class MemberRepository {
   public async getMembers(): Promise<getMembersResponse> {
     const { data } = await customAxios.get(`/members`);
+    return data;
+  }
+
+  public async getMyMember(): Promise<getMyMemberResponse> {
+    const { data } = await customAxios.get("/members/my");
     return data;
   }
 
