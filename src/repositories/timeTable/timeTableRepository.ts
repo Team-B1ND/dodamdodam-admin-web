@@ -1,14 +1,13 @@
 import { customAxios } from "../../lib/axios/customAxios";
 import {
   getTimeTablesDataResponse,
-  getTimeTableTypeResponse,
+  getTimeTablesTypeResponse,
 } from "./timeTableRepository.res";
 import {
   createTimeTableDataParam,
   modifyTimeTableDataParam,
   deleteTimeTableParam,
 } from "./timeTableRepository.param";
-import { timeTableType } from "types/timeTable/timeTable";
 
 class TimeTableRepository {
   public async getTimeTables(): Promise<getTimeTablesDataResponse> {
@@ -33,13 +32,6 @@ class TimeTableRepository {
       `time/tables/${modifyTimeTableData.id}`,
       modifyTimeTableData
     );
-  }
-
-  public async getTimeTableType({
-    type,
-  }: timeTableType): Promise<getTimeTableTypeResponse> {
-    const { data } = await customAxios.patch(`time/tables/type?=${type}`);
-    return data;
   }
 }
 

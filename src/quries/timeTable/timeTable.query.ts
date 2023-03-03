@@ -5,14 +5,10 @@ import {
   deleteTimeTableParam,
   modifyTimeTableDataParam,
 } from "repositories/timeTable/timeTableRepository.param";
-import {
-  getTimeTablesDataResponse,
-  getTimeTableTypeResponse,
-} from "repositories/timeTable/timeTableRepository.res";
-import { timeTableType } from "types/timeTable/timeTable";
+import { getTimeTablesDataResponse } from "repositories/timeTable/timeTableRepository.res";
 import TimeTableRepository from "../../repositories/timeTable/timeTableRepository";
 
-export const useGetTimeTableQuery = (
+export const useGetTimeTablesQuery = (
   options?: UseQueryOptions<
     getTimeTablesDataResponse,
     AxiosError,
@@ -52,22 +48,3 @@ export const usePatchTimeTableMutation = () => {
   );
   return mutation;
 };
-
-export const useGetTimeTableType = (
-  { type }: timeTableType,
-  options?: UseQueryOptions<
-    getTimeTableTypeResponse,
-    AxiosError,
-    getTimeTableTypeResponse,
-    "timeTableType/getTimeTableType"
-  >
-) =>
-  useQuery(
-    "timeTableType/getTimeTableType",
-    () => TimeTableRepository.getTimeTableType({ type }),
-    {
-      ...options,
-      staleTime: 1000 * 60 * 60,
-      cacheTime: 1000 * 60 * 60,
-    }
-  );

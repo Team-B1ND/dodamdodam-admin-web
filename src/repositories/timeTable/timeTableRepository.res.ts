@@ -1,10 +1,10 @@
-import { TimeTable } from "types/timeTable/timeTable";
+import { TimeTables } from "types/timeTable/timeTable";
 import { Response } from "../../types/util/util.type";
 
 export interface getTimeTablesDataResponse extends Response {
-  data: TimeTable[];
+  data: TimeTables[];
 }
 
-export interface getTimeTableTypeResponse extends Response {
-  data: TimeTable[];
+export interface getTimeTablesTypeResponse extends Response {
+  data: TimeTables[];
 }

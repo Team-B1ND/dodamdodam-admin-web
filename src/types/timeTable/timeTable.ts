@@ -1,11 +1,11 @@
-export interface TimeTable {
+export interface TimeTables {
   id: number;
   name: string;
   startTime: string;
   endTime: string;
-  type: timeTableType;
+  type: TimeTableType;
 }
 
-export interface timeTableType {
+export interface TimeTableType {
   type: string;
 }
