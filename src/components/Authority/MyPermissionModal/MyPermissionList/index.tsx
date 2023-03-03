@@ -8,9 +8,9 @@ const MyPermissionList = () => {
   });
   return (
     <MyPermissionUl>
-      {myPermissionData?.data.map((permission: Permission, index: number) => {
+      {myPermissionData?.data.map((permission: Permission) => {
         return (
-          <MyPermissionLi key={index}>
+          <MyPermissionLi key={permission.id}>
             {"- "}
             {permission.permission}
           </MyPermissionLi>

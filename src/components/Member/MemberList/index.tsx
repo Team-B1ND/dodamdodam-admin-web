@@ -53,9 +53,9 @@ const MemberList = ({ keyword, classification }: Props) => {
                   student.member.name.indexOf(keyword) > -1
                 );
               })
-              .map((student: Student, index: number) => {
+              .map((student: Student) => {
                 return (
-                  <CTR key={index}>
+                  <CTR key={student.id}>
                     <CTD customStyle={{ width: 120 }}>
                       <CTDImageWrap>
                         <MemberProfileImgWrap>
@@ -102,9 +102,9 @@ const MemberList = ({ keyword, classification }: Props) => {
                     teacher.member.name.indexOf(keyword) > -1
                   );
                 })
-                .map((teacher: Teacher, index: number) => {
+                .map((teacher: Teacher) => {
                   return (
-                    <CTR key={index}>
+                    <CTR key={teacher.id}>
                       <CTD customStyle={{ width: 120 }}>
                         <CTDImageWrap>
                           <MemberProfileImgWrap>

@@ -15,3 +15,14 @@ export const AuthorityInputWrap = styled.div`
   gap: 5px;
   margin-bottom: 10px;
 `;
+
+export const AuthorityBody = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+`;
+
+export const MemberTableWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;

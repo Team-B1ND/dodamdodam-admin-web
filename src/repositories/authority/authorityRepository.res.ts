@@ -1,5 +1,5 @@
 import { Permission } from "types/permission/permission.type";
 
-export interface getMyPermissionResponse extends Response {
+export interface getPermissionResponse extends Response {
   data: Permission[];
 }
