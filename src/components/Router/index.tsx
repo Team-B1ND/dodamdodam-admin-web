@@ -25,6 +25,7 @@ const Router = () => {
       <Route path="/sign" element={<AuthPage />} />
       <Route path="/joinapproval" element={<AuthJoinApprovalPage />} />
       <Route path="/timetable" element={<AuthTimeTablePage />} />
+      <Route path="/timetable/:id" element={<TimeTablePage />} />
       <Route path="/classroom" element={<AuthClassroomPage />} />
       <Route path="/classroom/:id" element={<AuthClassroomPage />} />
       <Route path="/place" element={<AuthPlacePage />} />
@@ -34,6 +35,7 @@ const Router = () => {
       <Route path="/authority" element={<AuthAuthorityPage />} />
       <Route path="/member" element={<AuthMemberPage />} />
       <Route path="/numberSetting" element={<AuthNumberSettingPage />} />
+
     </Routes>
   );
 };

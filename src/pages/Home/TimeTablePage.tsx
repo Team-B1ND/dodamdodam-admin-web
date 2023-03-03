@@ -1,5 +1,7 @@
+import TimeTable from "../../components/TimeTable";
+
 const TimeTablePage = () => {
-  return <div>timetable</div>;
+  return <TimeTable />;
 };
 
 export default TimeTablePage;
