@@ -11,7 +11,7 @@ interface Props {
 const Layout = ({ children }: Props) => {
   const { pathname } = useLocation();
 
-  const isAuthPage = pathname === "/auth";
+  const isAuthPage = pathname === "/sign";
 
   const disappearGNB = isAuthPage;
 
