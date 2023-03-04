@@ -23,21 +23,24 @@ export const PermissionSubtitleWrap = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 300px;
-  font-size: 10px;
+  font-size: 12px;
 `;
 
 export const PermissionSubtitle = styled.div`
-  font-weight: 400;
+  font-weight: 600;
+  font-size: 13px;
 `;
 
 export const AuthorityAddSubButton = styled.div<{ isDisabled: boolean }>`
-  padding: 2px;
+  padding: 5px;
   color: white;
   border-radius: 5px;
+  cursor: pointer;
   ${({ isDisabled }) =>
     isDisabled
       ? css`
           background-color: ${palette.gray[200]};
+          pointer-events: none;
         `
       : css`
           background-color: ${palette.main};
@@ -51,4 +54,28 @@ export const MemberAuthroityListWrap = styled.div`
 
 export const MemberAuthorityListItem = styled.div`
   display: flex;
+`;
+
+export const AuthorityIsNotExistWrap = styled.div`
+  display: flex;
+  width: 300px;
+  height: 80px;
+  justify-content: center;
+  align-items: center;
+  color: ${palette.gray[300]};
+  font-size: 12px;
+`;
+
+export const AuthorityIsExistWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 300px;
+  padding: 10px;
+  font-size: 13px;
+`;
+
+export const AuthorityItem = styled.div`
+  display: flex;
+  align-items: center;
 `;

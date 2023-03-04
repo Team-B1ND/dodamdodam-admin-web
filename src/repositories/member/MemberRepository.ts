@@ -1,13 +1,13 @@
 import { customAxios } from "../../lib/axios/customAxios";
 import {
   deleteMemberParam,
-  getStudentByIdParam,
+  getMemberByIdParam,
   getTeacherByIdParam,
 } from "./memberRepository.param";
 import {
+  getMemberByIdResponse,
   getMembersResponse,
   getMyMemberResponse,
-  getStudentByIdResponse,
   getTeacherByIdResponse,
 } from "./memberRepository.res";
 
@@ -22,9 +22,9 @@ class MemberRepository {
     return data;
   }
 
-  public async getStudentById({
+  public async getMemberById({
     id,
-  }: getStudentByIdParam): Promise<getStudentByIdResponse> {
+  }: getMemberByIdParam): Promise<getMemberByIdResponse> {
     const { data } = await customAxios.get(`/members/search/${id}`);
     return data;
   }

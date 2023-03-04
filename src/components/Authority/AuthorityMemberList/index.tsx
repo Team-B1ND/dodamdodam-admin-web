@@ -17,15 +17,9 @@ interface Props {
   keyword: string;
   classification: string;
   setOpen: Dispatch<SetStateAction<boolean>>;
-  setMemberType: Dispatch<SetStateAction<"student" | "teacher">>;
 }
 
-const AuthorityMemberList = ({
-  keyword,
-  classification,
-  setOpen,
-  setMemberType,
-}: Props) => {
+const AuthorityMemberList = ({ keyword, classification, setOpen }: Props) => {
   const { data: serverMembersData } = useGetMembersQuery({ suspense: true });
 
   const studentsData: Student[] | undefined =
@@ -71,7 +65,6 @@ const AuthorityMemberList = ({
                     style={{ width: 720 }}
                     onClick={() => {
                       navigate(`/authority/${student.member.id}`);
-                      setMemberType("student");
                       setOpen(true);
                     }}
                   >
@@ -125,7 +118,6 @@ const AuthorityMemberList = ({
                       style={{ width: 720 }}
                       onClick={() => {
                         navigate(`/authority/${teacher.member.id}`);
-                        setMemberType("teacher");
                         setOpen(true);
                       }}
                     >

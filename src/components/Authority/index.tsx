@@ -24,9 +24,6 @@ const Authority = () => {
   const [keyword, setKeyword] = useState<string>("");
   const [checkMyPermission, setCheckMyPermission] = useState<boolean>(false);
   const [startDetail, setStartDetail] = useState<boolean>(false);
-  const [memberType, setMemeberType] = useState<"student" | "teacher">(
-    "student"
-  );
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -80,7 +77,6 @@ const Authority = () => {
                   keyword={keyword}
                   classification={classification}
                   setOpen={setStartDetail}
-                  setMemberType={setMemeberType}
                 />
               </Suspense>
             </ErrorBoundary>
@@ -88,7 +84,6 @@ const Authority = () => {
           <AuthorityMemberDetail
             open={startDetail}
             setOpen={setStartDetail}
-            memberType={memberType}
           ></AuthorityMemberDetail>
         </AuthorityBody>
         <MyPermissionModal

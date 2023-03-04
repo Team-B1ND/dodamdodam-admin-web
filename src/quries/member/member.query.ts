@@ -3,13 +3,13 @@ import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import MemberRepository from "../../repositories/member/MemberRepository";
 import {
   deleteMemberParam,
-  getStudentByIdParam,
+  getMemberByIdParam,
   getTeacherByIdParam,
 } from "../../repositories/member/memberRepository.param";
 import {
+  getMemberByIdResponse,
   getMembersResponse,
   getMyMemberResponse,
-  getStudentByIdResponse,
   getTeacherByIdResponse,
 } from "../../repositories/member/memberRepository.res";
 
@@ -27,18 +27,18 @@ export const useGetMembersQuery = (
     cacheTime: 1000 * 60 * 60,
   });
 
-export const useGetStudentById = (
-  { id }: getStudentByIdParam,
+export const useGetMemberById = (
+  { id }: getMemberByIdParam,
   options?: UseQueryOptions<
-    getStudentByIdResponse,
+    getMemberByIdResponse,
     AxiosError,
-    getStudentByIdResponse,
+    getMemberByIdResponse,
     ["member/search/id", string]
   >
 ) =>
   useQuery(
     ["member/search/id", id],
-    () => MemberRepository.getStudentById({ id }),
+    () => MemberRepository.getMemberById({ id }),
     {
       ...options,
       staleTime: 1000 * 60 * 5,
@@ -53,7 +53,7 @@ export const useGetTeacherById = (
     getTeacherByIdResponse,
     AxiosError,
     getTeacherByIdResponse,
-    ["member/teacher/id", string]
+    ["member/teacher/id", number]
   >
 ) =>
   useQuery(

@@ -3,9 +3,7 @@ import { ClassRoom } from "types/classRoom/classRoom.type";
 
 export interface Permission {
   id: number;
-  member: Member & {
-    student: StudentForPermission;
-  };
+  member: Member;
   permission: string;
 }
 

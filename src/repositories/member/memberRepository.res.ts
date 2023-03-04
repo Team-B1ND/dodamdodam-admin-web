@@ -20,7 +20,7 @@ export interface getMyMemberResponse extends Response {
   data: Admin;
 }
 
-export interface getStudentByIdResponse extends Response {
+export interface getMemberByIdResponse extends Response {
   data: Member;
 }
 
