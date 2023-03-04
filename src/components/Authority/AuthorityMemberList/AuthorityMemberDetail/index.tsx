@@ -1,11 +1,8 @@
-import ErrorBoundary from "components/Common/ErrorBoundary";
 import { useGetMemberById } from "quries/member/member.query";
 import { useGetPermissionByMemberIdQuery } from "quries/permission/permission.query";
-import { Dispatch, SetStateAction, Suspense, useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
-import { getPermissionResponse } from "repositories/authority/authorityRepository.res";
-import { Member, Student, Teacher } from "types/member/member.type";
-import { Permission } from "types/permission/permission.type";
+import { Dispatch, SetStateAction, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Member } from "types/member/member.type";
 import {
   AuthorityAddSubButton,
   AuthorityIsExistWrap,
@@ -25,16 +22,14 @@ interface Props {
 const AuthorityMemberDetail = ({ open }: Props) => {
   const { id } = useParams();
 
-  const [selectedMember, setSelectedMember] = useState<Member>();
-
   const { data: memberPermissions } = useGetPermissionByMemberIdQuery({
     memberId: id || "",
   });
   const { data: allAuthorityData } = useGetPermissionByMemberIdQuery({
     memberId: "admin",
   });
-  const [flag, setFlag] = useState(0);
-  const [permissionArray, setPermissionArray] = useState<Array<Permission>>([]);
+
+  const existedPermissionArray = new Array<string>();
 
   const { data: memberData } = useGetMemberById({ id: id || "" });
 
@@ -44,11 +39,6 @@ const AuthorityMemberDetail = ({ open }: Props) => {
         <PermissionDetailContainer>
           <PermissionOwnerTitle>
             <>
-              {/* {(teacherData || studentData) &&
-                (memberType === "student"
-                  ? studentData?.data.name
-                  : teacherData?.data.name)}
-              {teacherData != undefined && teacherData.data.name} */}
               {memberData && memberData.data.name}
               {" 님의 정보"}
             </>
@@ -75,6 +65,7 @@ const AuthorityMemberDetail = ({ open }: Props) => {
             ) : (
               <AuthorityIsExistWrap>
                 {memberPermissions.data.map((permission) => {
+                  existedPermissionArray.push(permission.permission);
                   return (
                     <AuthorityItem>
                       {"- "}
@@ -93,51 +84,24 @@ const AuthorityMemberDetail = ({ open }: Props) => {
           </PermissionSubtitleWrap>
           <div>
             <AuthorityIsExistWrap>
-              {/* {memberPermissions?.data === undefined || memberPermissions.data.length <1
-             ? allAuthorityData?.data.map(
-              (authority)=> {
-              return <AuthorityItem>{authority.permission}</AuthorityItem>;
-            })  : allAuthorityData.data.filter((authority)=>{
-              return authority.id !== memberPermissions.data.map((memberAuthority)=>{
-                return memberAuthority.id
-              }).map((validAuthority)=>
-              return <AuthorityItem>{validAuthority.permission}</AuthorityItem>)
-            })} */}
-              <ErrorBoundary fallback={<>로딩중...</>}>
-                <Suspense fallback={<>에러발생...</>}>
-                  {memberPermissions?.data === undefined ||
-                  memberPermissions.data.length < 1
-                    ? allAuthorityData?.data.map((authority) => {
-                        return (
-                          <AuthorityItem>{authority.permission}</AuthorityItem>
-                        );
-                      })
-                    : (() => {
-                        allAuthorityData?.data.forEach((allAuthority) => {
-                          setFlag(0);
-                          memberPermissions.data.forEach((memberAuthority) => {
-                            if (memberAuthority.id === allAuthority.id) {
-                              setFlag(1);
-                            }
-                          });
-                          if (flag === 1) {
-                            setPermissionArray([
-                              ...permissionArray,
-                              allAuthority,
-                            ]);
-                          }
-                        });
-                        return permissionArray;
-                      })().map((validAuthority) => {
-                        return (
-                          <AuthorityItem>
-                            {"- "}
-                            {validAuthority.permission}
-                          </AuthorityItem>
-                        );
-                      })}
-                </Suspense>
-              </ErrorBoundary>
+              {memberPermissions?.data === undefined ||
+              memberPermissions?.data.length < 1
+                ? allAuthorityData?.data.map((authority) => {
+                    return (
+                      <AuthorityItem>{authority.permission}</AuthorityItem>
+                    );
+                  })
+                : allAuthorityData?.data.map((permission) => {
+                    if (
+                      existedPermissionArray.indexOf(permission.permission) ===
+                      -1
+                    ) {
+                      return (
+                        <AuthorityItem>{permission.permission}</AuthorityItem>
+                      );
+                    }
+                    return <></>;
+                  })}
             </AuthorityIsExistWrap>
           </div>
         </PermissionDetailContainer>
