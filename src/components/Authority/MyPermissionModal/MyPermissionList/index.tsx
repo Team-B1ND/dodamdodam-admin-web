@@ -1,4 +1,4 @@
-import { useGetMyPermissionQuery } from "quries/permission/permission.query";
+import { useGetMyPermissionQuery } from "quries/authority/permission.query";
 import { Permission } from "types/permission/permission.type";
 import { MyPermissionLi, MyPermissionUl } from "./style";
 

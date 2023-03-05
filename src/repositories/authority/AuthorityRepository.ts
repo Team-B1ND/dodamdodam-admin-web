@@ -1,5 +1,9 @@
 import { customAxios } from "lib/axios/customAxios";
-import { getPermissionByMemberParam } from "./authorityRepository.param";
+import {
+  deletePermissionParam,
+  getPermissionByMemberParam,
+  postAssignPermissionParam,
+} from "./authorityRepository.param";
 import { getPermissionResponse } from "./authorityRepository.res";
 
 class AuthorityRepository {
@@ -15,6 +19,22 @@ class AuthorityRepository {
       `permission/member?memberId=${memberId}`
     );
     return data;
+  }
+
+  public async postAssignPermission({
+    memberId,
+    permission,
+  }: postAssignPermissionParam): Promise<void> {
+    await customAxios.post("/permission/assign", { memberId, permission });
+  }
+
+  public async deletePermission({
+    memberId,
+    permission,
+  }: deletePermissionParam): Promise<void> {
+    await customAxios.delete(
+      `/permission?memberId=${memberId}&permission=${permission}`
+    );
   }
 }
 

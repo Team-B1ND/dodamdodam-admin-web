@@ -1,8 +1,7 @@
 import { useGetMemberById } from "quries/member/member.query";
-import { useGetPermissionByMemberIdQuery } from "quries/permission/permission.query";
-import { Dispatch, SetStateAction, useState } from "react";
+import { useGetPermissionByMemberIdQuery } from "quries/authority/permission.query";
+import { Dispatch, SetStateAction } from "react";
 import { useParams } from "react-router-dom";
-import { Member } from "types/member/member.type";
 import {
   AuthorityAddSubButton,
   AuthorityIsExistWrap,
@@ -52,6 +51,7 @@ const AuthorityMemberDetail = ({ open }: Props) => {
                   ? true
                   : false
               }
+              onClick={() => {}}
             >
               모든 권한 회수
             </AuthorityAddSubButton>
@@ -97,7 +97,10 @@ const AuthorityMemberDetail = ({ open }: Props) => {
                       -1
                     ) {
                       return (
-                        <AuthorityItem>{permission.permission}</AuthorityItem>
+                        <AuthorityItem>
+                          {"- "}
+                          {permission.permission}
+                        </AuthorityItem>
                       );
                     }
                     return <></>;
