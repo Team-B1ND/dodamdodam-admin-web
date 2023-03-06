@@ -78,4 +78,5 @@ export const AuthorityIsExistWrap = styled.div`
 export const AuthorityItem = styled.div`
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;

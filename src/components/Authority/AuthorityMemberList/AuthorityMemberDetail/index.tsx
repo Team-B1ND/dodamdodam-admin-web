@@ -12,6 +12,8 @@ import {
   PermissionSubtitle,
   PermissionSubtitleWrap,
 } from "./style";
+import useAssignPermission from "hooks/authority/useAssignPermission";
+import useDeletePermission from "hooks/authority/useDeletePermission";
 
 interface Props {
   open: boolean;
@@ -29,8 +31,12 @@ const AuthorityMemberDetail = ({ open }: Props) => {
   });
 
   const existedPermissionArray = new Array<string>();
+  const restedPermissionArray = new Array<string>();
 
   const { data: memberData } = useGetMemberById({ id: id || "" });
+
+  const { onAssignPermission, onAllAssignPermission } = useAssignPermission();
+  const { onDeletePermission, onAllDeletePermission } = useDeletePermission();
 
   return (
     <>
@@ -51,7 +57,13 @@ const AuthorityMemberDetail = ({ open }: Props) => {
                   ? true
                   : false
               }
-              onClick={() => {}}
+              onClick={() => {
+                id &&
+                  onAllDeletePermission({
+                    memberId: id,
+                    permissions: existedPermissionArray,
+                  });
+              }}
             >
               모든 권한 회수
             </AuthorityAddSubButton>
@@ -67,7 +79,16 @@ const AuthorityMemberDetail = ({ open }: Props) => {
                 {memberPermissions.data.map((permission) => {
                   existedPermissionArray.push(permission.permission);
                   return (
-                    <AuthorityItem>
+                    <AuthorityItem
+                      key={permission.id}
+                      onClick={() => {
+                        id &&
+                          onDeletePermission({
+                            memberId: id,
+                            permission: permission.permission,
+                          });
+                      }}
+                    >
                       {"- "}
                       {permission.permission}
                     </AuthorityItem>
@@ -78,7 +99,20 @@ const AuthorityMemberDetail = ({ open }: Props) => {
           </div>
           <PermissionSubtitleWrap>
             <PermissionSubtitle>부여 가능한 권한</PermissionSubtitle>
-            <AuthorityAddSubButton isDisabled={false}>
+            <AuthorityAddSubButton
+              isDisabled={
+                allAuthorityData !== undefined &&
+                memberPermissions !== undefined &&
+                memberPermissions?.data.length >= allAuthorityData?.data.length
+              }
+              onClick={() => {
+                id &&
+                  onAllAssignPermission({
+                    memberId: id,
+                    permissions: restedPermissionArray,
+                  });
+              }}
+            >
               모든 권한 주기
             </AuthorityAddSubButton>
           </PermissionSubtitleWrap>
@@ -86,9 +120,19 @@ const AuthorityMemberDetail = ({ open }: Props) => {
             <AuthorityIsExistWrap>
               {memberPermissions?.data === undefined ||
               memberPermissions?.data.length < 1
-                ? allAuthorityData?.data.map((authority) => {
+                ? allAuthorityData?.data.map((permission) => {
                     return (
-                      <AuthorityItem>{authority.permission}</AuthorityItem>
+                      <AuthorityItem
+                        onClick={() =>
+                          id &&
+                          onAssignPermission({
+                            memberId: id,
+                            permission: permission.permission,
+                          })
+                        }
+                      >
+                        {permission.permission}
+                      </AuthorityItem>
                     );
                   })
                 : allAuthorityData?.data.map((permission) => {
@@ -96,8 +140,18 @@ const AuthorityMemberDetail = ({ open }: Props) => {
                       existedPermissionArray.indexOf(permission.permission) ===
                       -1
                     ) {
+                      restedPermissionArray.push(permission.permission);
                       return (
-                        <AuthorityItem>
+                        <AuthorityItem
+                          key={permission.id}
+                          onClick={() =>
+                            id &&
+                            onAssignPermission({
+                              memberId: id,
+                              permission: permission.permission,
+                            })
+                          }
+                        >
                           {"- "}
                           {permission.permission}
                         </AuthorityItem>
