@@ -11,7 +11,7 @@ import {
 import { useGetMembersQuery } from "quries/member/member.query";
 import { Student, Teacher } from "types/member/member.type";
 import { useNavigate, useParams } from "react-router-dom";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, memo, SetStateAction } from "react";
 
 interface Props {
   keyword: string;
@@ -62,6 +62,7 @@ const AuthorityMemberList = ({ keyword, classification, setOpen }: Props) => {
               .map((student: Student) => {
                 return (
                   <div
+                    key={student.id}
                     style={{ width: 720 }}
                     onClick={() => {
                       navigate(`/authority/${student.member.id}`);
@@ -115,6 +116,7 @@ const AuthorityMemberList = ({ keyword, classification, setOpen }: Props) => {
                 .map((teacher: Teacher) => {
                   return (
                     <div
+                      key={teacher.id}
                       style={{ width: 720 }}
                       onClick={() => {
                         navigate(`/authority/${teacher.member.id}`);
@@ -160,4 +162,4 @@ const AuthorityMemberList = ({ keyword, classification, setOpen }: Props) => {
   );
 };
 
-export default AuthorityMemberList;
+export default memo(AuthorityMemberList);

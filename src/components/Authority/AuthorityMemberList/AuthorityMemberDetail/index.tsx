@@ -1,6 +1,6 @@
 import { useGetMemberById } from "quries/member/member.query";
 import { useGetPermissionByMemberIdQuery } from "quries/authority/permission.query";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, memo, SetStateAction } from "react";
 import { useParams } from "react-router-dom";
 import {
   AuthorityAddSubButton,
@@ -14,6 +14,8 @@ import {
 } from "./style";
 import useAssignPermission from "hooks/authority/useAssignPermission";
 import useDeletePermission from "hooks/authority/useDeletePermission";
+import useAssignAllPermission from "hooks/authority/useAssignAllPermission";
+import useDeleteAllPermission from "hooks/authority/useDeleteAllPermission";
 
 interface Props {
   open: boolean;
@@ -35,8 +37,10 @@ const AuthorityMemberDetail = ({ open }: Props) => {
 
   const { data: memberData } = useGetMemberById({ id: id || "" });
 
-  const { onAssignPermission, onAllAssignPermission } = useAssignPermission();
-  const { onDeletePermission, onAllDeletePermission } = useDeletePermission();
+  const { onAssignPermission } = useAssignPermission();
+  const { onDeletePermission } = useDeletePermission();
+  const { onAssignAllPermission } = useAssignAllPermission();
+  const { onDeleteAllPermission } = useDeleteAllPermission();
 
   return (
     <>
@@ -59,9 +63,8 @@ const AuthorityMemberDetail = ({ open }: Props) => {
               }
               onClick={() => {
                 id &&
-                  onAllDeletePermission({
+                  onDeleteAllPermission({
                     memberId: id,
-                    permissions: existedPermissionArray,
                   });
               }}
             >
@@ -107,9 +110,8 @@ const AuthorityMemberDetail = ({ open }: Props) => {
               }
               onClick={() => {
                 id &&
-                  onAllAssignPermission({
+                  onAssignAllPermission({
                     memberId: id,
-                    permissions: restedPermissionArray,
                   });
               }}
             >
@@ -123,6 +125,7 @@ const AuthorityMemberDetail = ({ open }: Props) => {
                 ? allAuthorityData?.data.map((permission) => {
                     return (
                       <AuthorityItem
+                        key={permission.id}
                         onClick={() =>
                           id &&
                           onAssignPermission({
@@ -167,4 +170,4 @@ const AuthorityMemberDetail = ({ open }: Props) => {
   );
 };
 
-export default AuthorityMemberDetail;
+export default memo(AuthorityMemberDetail);

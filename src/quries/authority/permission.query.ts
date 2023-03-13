@@ -2,8 +2,10 @@ import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import AuthorityRepository from "repositories/authority/AuthorityRepository";
 import {
+  deleteAllPermissionParam,
   deletePermissionParam,
   getPermissionByMemberParam,
+  postAssignAllPermissionParam,
   postAssignPermissionParam,
 } from "repositories/authority/authorityRepository.param";
 import { getPermissionResponse } from "repositories/authority/authorityRepository.res";
@@ -50,10 +52,24 @@ export const usePostAssignPermissionMutation = () => {
   return mutation;
 };
 
+export const usePostAssignAllPermissionMutation = () => {
+  const mutation = useMutation(({ memberId }: postAssignAllPermissionParam) =>
+    AuthorityRepository.postAssignAllPermission({ memberId })
+  );
+  return mutation;
+};
+
 export const useDeletePermissionMutation = () => {
   const mutation = useMutation(
     ({ memberId, permission }: deletePermissionParam) =>
       AuthorityRepository.deletePermission({ memberId, permission })
+  );
+  return mutation;
+};
+
+export const useDeleteAllPermissionMutation = () => {
+  const mutation = useMutation(({ memberId }: deleteAllPermissionParam) =>
+    AuthorityRepository.deleteAllPermission({ memberId })
   );
   return mutation;
 };
