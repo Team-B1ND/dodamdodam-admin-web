@@ -47,10 +47,7 @@ const AuthorityMemberDetail = ({ open }: Props) => {
       {open && (
         <PermissionDetailContainer>
           <PermissionOwnerTitle>
-            <>
-              {memberData && memberData.data.name}
-              {" 님의 정보"}
-            </>
+            <>{`${memberData?.data.name || ""} 님의 정보`}</>
           </PermissionOwnerTitle>
           <PermissionSubtitleWrap>
             <PermissionSubtitle>부여 된 권한</PermissionSubtitle>
@@ -58,8 +55,6 @@ const AuthorityMemberDetail = ({ open }: Props) => {
               isDisabled={
                 memberPermissions?.data === undefined ||
                 memberPermissions?.data.length < 1
-                  ? true
-                  : false
               }
               onClick={() => {
                 id &&

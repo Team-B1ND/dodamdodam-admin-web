@@ -1,6 +1,7 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useDeleteAllPermissionMutation } from "quries/authority/permission.query";
 import { useQueryClient } from "react-query";
+import { useParams } from "react-router-dom";
 import { deleteAllPermissionParam } from "repositories/authority/authorityRepository.param";
 
 const useDeleteAllPermission = () => {
