@@ -1,5 +1,8 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import { useDeleteAllPermissionMutation } from "quries/authority/permission.query";
+import {
+  useDeleteAllPermissionMutation,
+  useGetPermissionByMemberIdQuery,
+} from "quries/authority/permission.query";
 import { useQueryClient } from "react-query";
 import { useParams } from "react-router-dom";
 import { deleteAllPermissionParam } from "repositories/authority/authorityRepository.param";
@@ -7,9 +10,29 @@ import { deleteAllPermissionParam } from "repositories/authority/authorityReposi
 const useDeleteAllPermission = () => {
   const queryClient = useQueryClient();
 
+  const { id } = useParams();
+
   const deleteAllPermissionMutation = useDeleteAllPermissionMutation();
 
+  const { data: memberPermissions } = useGetPermissionByMemberIdQuery({
+    memberId: id || "",
+  });
+  const { data: allPermissions } = useGetPermissionByMemberIdQuery({
+    memberId: "admin",
+  });
+
   const onDeleteAllPermission = ({ memberId }: deleteAllPermissionParam) => {
+    if (!id) {
+      return;
+    }
+
+    if (memberPermissions && allPermissions) {
+      if (memberPermissions.data.length <= 0) {
+        alert("권한이 존재하지 않습니다.");
+        return;
+      }
+    }
+
     if (deleteAllPermissionMutation.isLoading) {
       return;
     }

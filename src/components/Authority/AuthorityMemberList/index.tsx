@@ -11,28 +11,44 @@ import {
 import { useGetMembersQuery } from "quries/member/member.query";
 import { Student, Teacher } from "types/member/member.type";
 import { useNavigate, useParams } from "react-router-dom";
-import { Dispatch, memo, SetStateAction } from "react";
+import { memo, useMemo } from "react";
 
 interface Props {
   keyword: string;
   classification: string;
-  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const AuthorityMemberList = ({ keyword, classification, setOpen }: Props) => {
+const AuthorityMemberList = ({ keyword, classification }: Props) => {
   const { data: serverMembersData } = useGetMembersQuery({ suspense: true });
 
-  const studentsData: Student[] | undefined =
-    serverMembersData?.data.students.sort(
+  const memberData = useMemo(() => {
+    return serverMembersData?.data;
+  }, [serverMembersData]);
+
+  const studentsData: Student[] | undefined = memberData?.students
+    .sort(
       (a: Student, b: Student) =>
         a.classroom.grade - b.classroom.grade ||
         a.classroom.room - b.classroom.room ||
         a.number - b.number
-    );
-  const teachersData: Teacher[] | undefined =
-    serverMembersData?.data.teachers.sort(
-      (a: Teacher, b: Teacher) => b.id - a.id
-    );
+    )
+    .filter((student: Student) => {
+      return (
+        student.member.email.indexOf(keyword) > -1 ||
+        student.member.id.indexOf(keyword) > -1 ||
+        student.member.name.indexOf(keyword) > -1
+      );
+    });
+
+  const teachersData: Teacher[] | undefined = memberData?.teachers
+    .sort((a: Teacher, b: Teacher) => b.id - a.id)
+    .filter((teacher: Teacher) => {
+      return (
+        teacher.member.email.indexOf(keyword) > -1 ||
+        teacher.member.id.indexOf(keyword) > -1 ||
+        teacher.member.name.indexOf(keyword) > -1
+      );
+    });
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -51,110 +67,80 @@ const AuthorityMemberList = ({ keyword, classification, setOpen }: Props) => {
                         student.classroom.grade ===
                         Number(classification.slice(0, 1))
                     );
-            })()
-              ?.filter((student: Student) => {
-                return (
-                  student.member.email.indexOf(keyword) > -1 ||
-                  student.member.id.indexOf(keyword) > -1 ||
-                  student.member.name.indexOf(keyword) > -1
-                );
-              })
-              .map((student: Student) => {
+            })()?.map((student: Student) => {
+              return (
+                <div
+                  key={student.id}
+                  style={{ width: 720 }}
+                  onClick={() => {
+                    navigate(`/authority/${student.member.id}`);
+                  }}
+                >
+                  <CTR
+                    key={student.id}
+                    customStyle={{
+                      backgroundColor:
+                        id === student.member.id ? "#eeeeee" : "white",
+                    }}
+                  >
+                    <CTD customStyle={{ width: 120 }}>
+                      <CTDImageWrap>
+                        <MemberProfileImgWrap>
+                          <MemberProfileImg
+                            src={student.member.profileImage || DODAM_PROFILE}
+                          />
+                        </MemberProfileImgWrap>
+                      </CTDImageWrap>
+                    </CTD>
+                    <CTD customStyle={{ width: 200 }}>
+                      {student.member.name}
+                    </CTD>
+                    <CTD customStyle={{ width: 150 }}>
+                      {student.classroom.grade}학년 {student.classroom.room}반{" "}
+                      {student.number}번
+                    </CTD>
+                    <CTD customStyle={{ width: 250 }}>{student.member.id}</CTD>
+                  </CTR>
+                </div>
+              );
+            })}
+            {(classification === "전체보기" || classification === "선생님") &&
+              teachersData?.map((teacher: Teacher) => {
                 return (
                   <div
-                    key={student.id}
+                    key={teacher.id}
                     style={{ width: 720 }}
                     onClick={() => {
-                      navigate(`/authority/${student.member.id}`);
-                      setOpen(true);
+                      navigate(`/authority/${teacher.member.id}`);
                     }}
                   >
                     <CTR
-                      key={student.id}
-                      customStyle={
-                        id === student.member.id
-                          ? { backgroundColor: "#eeeeee" }
-                          : { backgroundColor: "white" }
-                      }
+                      key={teacher.id}
+                      customStyle={{
+                        backgroundColor:
+                          id === teacher.member.id ? "#eeeeee" : "white",
+                      }}
                     >
                       <CTD customStyle={{ width: 120 }}>
                         <CTDImageWrap>
                           <MemberProfileImgWrap>
                             <MemberProfileImg
-                              src={
-                                student.member.profileImage
-                                  ? student.member.profileImage
-                                  : DODAM_PROFILE
-                              }
+                              src={teacher.member.profileImage || DODAM_PROFILE}
                             />
                           </MemberProfileImgWrap>
                         </CTDImageWrap>
                       </CTD>
                       <CTD customStyle={{ width: 200 }}>
-                        {student.member.name}
+                        {teacher.member.name}
                       </CTD>
-                      <CTD customStyle={{ width: 150 }}>
-                        {student.classroom.grade}학년 {student.classroom.room}반{" "}
-                        {student.number}번
-                      </CTD>
+                      <CTD customStyle={{ width: 150 }}>선생님</CTD>
                       <CTD customStyle={{ width: 250 }}>
-                        {student.member.id}
+                        {teacher.member.id}
                       </CTD>
                     </CTR>
                   </div>
                 );
               })}
-            {(classification === "전체보기" || classification === "선생님") &&
-              teachersData
-                ?.filter((teacher: Teacher) => {
-                  return (
-                    teacher.member.email.indexOf(keyword) > -1 ||
-                    teacher.member.id.indexOf(keyword) > -1 ||
-                    teacher.member.name.indexOf(keyword) > -1
-                  );
-                })
-                .map((teacher: Teacher) => {
-                  return (
-                    <div
-                      key={teacher.id}
-                      style={{ width: 720 }}
-                      onClick={() => {
-                        navigate(`/authority/${teacher.member.id}`);
-                        setOpen(true);
-                      }}
-                    >
-                      <CTR
-                        key={teacher.id}
-                        customStyle={
-                          id === teacher.member.id
-                            ? { backgroundColor: "#eeeeee" }
-                            : { backgroundColor: "white" }
-                        }
-                      >
-                        <CTD customStyle={{ width: 120 }}>
-                          <CTDImageWrap>
-                            <MemberProfileImgWrap>
-                              <MemberProfileImg
-                                src={
-                                  teacher.member.profileImage
-                                    ? teacher.member.profileImage
-                                    : DODAM_PROFILE
-                                }
-                              />
-                            </MemberProfileImgWrap>
-                          </CTDImageWrap>
-                        </CTD>
-                        <CTD customStyle={{ width: 200 }}>
-                          {teacher.member.name}
-                        </CTD>
-                        <CTD customStyle={{ width: 150 }}>선생님</CTD>
-                        <CTD customStyle={{ width: 250 }}>
-                          {teacher.member.id}
-                        </CTD>
-                      </CTR>
-                    </div>
-                  );
-                })}
           </>
         </CTBody>
       </CTable>

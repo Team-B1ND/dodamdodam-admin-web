@@ -31,20 +31,12 @@ export const PermissionSubtitle = styled.div`
   font-size: 13px;
 `;
 
-export const AuthorityAddSubButton = styled.div<{ isDisabled: boolean }>`
+export const AuthorityAddSubButton = styled.div`
   padding: 5px;
   color: white;
   border-radius: 5px;
   cursor: pointer;
-  ${({ isDisabled }) =>
-    isDisabled
-      ? css`
-          background-color: ${palette.gray[200]};
-          pointer-events: none;
-        `
-      : css`
-          background-color: ${palette.main};
-        `}
+  background-color: ${palette.main};
 `;
 
 export const MemberAuthroityListWrap = styled.div`

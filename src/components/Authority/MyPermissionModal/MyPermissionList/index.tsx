@@ -11,8 +11,7 @@ const MyPermissionList = () => {
       {myPermissionData?.data.map((permission: Permission) => {
         return (
           <MyPermissionLi key={permission.id}>
-            {"- "}
-            {permission.permission}
+            {`- ${permission.permission}`}
           </MyPermissionLi>
         );
       })}

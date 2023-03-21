@@ -1,6 +1,6 @@
 import { useGetMemberById } from "quries/member/member.query";
 import { useGetPermissionByMemberIdQuery } from "quries/authority/permission.query";
-import { Dispatch, memo, SetStateAction } from "react";
+import { Dispatch, memo, SetStateAction, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import {
   AuthorityAddSubButton,
@@ -17,12 +17,7 @@ import useDeletePermission from "hooks/authority/useDeletePermission";
 import useAssignAllPermission from "hooks/authority/useAssignAllPermission";
 import useDeleteAllPermission from "hooks/authority/useDeleteAllPermission";
 
-interface Props {
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
-}
-
-const AuthorityMemberDetail = ({ open }: Props) => {
+const AuthorityMemberDetail = () => {
   const { id } = useParams();
 
   const { data: memberPermissions } = useGetPermissionByMemberIdQuery({
@@ -31,6 +26,10 @@ const AuthorityMemberDetail = ({ open }: Props) => {
   const { data: allAuthorityData } = useGetPermissionByMemberIdQuery({
     memberId: "admin",
   });
+
+  const memberPermissionsData = useMemo(() => {
+    return memberPermissions?.data;
+  }, [memberPermissions]);
 
   const existedPermissionArray = new Array<string>();
   const restedPermissionArray = new Array<string>();
@@ -44,7 +43,7 @@ const AuthorityMemberDetail = ({ open }: Props) => {
 
   return (
     <>
-      {open && (
+      {id && (
         <PermissionDetailContainer>
           <PermissionOwnerTitle>
             <>{`${memberData?.data.name || ""} 님의 정보`}</>
@@ -52,10 +51,6 @@ const AuthorityMemberDetail = ({ open }: Props) => {
           <PermissionSubtitleWrap>
             <PermissionSubtitle>부여 된 권한</PermissionSubtitle>
             <AuthorityAddSubButton
-              isDisabled={
-                memberPermissions?.data === undefined ||
-                memberPermissions?.data.length < 1
-              }
               onClick={() => {
                 id &&
                   onDeleteAllPermission({
@@ -67,14 +62,14 @@ const AuthorityMemberDetail = ({ open }: Props) => {
             </AuthorityAddSubButton>
           </PermissionSubtitleWrap>
           <div>
-            {memberPermissions?.data === undefined ||
-            memberPermissions?.data.length < 1 ? (
+            {memberPermissionsData === undefined ||
+            memberPermissionsData.length < 1 ? (
               <AuthorityIsNotExistWrap>
                 부여 된 권한이 없습니다.
               </AuthorityIsNotExistWrap>
             ) : (
               <AuthorityIsExistWrap>
-                {memberPermissions.data.map((permission) => {
+                {memberPermissionsData.map((permission) => {
                   existedPermissionArray.push(permission.permission);
                   return (
                     <AuthorityItem
@@ -87,8 +82,7 @@ const AuthorityMemberDetail = ({ open }: Props) => {
                           });
                       }}
                     >
-                      {"- "}
-                      {permission.permission}
+                      {`- ${permission.permission}`}
                     </AuthorityItem>
                   );
                 })}
@@ -98,11 +92,6 @@ const AuthorityMemberDetail = ({ open }: Props) => {
           <PermissionSubtitleWrap>
             <PermissionSubtitle>부여 가능한 권한</PermissionSubtitle>
             <AuthorityAddSubButton
-              isDisabled={
-                allAuthorityData !== undefined &&
-                memberPermissions !== undefined &&
-                memberPermissions?.data.length >= allAuthorityData?.data.length
-              }
               onClick={() => {
                 id &&
                   onAssignAllPermission({
@@ -115,8 +104,8 @@ const AuthorityMemberDetail = ({ open }: Props) => {
           </PermissionSubtitleWrap>
           <div>
             <AuthorityIsExistWrap>
-              {memberPermissions?.data === undefined ||
-              memberPermissions?.data.length < 1
+              {memberPermissionsData === undefined ||
+              memberPermissionsData.length < 1
                 ? allAuthorityData?.data.map((permission) => {
                     return (
                       <AuthorityItem
@@ -150,8 +139,7 @@ const AuthorityMemberDetail = ({ open }: Props) => {
                             })
                           }
                         >
-                          {"- "}
-                          {permission.permission}
+                          {`- ${permission.permission}`}
                         </AuthorityItem>
                       );
                     }

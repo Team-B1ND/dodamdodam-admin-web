@@ -2,10 +2,13 @@ import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { usePostAssignPermissionMutation } from "quries/authority/permission.query";
 import { useEffect } from "react";
 import { useQueryClient } from "react-query";
+import { useParams } from "react-router-dom";
 import { postAssignPermissionParam } from "repositories/authority/authorityRepository.param";
 
 const useAssignPermission = () => {
   const queryClient = useQueryClient();
+
+  const { id } = useParams();
 
   const assignPermissionMutation = usePostAssignPermissionMutation();
 
@@ -13,6 +16,10 @@ const useAssignPermission = () => {
     memberId,
     permission,
   }: postAssignPermissionParam) => {
+    if (!id) {
+      return;
+    }
+
     if (assignPermissionMutation.isLoading) {
       return;
     }

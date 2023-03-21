@@ -60,11 +60,7 @@ const MemberList = ({ keyword, classification }: Props) => {
                       <CTDImageWrap>
                         <MemberProfileImgWrap>
                           <MemberProfileImg
-                            src={
-                              student.member.profileImage
-                                ? student.member.profileImage
-                                : DODAM_PROFILE
-                            }
+                            src={student.member.profileImage || DODAM_PROFILE}
                           />
                         </MemberProfileImgWrap>
                       </CTDImageWrap>

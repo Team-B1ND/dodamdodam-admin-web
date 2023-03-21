@@ -33,11 +33,11 @@ export const useGetMemberById = (
     getMemberByIdResponse,
     AxiosError,
     getMemberByIdResponse,
-    ["member/search/id", string]
+    ["member/getMember", string]
   >
 ) =>
   useQuery(
-    ["member/search/id", id],
+    ["member/getMember", id],
     () => MemberRepository.getMemberById({ id }),
     {
       ...options,
@@ -53,11 +53,11 @@ export const useGetTeacherById = (
     getTeacherByIdResponse,
     AxiosError,
     getTeacherByIdResponse,
-    ["member/teacher/id", number]
+    ["member/getTeacher", number]
   >
 ) =>
   useQuery(
-    ["member/teacher/id", id],
+    ["member/getTeacher", id],
     () => MemberRepository.getTeacherById({ id }),
     {
       ...options,

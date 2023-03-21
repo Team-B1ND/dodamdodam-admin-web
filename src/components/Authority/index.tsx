@@ -8,7 +8,7 @@ import SearchBar from "components/Common/SearchBar";
 import SectionHeader from "components/Common/SectionHeader";
 import Select from "components/Common/Select";
 import { Suspense, useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import AuthorityMemberList from "./AuthorityMemberList";
 import AuthorityMemberDetail from "./AuthorityMemberList/AuthorityMemberDetail";
 import MyPermissionModal from "./MyPermissionModal";
@@ -23,16 +23,6 @@ const Authority = () => {
   const [classification, setClassification] = useState<string>("전체보기");
   const [keyword, setKeyword] = useState<string>("");
   const [checkMyPermission, setCheckMyPermission] = useState<boolean>(false);
-  const [startDetail, setStartDetail] = useState<boolean>(false);
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    if (pathname.length > "/authority/".length) {
-      setStartDetail(true);
-    } else if (pathname.length === "/authority".length) {
-      setStartDetail(false);
-    }
-  }, [startDetail]);
 
   return (
     <>
@@ -76,15 +66,11 @@ const Authority = () => {
                 <AuthorityMemberList
                   keyword={keyword}
                   classification={classification}
-                  setOpen={setStartDetail}
                 />
               </Suspense>
             </ErrorBoundary>
           </MemberTableWrap>
-          <AuthorityMemberDetail
-            open={startDetail}
-            setOpen={setStartDetail}
-          ></AuthorityMemberDetail>
+          <AuthorityMemberDetail />
         </AuthorityBody>
         <MyPermissionModal
           open={checkMyPermission}

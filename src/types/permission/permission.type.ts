@@ -13,3 +13,7 @@ export interface StudentForPermission {
   number: number;
   phone: string;
 }
+
+export interface PermissionHookProps {
+  id: string;
+}
