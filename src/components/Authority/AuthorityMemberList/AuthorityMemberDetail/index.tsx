@@ -1,6 +1,6 @@
 import { useGetMemberById } from "quries/member/member.query";
 import { useGetPermissionByMemberIdQuery } from "quries/authority/permission.query";
-import { Dispatch, memo, SetStateAction, useMemo } from "react";
+import { memo, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import {
   AuthorityAddSubButton,

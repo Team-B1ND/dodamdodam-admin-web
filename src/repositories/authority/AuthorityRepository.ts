@@ -1,10 +1,4 @@
-import axios from "axios";
-import {
-  ACCESS_TOKEN_KEY,
-  REQUEST_TOKEN_KEY,
-} from "constants/token/token.constant";
 import { customAxios } from "lib/axios/customAxios";
-import token from "lib/token";
 import {
   deleteAllPermissionParam,
   deletePermissionParam,
