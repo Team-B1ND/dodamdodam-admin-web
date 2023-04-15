@@ -33,6 +33,7 @@ const Router = () => {
       <Route path="/placetype" element={<AuthPlaceTypePage />} />
       <Route path="/placetype/:id" element={<AuthPlaceTypePage />} />
       <Route path="/authority" element={<AuthAuthorityPage />} />
+      <Route path="/authority/:id" element={<AuthAuthorityPage />} />
       <Route path="/member" element={<AuthMemberPage />} />
       <Route path="/numberSetting" element={<AuthNumberSettingPage />} />
     </Routes>

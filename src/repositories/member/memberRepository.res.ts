@@ -1,5 +1,7 @@
+import { StudentForPermission } from "types/permission/permission.type";
 import {
   Admin,
+  Member,
   Parent,
   Student,
   Teacher,
@@ -16,4 +18,12 @@ export interface getMembersResponse extends Response {
 
 export interface getMyMemberResponse extends Response {
   data: Admin;
+}
+
+export interface getMemberByIdResponse extends Response {
+  data: Member;
+}
+
+export interface getTeacherByIdResponse extends Response {
+  data: Member;
 }

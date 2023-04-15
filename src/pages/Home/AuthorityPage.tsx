@@ -1,5 +1,7 @@
+import Authority from "components/Authority";
+
 const AuthorityPage = () => {
-  return <div>authority</div>;
+  return <Authority />;
 };
 
 export default AuthorityPage;

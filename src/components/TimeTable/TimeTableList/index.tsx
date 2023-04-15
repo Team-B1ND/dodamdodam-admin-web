@@ -8,6 +8,7 @@ import CTBody from "../../Common/CTable/CTBody";
 import CTD from "../../Common/CTable/CTD";
 import CTR from "../../Common/CTable/CTR";
 import { TimeTableListButtonWrap } from "./style";
+import { TimeTables } from "../../../types/timeTable/timeTable";
 
 interface Props {
   setModifyModalIsOpen: Dispatch<SetStateAction<boolean>>;
@@ -22,7 +23,7 @@ const TimeTableList = ({ setModifyModalIsOpen }: Props) => {
     <CTableScrollWrapper customStyle={{ width: 800, height: 568 }}>
       <CTable>
         <CTBody>
-          {timeTableData?.data.map((item) => (
+          {timeTableData?.data.map((item: TimeTables) => (
             <CTR>
               <CTD customStyle={{ minWidth: 200 }}>{item.name}</CTD>
               <CTD customStyle={{ minWidth: 200 }}>{item.startTime}</CTD>

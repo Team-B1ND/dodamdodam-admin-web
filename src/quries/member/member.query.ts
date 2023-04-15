@@ -1,10 +1,16 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
 import MemberRepository from "../../repositories/member/MemberRepository";
-import { deleteMemberParam } from "../../repositories/member/memberRepository.param";
 import {
+  deleteMemberParam,
+  getMemberByIdParam,
+  getTeacherByIdParam,
+} from "../../repositories/member/memberRepository.param";
+import {
+  getMemberByIdResponse,
   getMembersResponse,
   getMyMemberResponse,
+  getTeacherByIdResponse,
 } from "../../repositories/member/memberRepository.res";
 
 export const useGetMembersQuery = (
@@ -20,6 +26,46 @@ export const useGetMembersQuery = (
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 60,
   });
+
+export const useGetMemberById = (
+  { id }: getMemberByIdParam,
+  options?: UseQueryOptions<
+    getMemberByIdResponse,
+    AxiosError,
+    getMemberByIdResponse,
+    ["member/getMember", string]
+  >
+) =>
+  useQuery(
+    ["member/getMember", id],
+    () => MemberRepository.getMemberById({ id }),
+    {
+      ...options,
+      staleTime: 1000 * 60 * 5,
+      cacheTime: 1000 * 60 * 60,
+      enabled: !!id,
+    }
+  );
+
+export const useGetTeacherById = (
+  { id }: getTeacherByIdParam,
+  options?: UseQueryOptions<
+    getTeacherByIdResponse,
+    AxiosError,
+    getTeacherByIdResponse,
+    ["member/getTeacher", number]
+  >
+) =>
+  useQuery(
+    ["member/getTeacher", id],
+    () => MemberRepository.getTeacherById({ id }),
+    {
+      ...options,
+      staleTime: 1000 * 60 * 5,
+      cacheTime: 1000 * 60 * 60,
+      enabled: !!id,
+    }
+  );
 
 export const useGetMyMemberQuery = (
   options?: UseQueryOptions<
