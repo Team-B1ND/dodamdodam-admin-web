@@ -29,13 +29,12 @@ const Router = () => {
       <Route path="/classroom" element={<AuthClassroomPage />} />
       <Route path="/classroom/:id" element={<AuthClassroomPage />} />
       <Route path="/place" element={<AuthPlacePage />} />
-      <Route path="/place/id" element={<AuthPlacePage />} />
+      <Route path="/place/:id" element={<AuthPlacePage />} />
       <Route path="/placetype" element={<AuthPlaceTypePage />} />
       <Route path="/placetype/:id" element={<AuthPlaceTypePage />} />
       <Route path="/authority" element={<AuthAuthorityPage />} />
       <Route path="/member" element={<AuthMemberPage />} />
       <Route path="/numberSetting" element={<AuthNumberSettingPage />} />
-
     </Routes>
   );
 };
