@@ -1,13 +1,14 @@
 import { useGetMembersQuery } from "../../../quries/member/member.query";
 import CTD from "../../Common/CTable/CTD";
 import CTR from "../../Common/CTable/CTR";
-import DEFAULT_PROFILE from "../../../assets/defaultProfile/defaultProfile.svg";
 import DODAM_PROFILE from "../../../assets/defaultProfile/dodamProfile.svg";
 import Button from "../../Common/Button";
 import { MemberProfileImg, MemberProfileImgWrap } from "./style";
 import CTable, { CTableScrollWrapper } from "../../Common/CTable";
 import CTBody from "../../Common/CTable/CTBody";
 import useDeleteMember from "../../../hooks/member/useDeleteMember";
+import { CTDImageWrap } from "components/Common/CTable/CTD/style";
+import { Student, Teacher } from "types/member/member.type";
 
 interface Props {
   keyword: string;
@@ -20,13 +21,14 @@ const MemberList = ({ keyword, classification }: Props) => {
   const { onDeleteMember } = useDeleteMember();
 
   const studentsData = serverMembersData?.data.students.sort(
-    (a, b) =>
+    (a: Student, b: Student) =>
       a.classroom.grade - b.classroom.grade ||
       a.classroom.room - b.classroom.room ||
       a.number - b.number
   );
+
   const teachersData = serverMembersData?.data.teachers.sort(
-    (a, b) => b.id - a.id
+    (a: Teacher, b: Teacher) => b.id - a.id
   );
 
   return (
@@ -37,33 +39,31 @@ const MemberList = ({ keyword, classification }: Props) => {
             {(() => {
               if (classification !== "선생님")
                 return classification === "전체보기"
-                  ? studentsData?.map((student) => student)
+                  ? studentsData?.map((student: Student) => student)
                   : studentsData?.filter(
-                      (student) =>
+                      (student: Student) =>
                         student.classroom.grade ===
                         Number(classification.slice(0, 1))
                     );
             })()
-              ?.filter((student) => {
+              ?.filter((student: Student) => {
                 return (
                   student.member.email.indexOf(keyword) > -1 ||
                   student.member.id.indexOf(keyword) > -1 ||
                   student.member.name.indexOf(keyword) > -1
                 );
               })
-              .map((student) => {
+              .map((student: Student) => {
                 return (
-                  <CTR>
-                    <CTD customStyle={{ width: "120px", textAlign: "center" }}>
-                      <MemberProfileImgWrap>
-                        <MemberProfileImg
-                          src={
-                            student.member.profileImage
-                              ? student.member.profileImage
-                              : DODAM_PROFILE
-                          }
-                        />
-                      </MemberProfileImgWrap>
+                  <CTR key={student.id}>
+                    <CTD customStyle={{ width: 120 }}>
+                      <CTDImageWrap>
+                        <MemberProfileImgWrap>
+                          <MemberProfileImg
+                            src={student.member.profileImage || DODAM_PROFILE}
+                          />
+                        </MemberProfileImgWrap>
+                      </CTDImageWrap>
                     </CTD>
                     <CTD customStyle={{ width: "19%", textAlign: "left" }}>
                       {student.member.name}
@@ -91,28 +91,28 @@ const MemberList = ({ keyword, classification }: Props) => {
               })}
             {(classification === "전체보기" || classification === "선생님") &&
               teachersData
-                ?.filter((student) => {
+                ?.filter((teacher: Teacher) => {
                   return (
-                    student.member.email.indexOf(keyword) > -1 ||
-                    student.member.id.indexOf(keyword) > -1 ||
-                    student.member.name.indexOf(keyword) > -1
+                    teacher.member.email.indexOf(keyword) > -1 ||
+                    teacher.member.id.indexOf(keyword) > -1 ||
+                    teacher.member.name.indexOf(keyword) > -1
                   );
                 })
-                .map((teacher) => {
+                .map((teacher: Teacher) => {
                   return (
-                    <CTR>
-                      <CTD
-                        customStyle={{ width: "120px", textAlign: "center" }}
-                      >
-                        <MemberProfileImgWrap>
-                          <MemberProfileImg
-                            src={
-                              teacher.member.profileImage
-                                ? teacher.member.profileImage
-                                : DODAM_PROFILE
-                            }
-                          />
-                        </MemberProfileImgWrap>
+                    <CTR key={teacher.id}>
+                      <CTD customStyle={{ width: 120 }}>
+                        <CTDImageWrap>
+                          <MemberProfileImgWrap>
+                            <MemberProfileImg
+                              src={
+                                teacher.member.profileImage
+                                  ? teacher.member.profileImage
+                                  : DODAM_PROFILE
+                              }
+                            />
+                          </MemberProfileImgWrap>
+                        </CTDImageWrap>
                       </CTD>
                       <CTD customStyle={{ width: "19%", textAlign: "left" }}>
                         {teacher.member.name}

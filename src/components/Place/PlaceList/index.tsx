@@ -26,7 +26,7 @@ const PlaceList = ({ keyword }: Props) => {
           {serverPlacesData?.data.map(
             (place) =>
               place.name.indexOf(keyword) > -1 && (
-                <CTR>
+                <CTR key={place.id}>
                   <CTD customStyle={{ minWidth: 224 }}>{place.type.name}</CTD>
                   <CTD customStyle={{ minWidth: 214 }}>{place.name}</CTD>
                   <CTD customStyle={{ width: "100%", textAlign: "right" }}>

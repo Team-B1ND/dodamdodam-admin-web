@@ -4,6 +4,7 @@ export const MemberContainer = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
+  padding: 16px 48px;
   flex-direction: column;
 `;
 

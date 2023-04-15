@@ -22,7 +22,7 @@ const PlaceTypeList = () => {
       <CTable customStyle={{ width: 664 }}>
         <CTBody>
           {serverPlaceTypesData?.data.map((placeType) => (
-            <CTR>
+            <CTR key={placeType.id}>
               <CTD customStyle={{ width: "50%" }}>{placeType.name}</CTD>
               <CTD customStyle={{ width: "50%" }}>
                 <PlaceTypeListButtonWrap>
