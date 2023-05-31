@@ -8,6 +8,7 @@ import CTBody from "../../Common/CTable/CTBody";
 import CTD from "../../Common/CTable/CTD";
 import CTR from "../../Common/CTable/CTR";
 import { TimeTableListButtonWrap } from "./style";
+
 import { TimeTables } from "../../../types/timeTable/timeTable";
 
 interface Props {

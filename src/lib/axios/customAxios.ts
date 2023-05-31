@@ -21,3 +21,23 @@ customAxios.interceptors.response.use((req) => req, errorResponseInterceptor);
 export const injectCustomAxiosAccessToken = (token: string) => {
   customAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = token;
 };
+
+// // 요청 인터셉터 추가
+// customAxios.interceptors.request.use((config) => {
+//   const accessToken = token.getToken(ACCESS_TOKEN_KEY);
+//   if (accessToken) {
+//     config.headers[REQUEST_TOKEN_KEY] = `Bearer ${accessToken}`;
+//   }
+//   return config;
+// });
+
+// // 응답 인터셉터 추가
+// customAxios.interceptors.response.use(
+//   (response) => response,
+//   errorResponseInterceptor
+// );
+
+// // AccessToken 주입 함수 정의
+// export const injectCustomAxiosAccessToken = (token: string) => {
+//   customAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = `Bearer ${token}`;
+// };
