@@ -16,6 +16,8 @@ const withAuth = (AuthComponent: React.ComponentType) => {
         staleTime: 1000 * 3,
       });
 
+    console.log(serverMyMemberData?.data.position);
+
     const navigate = useNavigate();
 
     const isAuthority =
@@ -26,7 +28,7 @@ const withAuth = (AuthComponent: React.ComponentType) => {
       if (
         !isAuthority ||
         (!serverMyMemberDataIsLoading &&
-          serverMyMemberData?.data.position !== "관리자")
+          serverMyMemberData?.data.position !== "admin")
       ) {
         B1ndToast.showError("토큰이 유효하지 않습니다.");
         navigate("/sign");
