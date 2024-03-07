@@ -19,7 +19,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <RecoilRoot>
         <B1ndToastContainer autoClose={5000} limit={6} />
-        <BrowserRouter>
+        <BrowserRouter basename="/admin">
           <GlobalStyle />
           <Layout>
             <Router />
