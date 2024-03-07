@@ -16,8 +16,6 @@ const withAuth = (AuthComponent: React.ComponentType) => {
         staleTime: 1000 * 3,
       });
 
-    console.log(serverMyMemberData?.data.position);
-
     const navigate = useNavigate();
 
     const isAuthority =

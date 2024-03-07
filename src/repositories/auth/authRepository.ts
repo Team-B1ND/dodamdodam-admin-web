@@ -1,7 +1,12 @@
 import axios from "axios";
 import config from "../../config/config.json";
 import { postLoginParam } from "./authRepository.param";
-import { postLoginResponse } from "./authRepository.res";
+import {
+  postLoginResponse,
+  postRefreshParam,
+  postRefreshResponse,
+} from "./authRepository.res";
+import customAxios from "lib/axios/customAxios";
 
 class AuthRepository {
   public async postLogin({
@@ -12,11 +17,17 @@ class AuthRepository {
       id,
       pw,
     });
-
     return data;
   }
 
   public async postSignup() {}
+
+  public async postRefresh({
+    refreshToken,
+  }: postRefreshParam): Promise<postRefreshResponse> {
+    const { data } = await customAxios.post("/auth/reissue", { refreshToken });
+    return data;
+  }
 }
 
 export default new AuthRepository();

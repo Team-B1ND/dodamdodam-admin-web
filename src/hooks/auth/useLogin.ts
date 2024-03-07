@@ -1,5 +1,4 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import { sha512 } from "js-sha512";
 
 import { FormEvent, useState } from "react";
 import { useQueryClient } from "react-query";
@@ -48,13 +47,13 @@ const useLogin = () => {
 
     const processLoginData = {
       id,
-      pw: sha512(pw),
+      pw,
     };
 
     postLoginMutation.mutateAsync(
       { ...processLoginData },
       {
-        onSuccess: ({ data: { token: accessToken, refreshToken, member } }) => {
+        onSuccess: ({ accessToken, refreshToken, member }) => {
           if (member.role === "ADMIN") {
             token.setToken(ACCESS_TOKEN_KEY, accessToken);
             token.setToken(REFRESH_TOKEN_KEY, refreshToken);
