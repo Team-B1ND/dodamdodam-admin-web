@@ -53,11 +53,10 @@ const useLogin = () => {
     postLoginMutation.mutateAsync(
       { ...processLoginData },
       {
-        onSuccess: ({ accessToken, refreshToken, data: { member } }) => {
-          console.log(member);
-          if (member.role === "ADMIN") {
-            token.setToken(ACCESS_TOKEN_KEY, accessToken);
-            token.setToken(REFRESH_TOKEN_KEY, refreshToken);
+        onSuccess: ({ data }) => {
+          if (data.member.role === "ADMIN") {
+            token.setToken(ACCESS_TOKEN_KEY, data.accessToken);
+            token.setToken(REFRESH_TOKEN_KEY, data.refreshToken);
             queryClient.invalidateQueries("member/getMyMember");
             B1ndToast.showSuccess("로그인 성공");
             navigate("/member");
