@@ -13,7 +13,7 @@ class AuthRepository {
     id,
     pw,
   }: postLoginParam): Promise<postLoginResponse> {
-    const { data } = await axios.post(`${config.SERVER}/auth/login`, {
+    const { data } = await axios.post(`${config.TEST_SERVER}/auth/login`, {
       id,
       pw,
     });
