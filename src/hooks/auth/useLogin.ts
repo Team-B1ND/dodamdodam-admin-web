@@ -53,7 +53,8 @@ const useLogin = () => {
     postLoginMutation.mutateAsync(
       { ...processLoginData },
       {
-        onSuccess: ({ accessToken, refreshToken, member }) => {
+        onSuccess: ({ accessToken, refreshToken, data: { member } }) => {
+          console.log(member);
           if (member.role === "ADMIN") {
             token.setToken(ACCESS_TOKEN_KEY, accessToken);
             token.setToken(REFRESH_TOKEN_KEY, refreshToken);
