@@ -15,31 +15,14 @@ export const customAxios = axios.create({
   },
 });
 
-export const testAxios = axios.create({
-  baseURL: config.TEST_SERVER,
-  headers: {
-    [REQUEST_TOKEN_KEY]: `Bearer ${token.getToken(ACCESS_TOKEN_KEY)}`,
-  },
-});
-
-// customAxios.interceptors.request.use(requestInterceptor);
-// customAxios.interceptors.response.use(
-//   (req: any) => req,
-//   errorResponseInterceptor
-// );
-
-// export const injectCustomAxiosAccessToken = (token: string) => {
-//   customAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = token;
-// };
-
-testAxios.interceptors.request.use(requestInterceptor);
-testAxios.interceptors.response.use(
+customAxios.interceptors.request.use(requestInterceptor);
+customAxios.interceptors.response.use(
   (req: any) => req,
   errorResponseInterceptor
 );
 
 export const injectCustomAxiosAccessToken = (token: string) => {
-  testAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = token;
+  customAxios.defaults.headers.common[REQUEST_TOKEN_KEY] = token;
 };
 
 export default customAxios;

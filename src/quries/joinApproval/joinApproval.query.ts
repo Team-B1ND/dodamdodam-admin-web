@@ -1,18 +1,18 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
-import { postJoinMemberIdParam } from "repositories/joinApproval/joinApproval.param";
+import { patchJoinMemberIdParam } from "repositories/joinApproval/joinApproval.param";
 import { getNotAllowMemberResponse } from "repositories/joinApproval/joinApproval.res";
 import JoinApprovalRepository from "repositories/joinApproval/joinApprovalRepository";
 
 export const usePostMemberJoinApproval = () => {
-  const mutation = useMutation(({ id }: postJoinMemberIdParam) =>
+  const mutation = useMutation(({ id }: patchJoinMemberIdParam) =>
     JoinApprovalRepository.PostMemberJoinApproval({ id })
   );
   return mutation;
 };
 
 export const usePostMemberJoinDeny = () => {
-  const mutation = useMutation(({ id }: postJoinMemberIdParam) =>
+  const mutation = useMutation(({ id }: patchJoinMemberIdParam) =>
     JoinApprovalRepository.PostMemberJoinApprovalDeny({ id })
   );
   return mutation;
@@ -30,8 +30,8 @@ export const useGetNotJoinApprovalAllowMember = (
     "joinApproval/getNotAllowMember",
     () => JoinApprovalRepository.GetNotJoinApprovalAllowMember(),
     {
-      ...options,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
+      ...options,
     }
   );

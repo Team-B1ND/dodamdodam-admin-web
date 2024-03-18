@@ -1,9 +1,8 @@
-import { StudentForPermission } from "types/permission/permission.type";
 import {
-  Admin,
   Member,
   Parent,
   Student,
+  StudentAndTeacher,
   Teacher,
 } from "../../types/member/member.type";
 import { Response } from "../../types/util/util.type";
@@ -16,14 +15,18 @@ export interface getMembersResponse extends Response {
   };
 }
 
+export interface getAllMembersResponse extends Response {
+  data: StudentAndTeacher[];
+}
+
 export interface getMyMemberResponse extends Response {
-  data: Admin;
+  data: StudentAndTeacher;
 }
 
 export interface getMemberByIdResponse extends Response {
   data: Member;
 }
 
-export interface getTeacherByIdResponse extends Response {
-  data: Member;
+export interface getBroadcastClubMemberByIdResponse extends Response {
+  data: boolean;
 }
