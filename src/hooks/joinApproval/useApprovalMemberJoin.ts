@@ -1,9 +1,9 @@
-import { usePostMemberJoinApproval } from "quries/joinApproval/joinApproval.query";
+import { usePatchMemberJoinApproval } from "quries/joinApproval/joinApproval.query";
 import { useQueryClient } from "react-query";
 
 const useApprovalMemberJoin = () => {
   const queryClient = useQueryClient();
-  const memberJoinApproval = usePostMemberJoinApproval();
+  const memberJoinApproval = usePatchMemberJoinApproval();
 
   const approval = (joinAllowMemberId: string) => {
     memberJoinApproval.mutate(
@@ -12,6 +12,7 @@ const useApprovalMemberJoin = () => {
         onSuccess: () => {
           window.alert("승인 성공");
           queryClient.invalidateQueries("joinApproval/getNotAllowMember");
+          queryClient.invalidateQueries("member/getMembers");
         },
         onError: () => {
           window.alert("승인 실패");

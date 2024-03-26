@@ -4,20 +4,19 @@ import MemberRepository from "../../repositories/member/MemberRepository";
 import {
   deleteMemberParam,
   getMemberByIdParam,
-  getTeacherByIdParam,
 } from "../../repositories/member/memberRepository.param";
 import {
   getMemberByIdResponse,
-  getMembersResponse,
+  getAllMembersResponse,
   getMyMemberResponse,
-  getTeacherByIdResponse,
+  getBroadcastClubMemberByIdResponse,
 } from "../../repositories/member/memberRepository.res";
 
 export const useGetMembersQuery = (
   options?: UseQueryOptions<
-    getMembersResponse,
+    getAllMembersResponse,
     AxiosError,
-    getMembersResponse,
+    getAllMembersResponse,
     "member/getMembers"
   >
 ) =>
@@ -47,42 +46,41 @@ export const useGetMemberById = (
     }
   );
 
-export const useGetTeacherById = (
-  { id }: getTeacherByIdParam,
-  options?: UseQueryOptions<
-    getTeacherByIdResponse,
-    AxiosError,
-    getTeacherByIdResponse,
-    ["member/getTeacher", number]
-  >
-) =>
-  useQuery(
-    ["member/getTeacher", id],
-    () => MemberRepository.getTeacherById({ id }),
-    {
-      ...options,
-      staleTime: 1000 * 60 * 5,
-      cacheTime: 1000 * 60 * 60,
-      enabled: !!id,
-    }
-  );
-
 export const useGetMyMemberQuery = (
   options?: UseQueryOptions<
     getMyMemberResponse,
     AxiosError,
     getMyMemberResponse,
-    "member/geMytMember"
+    "member/getMytMember"
   >
 ) =>
-  useQuery("member/geMytMember", () => MemberRepository.getMyMember(), {
+  useQuery("member/getMytMember", () => MemberRepository.getMyMember(), {
     ...options,
   });
 
-export const useDeleteMemberMutation = () => {
-  const mutation = useMutation(({ id }: deleteMemberParam) =>
-    MemberRepository.deleteMember({ id })
+export const useGetBroadcastClubMemberByIdQuery = (
+  { id }: getMemberByIdParam,
+  options?: UseQueryOptions<
+    getBroadcastClubMemberByIdResponse,
+    AxiosError,
+    getBroadcastClubMemberByIdResponse,
+    ["member/getBroadcastClubMemberById", string]
+  >
+) => {
+  return useQuery(
+    ["member/getBroadcastClubMemberById", id],
+    () => MemberRepository.getBroadcastClubMemberById({ id }),
+    {
+      cacheTime: 1000 * 60 * 60,
+      staleTime: 1000 * 60 * 60,
+      ...options,
+    }
   );
+};
 
+export const useGrantBroadcastClubMemberMutation = () => {
+  const mutation = useMutation(({ id }: getMemberByIdParam) =>
+    MemberRepository.grantBroadcastClubMember({ id })
+  );
   return mutation;
 };

@@ -1,19 +1,26 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
-import { postJoinMemberIdParam } from "repositories/joinApproval/joinApproval.param";
+import { patchJoinMemberIdParam } from "repositories/joinApproval/joinApproval.param";
 import { getNotAllowMemberResponse } from "repositories/joinApproval/joinApproval.res";
 import JoinApprovalRepository from "repositories/joinApproval/joinApprovalRepository";
 
-export const usePostMemberJoinApproval = () => {
-  const mutation = useMutation(({ id }: postJoinMemberIdParam) =>
-    JoinApprovalRepository.PostMemberJoinApproval({ id })
+export const usePatchMemberJoinApproval = () => {
+  const mutation = useMutation(({ id }: patchJoinMemberIdParam) =>
+    JoinApprovalRepository.patchMemberJoinApproval({ id })
   );
   return mutation;
 };
 
-export const usePostMemberJoinDeny = () => {
-  const mutation = useMutation(({ id }: postJoinMemberIdParam) =>
-    JoinApprovalRepository.PostMemberJoinApprovalDeny({ id })
+export const useDeleteMemberJoinDeny = () => {
+  const mutation = useMutation(({ id }: patchJoinMemberIdParam) =>
+    JoinApprovalRepository.deleteMemberJoinApprovalDeny({ id })
+  );
+  return mutation;
+};
+
+export const useDeactivateMemberMutation = () => {
+  const mutation = useMutation(({ id }: patchJoinMemberIdParam) =>
+    JoinApprovalRepository.patchDeactivateMember({ id })
   );
   return mutation;
 };
@@ -28,10 +35,10 @@ export const useGetNotJoinApprovalAllowMember = (
 ) =>
   useQuery(
     "joinApproval/getNotAllowMember",
-    () => JoinApprovalRepository.GetNotJoinApprovalAllowMember(),
+    () => JoinApprovalRepository.getNotJoinApprovalAllowMember(),
     {
-      ...options,
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,
+      ...options,
     }
   );

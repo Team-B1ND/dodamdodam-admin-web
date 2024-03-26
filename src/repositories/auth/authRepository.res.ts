@@ -5,6 +5,14 @@ export interface postLoginResponse extends Response {
   data: {
     member: Member;
     refreshToken: string;
-    token: string;
+    accessToken: string;
   };
+}
+
+export interface postRefreshParam {
+  refreshToken: string;
+}
+
+export interface postRefreshResponse extends Response {
+  data: string;
 }

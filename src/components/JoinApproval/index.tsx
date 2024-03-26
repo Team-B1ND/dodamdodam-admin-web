@@ -9,15 +9,13 @@ import CTH from "components/Common/CTable/CTH";
 import NotAllowMemberList from "./NotAllowMemberList";
 
 const JoinApproval = () => {
-
-
   return (
     <JoinApprovalContainer>
       <SectionHeader
         title="가입승인"
         subTitle="가입 신청자가 표시됩니다. 가입신청자는 승인 완료 후 서비스를 이용할 수 있습니다"
-      >
-      </SectionHeader>
+      ></SectionHeader>
+
       <CTable customStyle={{ width: 950 }}>
         <CTHead>
           <CTR>
@@ -31,12 +29,13 @@ const JoinApproval = () => {
           </CTR>
         </CTHead>
       </CTable>
+
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
           <NotAllowMemberList />
         </Suspense>
       </ErrorBoundary>
-    </JoinApprovalContainer >
+    </JoinApprovalContainer>
   );
 };
 

@@ -5,8 +5,8 @@ import {
   REFRESH_TOKEN_KEY,
 } from "constants/token/token.constant";
 import token from "lib/token";
-import TokenRepositoryImpl from "repositories/token/TokenRepositoryImpl";
 import { injectCustomAxiosAccessToken } from "./customAxios";
+import authRepository from "repositories/auth/authRepository";
 
 const errorResponseInterceptor = async (error: AxiosError) => {
   if (error.response) {
@@ -23,7 +23,7 @@ const errorResponseInterceptor = async (error: AxiosError) => {
       status === 401
     ) {
       try {
-        const { data: newAccessToken } = await TokenRepositoryImpl.postRefresh({
+        const { data: newAccessToken } = await authRepository.postRefresh({
           refreshToken: usingRefreshToken,
         });
 

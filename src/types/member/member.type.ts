@@ -1,45 +1,46 @@
-import { ClassRoom } from "../classRoom/classRoom.type";
-
 export interface Member {
-  email: string;
   id: string;
-  readonly joinDate: string;
   name: string;
-  profileImage: null | string;
+  email: string;
   readonly role: MemberRole;
   readonly status: "ACTIVE" | "DEACTIVATED";
+  profileImage: null | string;
+  phone: string;
+  readonly createdAt: string;
+  readonly modifiedAt: string;
 }
 
 export interface Parent {
-  readonly d: number;
+  readonly id: number;
   phone: string;
   student: Student;
 }
 
 export interface Student {
-  classroom: ClassRoom;
-  readonly id: number;
-  member: Member;
+  id: number;
+  name: string;
+  grade: number;
+  room: number;
   number: number;
-  phone: string;
 }
 
 export interface Teacher {
-  readonly id: number;
-  member: Member;
-  phone: string;
-  position: string;
+  id: number;
   tel: string;
+  position: string;
 }
 
 export interface Admin {
-  classroom: ClassRoom;
-  readonly id: number;
-  member: Member;
+  id: number;
+  name: string;
+  grade: number;
+  room: number;
   number: number;
-  phone: string;
-  position: string;
-  tel: string;
+}
+
+export interface StudentAndTeacher extends Member {
+  student: Student | null;
+  teacher: Teacher | null;
 }
 
 export type MemberRole = "STUDENT" | "TEACHER" | "ADMIN";
