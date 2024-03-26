@@ -13,6 +13,7 @@ const NotAllowMemberList = () => {
     useGetNotJoinApprovalAllowMember();
   const { approval } = useMemberJoinApproval();
   const { deny } = useMemberJoinApprovalDeny();
+
   return (
     <CTableScrollWrapper customStyle={{ width: 950, height: 568 }}>
       <CTable>

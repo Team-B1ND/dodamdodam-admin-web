@@ -78,14 +78,6 @@ export const useGetBroadcastClubMemberByIdQuery = (
   );
 };
 
-export const useDeleteMemberMutation = () => {
-  const mutation = useMutation(({ id }: deleteMemberParam) =>
-    MemberRepository.deleteMember({ id })
-  );
-
-  return mutation;
-};
-
 export const useGrantBroadcastClubMemberMutation = () => {
   const mutation = useMutation(({ id }: getMemberByIdParam) =>
     MemberRepository.grantBroadcastClubMember({ id })

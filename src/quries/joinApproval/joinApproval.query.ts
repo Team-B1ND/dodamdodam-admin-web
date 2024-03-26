@@ -4,16 +4,23 @@ import { patchJoinMemberIdParam } from "repositories/joinApproval/joinApproval.p
 import { getNotAllowMemberResponse } from "repositories/joinApproval/joinApproval.res";
 import JoinApprovalRepository from "repositories/joinApproval/joinApprovalRepository";
 
-export const usePostMemberJoinApproval = () => {
+export const usePatchMemberJoinApproval = () => {
   const mutation = useMutation(({ id }: patchJoinMemberIdParam) =>
-    JoinApprovalRepository.PostMemberJoinApproval({ id })
+    JoinApprovalRepository.patchMemberJoinApproval({ id })
   );
   return mutation;
 };
 
-export const usePostMemberJoinDeny = () => {
+export const useDeleteMemberJoinDeny = () => {
   const mutation = useMutation(({ id }: patchJoinMemberIdParam) =>
-    JoinApprovalRepository.PostMemberJoinApprovalDeny({ id })
+    JoinApprovalRepository.deleteMemberJoinApprovalDeny({ id })
+  );
+  return mutation;
+};
+
+export const useDeactivateMemberMutation = () => {
+  const mutation = useMutation(({ id }: patchJoinMemberIdParam) =>
+    JoinApprovalRepository.patchDeactivateMember({ id })
   );
   return mutation;
 };
@@ -28,7 +35,7 @@ export const useGetNotJoinApprovalAllowMember = (
 ) =>
   useQuery(
     "joinApproval/getNotAllowMember",
-    () => JoinApprovalRepository.GetNotJoinApprovalAllowMember(),
+    () => JoinApprovalRepository.getNotJoinApprovalAllowMember(),
     {
       staleTime: 1000 * 60 * 60,
       cacheTime: 1000 * 60 * 60,

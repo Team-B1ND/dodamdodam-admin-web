@@ -36,10 +36,6 @@ class MemberRepository {
     return data;
   }
 
-  public async deleteMember({ id }: deleteMemberParam): Promise<void> {
-    await customAxios.delete(`/members/${id}`);
-  }
-
   public async grantBroadcastClubMember({
     id,
   }: getMemberByIdParam): Promise<void> {

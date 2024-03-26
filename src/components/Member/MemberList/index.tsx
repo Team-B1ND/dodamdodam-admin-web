@@ -6,6 +6,8 @@ import CTable, { CTableScrollWrapper } from "../../Common/CTable";
 import CTBody from "../../Common/CTable/CTBody";
 import { CTDImageWrap } from "components/Common/CTable/CTD/style";
 import { useFilterMember } from "hooks/member/useFilterMember";
+import Button from "components/Common/Button";
+import { useDeactivateMember } from "hooks/member/useDeactivateMember";
 
 interface Props {
   keyword: string;
@@ -14,6 +16,7 @@ interface Props {
 
 const MemberList = ({ keyword, classification }: Props) => {
   const { filteredData } = useFilterMember(keyword, classification);
+  const { handleDeactivateMember } = useDeactivateMember();
 
   return (
     <CTableScrollWrapper customStyle={{ width: "100%", height: 600 }}>
@@ -44,7 +47,14 @@ const MemberList = ({ keyword, classification }: Props) => {
               <CTD customStyle={{ width: "27.5%", textAlign: "left" }}>
                 {member.email}
               </CTD>
-              <CTD>{""}</CTD>
+              <CTD>
+                <Button
+                  type="Primary"
+                  onClick={() => handleDeactivateMember(member.id)}
+                  customStyle={{ borderRadius: "5px", width: "75px" }}
+                  title="비활성화"
+                />
+              </CTD>
             </CTR>
           ))}
         </CTBody>
