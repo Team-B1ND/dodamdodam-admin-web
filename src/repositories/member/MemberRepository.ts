@@ -2,42 +2,44 @@ import { customAxios } from "../../lib/axios/customAxios";
 import {
   deleteMemberParam,
   getMemberByIdParam,
-  getTeacherByIdParam,
 } from "./memberRepository.param";
 import {
-  getMemberByIdResponse,
-  getMembersResponse,
+  getAllMembersResponse,
   getMyMemberResponse,
-  getTeacherByIdResponse,
+  getBroadcastClubMemberByIdResponse,
 } from "./memberRepository.res";
 
 class MemberRepository {
-  public async getMembers(): Promise<getMembersResponse> {
-    const { data } = await customAxios.get(`/members`);
+  public async getMembers(): Promise<getAllMembersResponse> {
+    const { data } = await customAxios.get("/member/all");
     return data;
   }
 
   public async getMyMember(): Promise<getMyMemberResponse> {
-    const { data } = await customAxios.get("/members/my");
+    const { data } = await customAxios.get("/member/my");
     return data;
   }
 
   public async getMemberById({
     id,
-  }: getMemberByIdParam): Promise<getMemberByIdResponse> {
-    const { data } = await customAxios.get(`/members/search/${id}`);
+  }: getMemberByIdParam): Promise<getMyMemberResponse> {
+    const { data } = await customAxios.get(`/member/${id}`);
     return data;
   }
 
-  public async getTeacherById({
+  public async getBroadcastClubMemberById({
     id,
-  }: getTeacherByIdParam): Promise<getTeacherByIdResponse> {
-    const { data } = await customAxios.get(`/members/teacher/${id}`);
+  }: getMemberByIdParam): Promise<getBroadcastClubMemberByIdResponse> {
+    const { data } = await customAxios.get(
+      `/member/check/broadcast-club-member/${id}`
+    );
     return data;
   }
 
-  public async deleteMember({ id }: deleteMemberParam): Promise<void> {
-    await customAxios.delete(`/members/${id}`);
+  public async grantBroadcastClubMember({
+    id,
+  }: getMemberByIdParam): Promise<void> {
+    await customAxios.post("/member/broadcast-club-member", { id });
   }
 }
 

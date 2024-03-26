@@ -1,8 +1,8 @@
 import { ClassRoom } from "types/classRoom/classRoom.type";
-import { Member } from "types/member/member.type";
+import { StudentAndTeacher } from "types/member/member.type";
 
-export interface notAllowMemberParam extends Member {
-  student: Student;
+export interface notAllowMemberParam {
+  data: StudentAndTeacher[];
 }
 
 export interface Student {
@@ -12,6 +12,6 @@ export interface Student {
   phone: string;
 }
 
-export interface postJoinMemberIdParam {
+export interface patchJoinMemberIdParam {
   id: string;
 }
