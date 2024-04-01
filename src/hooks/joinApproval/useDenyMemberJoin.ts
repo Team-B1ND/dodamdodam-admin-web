@@ -1,3 +1,4 @@
+import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useDeleteMemberJoinDeny } from "quries/joinApproval/joinApproval.query";
 import { useQueryClient } from "react-query";
 
@@ -11,12 +12,12 @@ const useDenyMemberJoin = () => {
       { id: joinDenyMemberId },
       {
         onSuccess: () => {
-          window.alert("거절 성공");
+          B1ndToast.showSuccess("거절 성공");
           queryClient.invalidateQueries("joinApproval/getNotAllowMember");
           queryClient.invalidateQueries("member/getMembers");
         },
         onError: () => {
-          window.alert("거절 실패");
+          B1ndToast.showError("거절 실패");
         },
       }
     );
