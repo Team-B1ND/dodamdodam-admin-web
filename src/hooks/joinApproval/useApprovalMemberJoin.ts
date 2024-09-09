@@ -1,23 +1,24 @@
-import { usePatchMemberJoinApproval } from "quries/joinApproval/joinApproval.query";
+import { usePatchMemberStatus } from "quries/joinApproval/joinApproval.query";
 import { useQueryClient } from "react-query";
+import { activeStatus } from "repositories/joinApproval/joinApproval.param";
 
 const useApprovalMemberJoin = () => {
   const queryClient = useQueryClient();
-  const memberJoinApproval = usePatchMemberJoinApproval();
+  const memberJoinApproval = usePatchMemberStatus();
 
-  const approval = (joinAllowMemberId: string) => {
+  const approval = (joinAllowMemberId: string, activeStatus: activeStatus) => {
     memberJoinApproval.mutate(
-      { id: joinAllowMemberId },
+      { id: joinAllowMemberId, activeStatus: activeStatus },
       {
         onSuccess: () => {
-          window.alert("승인 성공");
+          window.alert("상태 변경 성공");
           queryClient.invalidateQueries("joinApproval/getNotAllowMember");
           queryClient.invalidateQueries("member/getMembers");
         },
         onError: () => {
-          window.alert("승인 실패");
+          window.alert("상태 변경 실패");
         },
-      }
+      },
     );
   };
 

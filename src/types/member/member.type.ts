@@ -1,10 +1,12 @@
+import { activeStatus } from "repositories/joinApproval/joinApproval.param";
+
 export interface Member {
   id: string;
   name: string;
   email: string;
   readonly role: MemberRole;
-  readonly status: "ACTIVE" | "DEACTIVATED";
-  profileImage: null | string;
+  readonly status: activeStatus;
+  profileImage: string;
   phone: string;
   readonly createdAt: string;
   readonly modifiedAt: string;
