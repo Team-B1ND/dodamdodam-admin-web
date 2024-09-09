@@ -8,12 +8,18 @@ import {
   getMyMemberResponse,
   getBroadcastClubMemberByIdResponse,
 } from "../../repositories/member/memberRepository.res";
+import { activeStatus } from "repositories/joinApproval/joinApproval.param";
 
 export const useGetMemberByStatus = (
   { status }: getMebmerByStatus,
-  options?: UseQueryOptions<getAllMembersResponse, AxiosError, getAllMembersResponse, ["member/getMembers", Location]>,
+  options?: UseQueryOptions<
+    getAllMembersResponse,
+    AxiosError,
+    getAllMembersResponse,
+    ["member/getMembers", activeStatus, Location]
+  >,
 ) =>
-  useQuery(["member/getMembers", window.location], () => MemberRepository.getMembers({ status }), {
+  useQuery(["member/getMembers", status, window.location], () => MemberRepository.getMembers({ status }), {
     ...options,
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 5,

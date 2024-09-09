@@ -10,6 +10,7 @@ import { Suspense, useState } from "react";
 import AuthorityMemberList from "./AuthorityMemberList";
 import AuthorityMemberDetail from "./AuthorityMemberList/AuthorityMemberDetail";
 import * as S from "./style";
+import { convertStatus } from "utils/JoinApproval/convertStatus";
 
 const Authority = () => {
   const [classification, setClassification] = useState<string>("전체보기");
@@ -17,10 +18,7 @@ const Authority = () => {
 
   return (
     <S.AuthorityContainer>
-      <SectionHeader
-        title="서비스 권한"
-        subTitle="사용자들의 권한을 관리할 수 있습니다."
-      />
+      <SectionHeader title="서비스 권한" subTitle="사용자들의 권한을 관리할 수 있습니다." />
 
       <S.AuthorityInputWrap>
         <Select
@@ -37,9 +35,7 @@ const Authority = () => {
           <CTable customStyle={{ width: 720 }}>
             <CTHead>
               <CTR>
-                <CTH customStyle={{ width: 120, textAlign: "center" }}>
-                  사진
-                </CTH>
+                <CTH customStyle={{ width: 120, textAlign: "center" }}>사진</CTH>
                 <CTH>이름</CTH>
                 <CTH>반</CTH>
                 <CTH>아이디</CTH>
@@ -52,6 +48,7 @@ const Authority = () => {
               <AuthorityMemberList
                 keyword={keyword}
                 classification={classification}
+                status={convertStatus(classification)}
               />
             </Suspense>
           </ErrorBoundary>

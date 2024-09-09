@@ -9,6 +9,7 @@ import SectionHeader from "../Common/SectionHeader";
 import Select from "../Common/Select";
 import MemberList from "./MemberList";
 import { MemberContainer, MemberInputWrap } from "./style";
+import { convertStatus } from "utils/JoinApproval/convertStatus";
 
 const Member = () => {
   const [classification, setClassification] = useState<string>("전체보기");
@@ -16,10 +17,7 @@ const Member = () => {
 
   return (
     <MemberContainer>
-      <SectionHeader
-        title="구성원"
-        subTitle="현재 가입한 구성원을 볼 수 있습니다"
-      ></SectionHeader>
+      <SectionHeader title="구성원" subTitle="현재 가입한 구성원을 볼 수 있습니다"></SectionHeader>
       <MemberInputWrap>
         <Select
           items={["전체보기", "1학년", "2학년", "3학년", "선생님"]}
@@ -32,9 +30,7 @@ const Member = () => {
       <CTable>
         <CTHead>
           <CTR>
-            <CTH customStyle={{ width: "120px", textAlign: "center" }}>
-              사진
-            </CTH>
+            <CTH customStyle={{ width: "120px", textAlign: "center" }}>사진</CTH>
             <CTH customStyle={{ width: "19%" }}>이름</CTH>
             <CTH customStyle={{ width: "15.5%" }}>반</CTH>
             <CTH customStyle={{ width: "17.5%" }}>아이디</CTH>
@@ -45,7 +41,7 @@ const Member = () => {
       </CTable>
       <ErrorBoundary fallback={<>에러 발생</>}>
         <Suspense fallback={<>로딩중...</>}>
-          <MemberList keyword={keyword} classification={classification} />
+          <MemberList keyword={keyword} classification={classification} status={convertStatus(classification)} />
         </Suspense>
       </ErrorBoundary>
     </MemberContainer>

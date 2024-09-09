@@ -8,14 +8,16 @@ import { CTDImageWrap } from "components/Common/CTable/CTD/style";
 import { useFilterMember } from "hooks/member/useFilterMember";
 import Button from "components/Common/Button";
 import useApprovalMemberJoin from "hooks/joinApproval/useApprovalMemberJoin";
+import { activeStatus } from "repositories/joinApproval/joinApproval.param";
 
 interface Props {
   keyword: string;
   classification: string;
+  status: activeStatus;
 }
 
-const MemberList = ({ keyword, classification }: Props) => {
-  const { filteredData } = useFilterMember(keyword, classification);
+const MemberList = ({ keyword, classification, status }: Props) => {
+  const { filteredData } = useFilterMember(keyword, classification, status);
   const { approval } = useApprovalMemberJoin();
 
   return (
