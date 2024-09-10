@@ -12,6 +12,9 @@ export interface Student {
   phone: string;
 }
 
+export type activeStatus = "ACTIVE" | "PENDING" | "DEACTIVATED";
+
 export interface patchJoinMemberIdParam {
   id: string;
+  activeStatus: activeStatus;
 }

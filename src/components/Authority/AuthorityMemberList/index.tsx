@@ -4,21 +4,20 @@ import CTD from "components/Common/CTable/CTD";
 import { CTDImageWrap } from "components/Common/CTable/CTD/style";
 import CTR from "components/Common/CTable/CTR";
 import DODAM_PROFILE from "../../../assets/defaultProfile/dodamProfile.svg";
-import {
-  MemberProfileImg,
-  MemberProfileImgWrap,
-} from "components/Member/MemberList/style";
+import { MemberProfileImg, MemberProfileImgWrap } from "components/Member/MemberList/style";
 import { useNavigate, useParams } from "react-router-dom";
 import { memo } from "react";
 import { useFilterMember } from "hooks/member/useFilterMember";
+import { activeStatus } from "repositories/joinApproval/joinApproval.param";
 
 interface Props {
   keyword: string;
   classification: string;
+  status: activeStatus;
 }
 
-const AuthorityMemberList = ({ keyword, classification }: Props) => {
-  const { filteredData } = useFilterMember(keyword, classification);
+const AuthorityMemberList = ({ keyword, classification, status }: Props) => {
+  const { filteredData } = useFilterMember(keyword, classification, status);
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -27,11 +26,7 @@ const AuthorityMemberList = ({ keyword, classification }: Props) => {
       <CTable>
         <CTBody>
           {filteredData.map((member) => (
-            <div
-              key={member.id}
-              style={{ width: 720 }}
-              onClick={() => navigate(`/authority/${member.id}`)}
-            >
+            <div key={member.id} style={{ width: 720 }} onClick={() => navigate(`/authority/${member.id}`)}>
               <CTR
                 key={member.id}
                 customStyle={{
@@ -41,9 +36,7 @@ const AuthorityMemberList = ({ keyword, classification }: Props) => {
                 <CTD customStyle={{ width: 120 }}>
                   <CTDImageWrap>
                     <MemberProfileImgWrap>
-                      <MemberProfileImg
-                        src={member.profileImage || DODAM_PROFILE}
-                      />
+                      <MemberProfileImg src={member.profileImage || DODAM_PROFILE} />
                     </MemberProfileImgWrap>
                   </CTDImageWrap>
                 </CTD>
