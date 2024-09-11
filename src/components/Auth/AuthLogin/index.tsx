@@ -25,13 +25,7 @@ interface Props {
 }
 
 const AuthLogin = ({ setIsLogin }: Props) => {
-  const {
-    loginData,
-    handleLoginData,
-    loginKeep,
-    handleLoginKeep,
-    submitLoginData,
-  } = useLogin();
+  const { loginData, handleLoginData, loginKeep, handleLoginKeep, submitLoginData } = useLogin();
 
   return (
     <AuthLoginContainer>
@@ -39,20 +33,11 @@ const AuthLogin = ({ setIsLogin }: Props) => {
         <AuthLoginInputForm>
           <AuthInputWrap>
             <AuthInputTitle>ID</AuthInputTitle>
-            <AuthInput
-              name="id"
-              value={loginData.id}
-              onChange={handleLoginData}
-            />
+            <AuthInput name="id" value={loginData.id} onChange={handleLoginData} />
           </AuthInputWrap>
           <AuthInputWrap>
             <AuthInputTitle>비밀번호</AuthInputTitle>
-            <AuthInput
-              name="pw"
-              value={loginData.pw}
-              onChange={handleLoginData}
-              type="password"
-            />
+            <AuthInput name="pw" value={loginData.pw} onChange={handleLoginData} type="password" />
           </AuthInputWrap>
         </AuthLoginInputForm>
         <AuthLoginKeepWrap>
@@ -68,9 +53,7 @@ const AuthLogin = ({ setIsLogin }: Props) => {
         <AuthLoginSubmitButton>Sign In</AuthLoginSubmitButton>
         <AuthOppositePartWrap>
           <AuthOppositePartText>아직 계정이 없으신가요?</AuthOppositePartText>
-          <AuthOppositePartButton onClick={() => setIsLogin(false)}>
-            회원가입
-          </AuthOppositePartButton>
+          <AuthOppositePartButton onClick={() => setIsLogin(false)}>회원가입</AuthOppositePartButton>
         </AuthOppositePartWrap>
       </AuthLoginWrap>
     </AuthLoginContainer>

@@ -38,11 +38,7 @@ export const AuthPanelBlind = styled.div`
   position: absolute;
   left: 0px;
   top: 0px;
-  background: linear-gradient(
-    180deg,
-    rgba(26, 26, 26, 0.8),
-    rgba(26, 26, 26, 0.3)
-  );
+  background: linear-gradient(180deg, rgba(26, 26, 26, 0.8), rgba(26, 26, 26, 0.3));
 `;
 
 export const AuthPanelTextWrap = styled.div`

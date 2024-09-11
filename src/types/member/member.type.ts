@@ -24,6 +24,7 @@ export interface Student {
   grade: number;
   room: number;
   number: number;
+  parentPhone: number;
 }
 
 export interface Teacher {
