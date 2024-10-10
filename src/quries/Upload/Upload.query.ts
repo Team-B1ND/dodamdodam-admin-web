@@ -1,5 +1,5 @@
-import { PostUploadParams } from "../../../dodamdodam-bannertool-web/src/repositories/UploadRepository/UploadRepository";
-import UploadRepositoryImpl from "../../../dodamdodam-bannertool-web/src/repositories/UploadRepository/UploadRepositoryImpl";
+import { PostUploadParams } from "../../repositories/UploadRepository/UploadRepository";
+import UploadRepositoryImpl from "../../repositories/UploadRepository/UploadRepositoryImpl";
 import { useMutation } from "react-query";
 
 export const useUploadImageMutation = () => {

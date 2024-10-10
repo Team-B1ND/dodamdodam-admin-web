@@ -1,14 +1,14 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
-import MemberRepository from "../../repositories/member/MemberRepository";
-import { getMebmerByStatus, getMemberByIdParam } from "../../repositories/member/memberRepository.param";
+import MemberRepository from "../../repositories/MemberRepository/MemberRepository";
+import { getMebmerByStatus, getMemberByIdParam } from "../../repositories/MemberRepository/memberRepository.param";
 import {
   getMemberByIdResponse,
   getAllMembersResponse,
   getMyMemberResponse,
   getBroadcastClubMemberByIdResponse,
-} from "../../repositories/member/memberRepository.res";
-import { activeStatus } from "repositories/joinApproval/joinApproval.param";
+} from "../../repositories/MemberRepository/memberRepository.res";
+import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
 
 export const useGetMemberByStatus = (
   { status }: getMebmerByStatus,

@@ -5,7 +5,7 @@ import {
 import { memo } from "react";
 import { useParams } from "react-router-dom";
 import * as S from "./style";
-import { useGrantBroadcastClubMember } from "hooks/member/useGrantBroadcastClubMember";
+import { useGrantBroadcastClubMember } from "hooks/Members/useGrantBroadcastClubMember";
 
 const AuthorityMemberDetail = () => {
   const { id } = useParams();

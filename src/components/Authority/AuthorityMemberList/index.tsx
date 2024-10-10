@@ -7,8 +7,8 @@ import DODAM_PROFILE from "../../../assets/defaultProfile/dodamProfile.svg";
 import { MemberProfileImg, MemberProfileImgWrap } from "components/Member/MemberList/style";
 import { useNavigate, useParams } from "react-router-dom";
 import { memo } from "react";
-import { useFilterMember } from "hooks/member/useFilterMember";
-import { activeStatus } from "repositories/joinApproval/joinApproval.param";
+import { useFilterMember } from "hooks/Members/useFilterMember";
+import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
 
 interface Props {
   keyword: string;

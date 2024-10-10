@@ -1,5 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
-import useLogin from "../../../hooks/auth/useLogin";
+import useLogin from "../../../hooks/Auths/useLogin";
 import {
   AuthInput,
   AuthInputTitle,

@@ -1,7 +1,7 @@
 import * as S from "./style";
 import { BannerWrapTitle } from "../style";
-import { useGetBannersQuery } from "../../../queries/Banner/Banner.query";
-import BannerBox from "../../common/Box";
+import { useGetBannersQuery } from "../../../quries/Banner/Banner.query";
+import BannerBox from "../../Common/Box";
 import BannerItem from "./BannerItem";
 
 const BannerList = () => {

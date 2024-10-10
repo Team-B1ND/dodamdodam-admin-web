@@ -5,10 +5,10 @@ import { MemberProfileImg, MemberProfileImgWrap } from "./style";
 import CTable, { CTableScrollWrapper } from "../../Common/CTable";
 import CTBody from "../../Common/CTable/CTBody";
 import { CTDImageWrap } from "components/Common/CTable/CTD/style";
-import { useFilterMember } from "hooks/member/useFilterMember";
+import { useFilterMember } from "hooks/Members/useFilterMember";
 import Button from "components/Common/Button";
-import useApprovalMemberJoin from "hooks/joinApproval/useApprovalMemberJoin";
-import { activeStatus } from "repositories/joinApproval/joinApproval.param";
+import useApprovalMemberJoin from "hooks/JoinApprovals/useApprovalMemberJoin";
+import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
 
 interface Props {
   keyword: string;

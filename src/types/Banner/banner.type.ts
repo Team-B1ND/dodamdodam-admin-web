@@ -1,4 +1,4 @@
-import { Response } from "../util/util.type";
+import { Response } from "../util/Response.type";
 
 export interface Banner {
   expireAt: string;

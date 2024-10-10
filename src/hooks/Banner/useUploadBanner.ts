@@ -3,7 +3,7 @@ import { useUploadBannerMutation } from "../../quries/Banner/Banner.query";
 import { useUploadImageMutation } from "../../quries/Upload/Upload.query";
 import { ChangeEvent, useState } from "react";
 import { useQueryClient } from "react-query";
-import { QUERY_KEYS } from "../../../dodamdodam-bannertool-web/src/queries/QueryKey";
+import { QUERY_KEYS } from "../../quries/QueryKey";
 import dayjs from "dayjs";
 
 const useUplodaBanner = () => {

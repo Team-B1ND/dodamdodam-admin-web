@@ -1,7 +1,7 @@
 import { Switch } from "@mui/material";
 import * as S from "./style";
 import { Banner } from "../../../../types/Banner/banner.type";
-import dateTransform from "../../../../util/dateTransform";
+import dateTransform from "../../../../utils/dateTransform";
 import useHandleBanner from "../../../../hooks/Banner/useHandleBanner";
 
 interface Props {

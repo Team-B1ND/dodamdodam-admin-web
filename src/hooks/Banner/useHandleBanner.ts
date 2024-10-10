@@ -3,10 +3,10 @@ import {
   useActiveBannersMutation,
   useDeativeBannersMutation,
   useDeleteBannerMutation,
-} from "../../../dodamdodam-bannertool-web/src/queries/Banner/Banner.query";
+} from "../../quries/Banner/Banner.query";
 import { B1ndToast } from "@b1nd/b1nd-toastify";
 import { useQueryClient } from "react-query";
-import { QUERY_KEYS } from "../../../dodamdodam-bannertool-web/src/queries/QueryKey";
+import { QUERY_KEYS } from "../../quries/QueryKey";
 
 interface Props {
   id: number;

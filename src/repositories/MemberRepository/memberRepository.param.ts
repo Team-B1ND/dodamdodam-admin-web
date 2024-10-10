@@ -1,4 +1,4 @@
-import { activeStatus } from "repositories/joinApproval/joinApproval.param";
+import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
 
 export interface deleteMemberParam {
   id: string;

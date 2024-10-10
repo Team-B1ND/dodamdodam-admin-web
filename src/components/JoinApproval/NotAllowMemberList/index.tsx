@@ -3,11 +3,11 @@ import CTable, { CTableScrollWrapper } from "components/Common/CTable";
 import CTBody from "components/Common/CTable/CTBody";
 import CTD from "components/Common/CTable/CTD";
 import CTR from "components/Common/CTable/CTR";
-import useMemberJoinApproval from "hooks/joinApproval/useApprovalMemberJoin";
+import useMemberJoinApproval from "hooks/JoinApprovals/useApprovalMemberJoin";
 import { NotAllowButtonWrap } from "./style";
 import { useGetMemberByStatus } from "quries/member/member.query";
-import { useFilterMember } from "hooks/member/useFilterMember";
-import { activeStatus } from "repositories/joinApproval/joinApproval.param";
+import { useFilterMember } from "hooks/Members/useFilterMember";
+import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
 
 interface Props {
   status: activeStatus;

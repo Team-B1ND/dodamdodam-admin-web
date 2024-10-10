@@ -3,11 +3,11 @@ import CTBody from "components/Common/CTable/CTBody";
 import CTD from "components/Common/CTable/CTD";
 import { CTDImageWrap } from "components/Common/CTable/CTD/style";
 import CTR from "components/Common/CTable/CTR";
-import { useFilterMember } from "hooks/member/useFilterMember";
+import { useFilterMember } from "hooks/Members/useFilterMember";
 import { PhoneNumberInput, PhoneNumberProfileImg, PhoneNumberProfileImgWrap } from "./style";
 import DODAM_PROFILE from "../../../assets/defaultProfile/dodamProfile.svg";
 import Button from "components/Common/Button";
-import usePhoneNumber from "hooks/phoneNumber/usePhoneNumber";
+import usePhoneNumber from "hooks/PhoneNumbers/usePhoneNumber";
 
 interface Props {
   keyword: string;

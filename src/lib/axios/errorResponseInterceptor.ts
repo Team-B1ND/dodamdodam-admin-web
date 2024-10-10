@@ -6,7 +6,7 @@ import {
 } from "constants/token/token.constant";
 import token from "lib/token";
 import { injectCustomAxiosAccessToken } from "./customAxios";
-import authRepository from "repositories/auth/authRepository";
+import authRepository from "repositories/AuthRepository/authRepository";
 
 const errorResponseInterceptor = async (error: AxiosError) => {
   if (error.response) {

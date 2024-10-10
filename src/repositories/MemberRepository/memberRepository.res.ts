@@ -5,7 +5,7 @@ import {
   StudentAndTeacher,
   Teacher,
 } from "../../types/member/member.type";
-import { Response } from "../../types/util/util.type";
+import { Response } from "../../types/util/Response.type";
 
 export interface getMembersResponse extends Response {
   data: {

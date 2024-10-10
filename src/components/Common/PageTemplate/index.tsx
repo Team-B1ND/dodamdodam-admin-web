@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { PageTemplateContainer, PageTemplateWrap } from "./style";
-import Footer from "../Footer";
+
 import Header from "../Header";
 
 interface Props {
@@ -13,7 +13,6 @@ const PageTemplate = ({ children }: Props) => {
       <PageTemplateContainer>
         <Header />
         <PageTemplateWrap>{children}</PageTemplateWrap>
-        <Footer />
       </PageTemplateContainer>
     </>
   );

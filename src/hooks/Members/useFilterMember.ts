@@ -1,6 +1,6 @@
 import { useGetMemberByStatus } from "quries/member/member.query";
 import { useMemo, useState } from "react";
-import { activeStatus } from "repositories/joinApproval/joinApproval.param";
+import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
 import { StudentAndTeacher } from "types/member/member.type";
 
 export const useFilterMember = (keyword: string, classification: string, status: activeStatus) => {

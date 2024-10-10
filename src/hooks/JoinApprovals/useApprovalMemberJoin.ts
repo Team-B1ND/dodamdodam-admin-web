@@ -1,6 +1,6 @@
 import { usePatchMemberStatus } from "quries/joinApproval/joinApproval.query";
 import { useQueryClient } from "react-query";
-import { activeStatus } from "repositories/joinApproval/joinApproval.param";
+import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
 
 const useApprovalMemberJoin = () => {
   const queryClient = useQueryClient();
