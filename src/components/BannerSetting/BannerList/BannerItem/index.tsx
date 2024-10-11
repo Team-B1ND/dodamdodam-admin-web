@@ -9,7 +9,7 @@ interface Props {
 }
 
 const BannerItem = ({ data }: Props) => {
-  const handleDateTime = dateTransform.hyphen(data.expireAt); //data.createdDate
+  const handleDateTime = dateTransform.hyphen(data.expireAt); 
   const { handleChangeBannerAllow, isAllowed, handleDeleteBanner } =
     useHandleBanner({
       id: data.id,
@@ -26,7 +26,7 @@ const BannerItem = ({ data }: Props) => {
         />
         <S.BannerItemText>{handleDateTime}</S.BannerItemText>
       </S.BannerItemFirstBox>
-      <S.BannerItemText>{data.title}</S.BannerItemText>
+      <S.BannerItemText style={{width:'30px',height:'13px',}}>{data.title}</S.BannerItemText>
       <S.BannerItemImg
         onClick={() => (window.location.href = data.redirectUrl)}
         src={data.imageUrl}

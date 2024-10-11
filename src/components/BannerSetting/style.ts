@@ -38,3 +38,11 @@ export const Row = styled.div`
   display: flex;
   column-gap: 16px;
 `;
+
+export const BannerContainer = styled.div`
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 16px 30px;
+    flex-direction: column;
+`

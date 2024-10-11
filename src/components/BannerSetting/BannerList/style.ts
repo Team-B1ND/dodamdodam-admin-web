@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BannerListWrap = styled.div`
   width: 700px;
-  height: 680px;
+  height: 480px;
 
   padding: 15px 30px;
 

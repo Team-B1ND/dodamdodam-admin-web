@@ -7,6 +7,7 @@ const SideBarDropdown = () => {
   return (
     <SideBarDropdownContainer>
       <MenuItem title="구성원" redirectUrl="/member" />
+      <MenuItem title="배너"  redirectUrl="/banner"/>
       <MenuItem title="전화번호 관리" redirectUrl="/phone" />
       <MenuItem title="가입승인" redirectUrl="/joinApproval" />
       <MenuDropdownWrapper title="서비스 설정">
