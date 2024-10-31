@@ -8,11 +8,12 @@ import {
   PatchDeativateByIdParam,
   PostBannerParam,
 } from "../../repositories/BannerRepository/BannerRepository";
+import { QUERY_KEYS } from "quries/QueryKey";
 
 export const useGetActiveBannersQuery = (
-  options?: UseQueryOptions<BannersResponse, AxiosError, BannersResponse, ["banner/getBanner"]>,
+  options?: UseQueryOptions<BannersResponse, AxiosError, BannersResponse, [string]>,
 ): UseQueryResult<BannersResponse, AxiosError> =>
-  useQuery(["banner/getBanner"], () => BannerRepositoryImpl.getActiveBanners(), options);
+  useQuery([QUERY_KEYS.banner.getActive], () => BannerRepositoryImpl.getActiveBanners(), options);
 
 export const useUploadBannerMutation = () => {
   const mutation = useMutation((bannerData: PostBannerParam) => BannerRepositoryImpl.postBanners(bannerData));
@@ -20,9 +21,9 @@ export const useUploadBannerMutation = () => {
 };
 
 export const useGetBannersQuery = (
-  options?: UseQueryOptions<BannersResponse, AxiosError, BannersResponse, ["banner/getBanner"]>,
+  options?: UseQueryOptions<BannersResponse, AxiosError, BannersResponse, [string]>,
 ): UseQueryResult<BannersResponse, AxiosError> =>
-  useQuery(["banner/getBanner"], () => BannerRepositoryImpl.getBanners(), options);
+  useQuery([QUERY_KEYS.banner.get], () => BannerRepositoryImpl.getBanners(), options);
 
 export const useActiveBannersMutation = () => {
   const mutation = useMutation(({ id }: PatchActiveBannersParam) => BannerRepositoryImpl.patchActiveBanners({ id }));

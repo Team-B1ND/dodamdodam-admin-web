@@ -9,6 +9,7 @@ import {
   getBroadcastClubMemberByIdResponse,
 } from "../../repositories/MemberRepository/memberRepository.res";
 import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
+import { QUERY_KEYS } from "quries/QueryKey";
 
 export const useGetMemberByStatus = (
   { status }: getMebmerByStatus,
@@ -16,10 +17,10 @@ export const useGetMemberByStatus = (
     getAllMembersResponse,
     AxiosError,
     getAllMembersResponse,
-    ["member/getMembers", activeStatus, Location]
+    [string, activeStatus, Location]
   >,
 ) =>
-  useQuery(["member/getMembers", status, window.location], () => MemberRepository.getMembers({ status }), {
+  useQuery([QUERY_KEYS.member.getMember, status, window.location], () => MemberRepository.getMembers({ status }), {
     ...options,
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 5,
@@ -27,9 +28,9 @@ export const useGetMemberByStatus = (
 
 export const useGetMemberById = (
   { id }: getMemberByIdParam,
-  options?: UseQueryOptions<getMemberByIdResponse, AxiosError, getMemberByIdResponse, ["member/getMember", string]>,
+  options?: UseQueryOptions<getMemberByIdResponse, AxiosError, getMemberByIdResponse, [string, string]>,
 ) =>
-  useQuery(["member/getMember", id], () => MemberRepository.getMemberById({ id }), {
+  useQuery([QUERY_KEYS.member.getMemberById, id], () => MemberRepository.getMemberById({ id }), {
     ...options,
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 60,

@@ -84,7 +84,7 @@ const useUplodaBanner = () => {
         {
           onSuccess: () => {
             B1ndToast.showSuccess("배너가 등록되었습니다");
-            queryClient.invalidateQueries(QUERY_KEYS.banner.get);
+            queryClient.invalidateQueries(QUERY_KEYS.banner.get)
             setUploadData({
               expireAt: "",
               image: "",

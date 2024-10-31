@@ -6,7 +6,7 @@ export const QUERY_KEYS = {
 
     },
     banner: {
-      get: "banner/getBanners",
+      get: "banner/getBanner",
       getActive: "banner/getActive",
     },
     
