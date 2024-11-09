@@ -8,7 +8,6 @@ import CTR from "components/Common/CTable/CTR";
 import CTH from "components/Common/CTable/CTH";
 import NotAllowMemberList from "./NotAllowMemberList";
 import Select from "components/Common/Select";
-import SearchBar from "components/Common/SearchBar";
 import { convertStatus } from "utils/JoinApproval/convertStatus";
 
 const JoinApproval = () => {

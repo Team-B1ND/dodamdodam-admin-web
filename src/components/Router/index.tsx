@@ -5,6 +5,7 @@ import MemberPage from "pages/Home/MemberPage";
 import { Route, Routes } from "react-router-dom";
 import AuthPage from "../../pages/Auth/AuthPage";
 import PhoneNumber from "components/PhoneNumber";
+import BannerSettingPage from "pages/Home/BannerSettingPage";
 
 const Router = () => {
   const AuthJoinApprovalPage = withAuth(JoinApprovalPage);
@@ -19,6 +20,7 @@ const Router = () => {
       <Route path="/authority/:id" element={<AuthAuthorityPage />} />
       <Route path="/member" element={<AuthMemberPage />} />
       <Route path="/phone" element={<PhoneNumber />} />
+      <Route path="/banner" element={<BannerSettingPage/>}/>
     </Routes>
   );
 };

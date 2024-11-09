@@ -1,14 +1,15 @@
 import { AxiosError } from "axios";
 import { useMutation, useQuery, UseQueryOptions } from "react-query";
-import MemberRepository from "../../repositories/member/MemberRepository";
-import { getMebmerByStatus, getMemberByIdParam } from "../../repositories/member/memberRepository.param";
+import MemberRepository from "../../repositories/MemberRepository/MemberRepository";
+import { getMebmerByStatus, getMemberByIdParam } from "../../repositories/MemberRepository/memberRepository.param";
 import {
   getMemberByIdResponse,
   getAllMembersResponse,
   getMyMemberResponse,
   getBroadcastClubMemberByIdResponse,
-} from "../../repositories/member/memberRepository.res";
-import { activeStatus } from "repositories/joinApproval/joinApproval.param";
+} from "../../repositories/MemberRepository/memberRepository.res";
+import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
+import { QUERY_KEYS } from "quries/QueryKey";
 
 export const useGetMemberByStatus = (
   { status }: getMebmerByStatus,
@@ -16,10 +17,10 @@ export const useGetMemberByStatus = (
     getAllMembersResponse,
     AxiosError,
     getAllMembersResponse,
-    ["member/getMembers", activeStatus, Location]
+    [string, activeStatus, Location]
   >,
 ) =>
-  useQuery(["member/getMembers", status, window.location], () => MemberRepository.getMembers({ status }), {
+  useQuery([QUERY_KEYS.member.getMember, status, window.location], () => MemberRepository.getMembers({ status }), {
     ...options,
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 5,
@@ -27,9 +28,9 @@ export const useGetMemberByStatus = (
 
 export const useGetMemberById = (
   { id }: getMemberByIdParam,
-  options?: UseQueryOptions<getMemberByIdResponse, AxiosError, getMemberByIdResponse, ["member/getMember", string]>,
+  options?: UseQueryOptions<getMemberByIdResponse, AxiosError, getMemberByIdResponse, [string, string]>,
 ) =>
-  useQuery(["member/getMember", id], () => MemberRepository.getMemberById({ id }), {
+  useQuery([QUERY_KEYS.member.getMemberById, id], () => MemberRepository.getMemberById({ id }), {
     ...options,
     staleTime: 1000 * 60 * 5,
     cacheTime: 1000 * 60 * 60,

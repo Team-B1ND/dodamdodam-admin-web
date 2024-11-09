@@ -1,6 +1,6 @@
 import { useMutation } from "react-query";
-import { postLoginParam } from "../../repositories/auth/authRepository.param";
-import AuthRepository from "../../repositories/auth/authRepository";
+import { postLoginParam } from "../../repositories/AuthRepository/authRepository.param";
+import AuthRepository from "../../repositories/AuthRepository/authRepository";
 
 export const usePostLoginMutation = () => {
   const mutation = useMutation(({ id, pw }: postLoginParam) =>
