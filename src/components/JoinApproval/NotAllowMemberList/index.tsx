@@ -6,7 +6,6 @@ import CTR from "components/Common/CTable/CTR";
 import useMemberJoinApproval from "hooks/JoinApprovals/useApprovalMemberJoin";
 import { NotAllowButtonWrap } from "./style";
 import { useGetMemberByStatus } from "quries/member/member.query";
-import { useFilterMember } from "hooks/Members/useFilterMember";
 import { activeStatus } from "repositories/JoinApprovalRepository/joinApproval.param";
 
 interface Props {

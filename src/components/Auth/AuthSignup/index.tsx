@@ -14,7 +14,7 @@ interface Props {
 }
 
 const AuthSignup = ({ setIsLogin }: Props) => {
-  const [section, setSection] = useState<"first" | "second">("first");
+  const [section, ] = useState<"first" | "second">("first");
 
   return (
     <AuthSignupContainer>

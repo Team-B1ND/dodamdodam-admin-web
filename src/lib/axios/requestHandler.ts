@@ -1,5 +1,5 @@
 import { B1ndToast } from "@b1nd/b1nd-toastify";
-import { AxiosRequestConfig, InternalAxiosRequestConfig } from "axios";
+import { InternalAxiosRequestConfig } from "axios";
 import {
   ACCESS_TOKEN_KEY,
   REFRESH_TOKEN_KEY,

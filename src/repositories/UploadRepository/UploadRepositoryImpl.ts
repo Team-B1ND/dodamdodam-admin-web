@@ -13,5 +13,5 @@ class UploadRepositoryImpl implements UploadRepository {
     return data;
   }
 }
-
-export default new UploadRepositoryImpl();
+const uploadRepository = new UploadRepositoryImpl();
+export default uploadRepository;

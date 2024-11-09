@@ -17,8 +17,8 @@ export const useFilterMember = (keyword: string, classification: string, status:
 
       const commonCondition = name.includes(keyword) || email.includes(keyword) || id.includes(keyword);
 
-      const pendingCondition =
-        (status === "PENDING" && name.includes(keyword)) || email.includes(keyword) || id.includes(keyword);
+      // const pendingCondition =
+      //   (status === "PENDING" && name.includes(keyword)) || email.includes(keyword) || id.includes(keyword);
 
       const deactiveCondition = status === "DEACTIVATED";
 

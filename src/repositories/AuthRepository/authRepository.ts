@@ -29,5 +29,5 @@ class AuthRepository {
     return data;
   }
 }
-
-export default new AuthRepository();
+const authRepository = new AuthRepository();
+export default authRepository;

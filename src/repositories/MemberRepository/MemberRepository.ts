@@ -1,5 +1,5 @@
 import { customAxios } from "../../lib/axios/customAxios";
-import { deleteMemberParam, getMebmerByStatus, getMemberByIdParam } from "./memberRepository.param";
+import { getMebmerByStatus, getMemberByIdParam } from "./memberRepository.param";
 import { getAllMembersResponse, getMyMemberResponse, getBroadcastClubMemberByIdResponse } from "./memberRepository.res";
 
 class MemberRepository {
@@ -27,5 +27,5 @@ class MemberRepository {
     await customAxios.post("/member/broadcast-club-member", { id });
   }
 }
-
-export default new MemberRepository();
+const memberRepository = new MemberRepository();
+export default memberRepository;

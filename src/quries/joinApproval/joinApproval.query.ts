@@ -1,7 +1,5 @@
-import { AxiosError } from "axios";
-import { useMutation, useQuery, UseQueryOptions } from "react-query";
+import { useMutation } from "react-query";
 import { patchJoinMemberIdParam } from "repositories/JoinApprovalRepository/joinApproval.param";
-import { getNotAllowMemberResponse } from "repositories/JoinApprovalRepository/joinApproval.res";
 import JoinApprovalRepository from "repositories/JoinApprovalRepository/joinApprovalRepository";
 
 export const usePatchMemberStatus = () => {

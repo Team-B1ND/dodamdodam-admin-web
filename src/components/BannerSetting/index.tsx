@@ -1,5 +1,4 @@
 import * as S from "./style";
-import { FcDocument } from "react-icons/fc";
 import BannerUpload from "./BannerUpload";
 import BannerList from "./BannerList";
 import BannerHandler from "./BannerHandler";

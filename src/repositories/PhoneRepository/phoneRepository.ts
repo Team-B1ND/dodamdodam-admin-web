@@ -6,5 +6,5 @@ class PhoneRepository {
     await customAxios.patch(`/member/student/info/${id}`, { parentPhone });
   }
 }
-
-export default new PhoneRepository();
+const phoneRepository = new PhoneRepository();
+export default phoneRepository;

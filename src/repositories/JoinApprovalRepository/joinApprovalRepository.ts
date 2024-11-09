@@ -1,6 +1,6 @@
 import { customAxios } from "lib/axios/customAxios";
 import { patchJoinMemberIdParam } from "./joinApproval.param";
-import { getNotAllowMemberResponse } from "./joinApproval.res";
+
 
 class JoinApprovalRepository {
   public async patchMemberStatus({ id, activeStatus }: patchJoinMemberIdParam): Promise<void> {
@@ -11,5 +11,5 @@ class JoinApprovalRepository {
     await customAxios.delete(`/member/${id}`); //회원가입 거절, 지금은 api가 없어서 나중에 수정해야함
   }
 }
-
-export default new JoinApprovalRepository();
+const joinApprovalRepository = new JoinApprovalRepository();
+export default joinApprovalRepository

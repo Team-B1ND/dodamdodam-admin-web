@@ -45,5 +45,5 @@ class BannerRepositoryImpl implements BannerRepository {
     return data;
   }
 }
-
-export default new BannerRepositoryImpl();
+const bannerRepository = new BannerRepositoryImpl();
+export default bannerRepository;
