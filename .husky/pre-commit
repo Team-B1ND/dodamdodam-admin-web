@@ -8,3 +8,4 @@ else
   npx eslint --quiet --format=compact --ext .ts . | grep 'error'
   exit 1
 fi
+
