@@ -1,20 +1,17 @@
-import * as S from "./style";
-import BannerUpload from "./BannerUpload";
-import BannerList from "./BannerList";
-import BannerHandler from "./BannerHandler";
+import * as S from './style';
+import BannerUpload from './BannerUpload';
+import BannerList from './BannerList';
+import BannerHandler from './BannerHandler';
+import SectionHeader from 'components/Common/SectionHeader';
 
 const BannerSetting = () => {
   return (
     <S.BannerContainer>
-      {/* <S.BannerTopWrap>
-        <FcDocument size={29} />
-        <S.BannerTitle>배너 관리</S.BannerTitle>
-      </S.BannerTopWrap> */}
+      <SectionHeader title="배너 관리" subTitle="배너 등록 및 수정을 진행할 수 있습니다." />
       <S.Row>
         <BannerList />
         <S.Column>
           <BannerUpload />
-          <BannerHandler />
         </S.Column>
       </S.Row>
     </S.BannerContainer>

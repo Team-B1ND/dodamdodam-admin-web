@@ -1,9 +1,5 @@
-import styled, {
-  CSSObject,
-  FlattenSimpleInterpolation,
-  css,
-} from "styled-components";
-import { SizeType } from "./types";
+import styled, { CSSObject, FlattenSimpleInterpolation, css } from 'styled-components';
+import { SizeType } from './types';
 
 export const BannerContentBox = styled.div<{
   size: SizeType;
@@ -19,7 +15,7 @@ export const BannerContentBox = styled.div<{
 
 const sizeStyle: Record<SizeType, FlattenSimpleInterpolation> = {
   lg: css`
-    width: 700px;
+    width: 750px;
     height: 680px;
     overflow-y: hidden;
   `,
