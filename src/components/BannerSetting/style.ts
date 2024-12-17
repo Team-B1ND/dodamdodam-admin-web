@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const BannerTopWrap = styled.div`
   width: 100%;
@@ -35,14 +35,16 @@ export const Column = styled.div`
 `;
 
 export const Row = styled.div`
+  width: 100%;
   display: flex;
-  column-gap: 16px;
+  justify-content: space-around;
 `;
 
 export const BannerContainer = styled.div`
-    width: 100%;
-    height: 100%;
-    display: flex;
-    padding: 16px 30px;
-    flex-direction: column;
-`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  padding: 16px 30px;
+  flex-direction: column;
+  align-items: center;
+`;

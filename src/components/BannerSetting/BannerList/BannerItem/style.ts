@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const BannerItemWrap = styled.div`
   width: 100%;
@@ -10,14 +10,13 @@ export const BannerItemWrap = styled.div`
 
   padding: 10px 0 10px 0;
   border-bottom: 1px solid #ddd;
-
 `;
 
 export const BannerItemText = styled.p`
   overflow: hidden;
-  text-overflow: ellipsis;
   font-weight: 500;
   font-size: 14px;
+  text-overflow: ellipsis;
   color: #282828;
 `;
 
